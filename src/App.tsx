@@ -218,7 +218,7 @@ function CategoryGrid() {
 function FilterBar({ active, setActive }: { active: string; setActive: (value: string) => void }) {
   const [open, setOpen] = useState(false)
   const groups = [
-    ['Khoảng giá', ['Dưới 500.000đ', '500.000đ–1.000.000đ', '1.000.000đ–2.000.000đ', 'Trên 2.000.000đ']],
+    ['Khoảng giá', ['499.000đ', '599.000đ', '699.000đ', '800.000đ', '1.000.000đ']],
     ['Dịp tặng', ['Tết', 'Sinh nhật', 'Biếu đối tác', 'Quà doanh nghiệp', 'Thăm bệnh', 'Cảm ơn', 'Cưới hỏi']],
     ['Loại sản phẩm', ['Giỏ trái cây', 'Hộp quà', 'Set quà cao cấp', 'Mâm lễ', 'Tráp cưới']],
     ['Phong cách', ['Sang trọng', 'Hiện đại', 'Tối giản', 'Truyền thống']],
@@ -299,7 +299,7 @@ function ContactForm({ compact = false }: { compact?: boolean }) {
     <form className={`contact-form ${compact ? 'compact-form' : ''}`} onSubmit={submit}>
       {sent ? <div className="form-success"><span><Check /></span><h3>Đã ghi nhận yêu cầu</h3><p>Cảm ơn bạn. Vui lòng gọi {PHONE} để được tư vấn ngay.</p><Button onClick={() => setSent(false)} variant="secondary">Gửi yêu cầu khác</Button></div> : <>
         <div className="field-row"><label>Họ và tên<input required placeholder="Nguyễn Anh" /></label><label>Số điện thoại<input required type="tel" placeholder="09xx xxx xxx" /></label></div>
-        <div className="field-row"><label>Dịp tặng<select defaultValue=""><option value="" disabled>Chọn dịp tặng</option><option>Sinh nhật</option><option>Biếu đối tác</option><option>Quà doanh nghiệp</option><option>Cưới hỏi</option><option>Khác</option></select></label><label>Ngân sách<select defaultValue=""><option value="" disabled>Chọn ngân sách</option><option>Dưới 500.000đ</option><option>500.000đ–1.000.000đ</option><option>1.000.000đ–2.000.000đ</option><option>Trên 2.000.000đ</option></select></label></div>
+        <div className="field-row"><label>Dịp tặng<select defaultValue=""><option value="" disabled>Chọn dịp tặng</option><option>Sinh nhật</option><option>Biếu đối tác</option><option>Quà doanh nghiệp</option><option>Cưới hỏi</option><option>Khác</option></select></label><label>Ngân sách<select defaultValue=""><option value="" disabled>Chọn ngân sách</option><option>Dưới 500.000đ</option><option>500.000đ–1.000.000đ</option><option>1.000.000đ</option></select></label></div>
         <label>Số lượng<input type="number" min="1" placeholder="Ví dụ: 2" /></label>
         <label>Ghi chú<textarea rows={compact ? 3 : 4} placeholder="Bạn muốn giỏ quà gồm những gì, giao khi nào..." /></label>
         <Button type="submit">Gửi yêu cầu tư vấn <Send size={17} /></Button>
@@ -339,10 +339,7 @@ function GiftsPage() {
   const [sort, setSort] = useState('Nổi bật')
   const shown = useMemo(() => {
     let list = [...products]
-    if (active === 'Dưới 500.000đ') list = list.filter(p => p.priceValue < 500000)
-    else if (active === '500.000đ–1.000.000đ') list = list.filter(p => p.priceValue >= 500000 && p.priceValue <= 1000000)
-    else if (active === '1.000.000đ–2.000.000đ') list = list.filter(p => p.priceValue > 1000000 && p.priceValue <= 2000000)
-    else if (active === 'Trên 2.000.000đ') list = list.filter(p => p.priceValue > 2000000)
+    if (active.endsWith('đ')) list = list.filter(p => p.price === active)
     else if (['Giỏ trái cây', 'Hộp quà', 'Set quà cao cấp'].includes(active)) list = list.filter(p => p.type === active)
     else if (active) list = list.filter(p => p.occasion === active || p.tag === active)
     if (sort.includes('thấp')) list.sort((a, b) => a.priceValue - b.priceValue)
