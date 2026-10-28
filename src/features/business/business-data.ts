@@ -1,0 +1,35 @@
+export const business = {
+  name: "Ely Fruit",
+  url: "https://ely-fruit.vn/",
+  title: "Ely Fruit | Giỏ trái cây, mâm lễ & tráp cưới hỏi",
+  description: "Ely Fruit cung cấp trái cây, bánh kẹo nhập khẩu, giỏ trái cây cao cấp; nhận thiết kế mâm lễ và tráp cưới hỏi tại Phú Lợi, Thủ Dầu Một, TP. Hồ Chí Minh.",
+  address: "Số 22 đường 30/4, Phú Lợi, Thủ Dầu Một, TP. Hồ Chí Minh",
+  phone: "0981370970",
+  phoneLabel: "0981.370.970",
+  email: "ctythucphamelyfruit@gmail.com",
+  openingHoursLabel: "07:30–21:00",
+  maps: "https://maps.app.goo.gl/JwQ1uLf4Ym1GPQWL6?g_st=ic",
+  facebook: "https://www.facebook.com/share/1DXwAhtZ7R/?mibextid=wwXIfr",
+  tiktok: "https://www.tiktok.com/@ely.fruit.bnh.dng?_r=1&_t=ZS-9AvYsctqiqz",
+} as const
+
+export const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "@id": `${business.url}#store`,
+  name: business.name,
+  url: business.url,
+  description: business.description,
+  telephone: "+84981370970",
+  email: business.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Số 22 đường 30/4, Phú Lợi",
+    addressLocality: "Thủ Dầu Một",
+    addressRegion: "TP. Hồ Chí Minh",
+    addressCountry: "VN",
+  },
+  openingHours: "Mo-Su 07:30-21:00",
+  hasMap: business.maps,
+  sameAs: [business.facebook, business.tiktok],
+} as const

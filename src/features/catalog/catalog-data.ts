@@ -8,7 +8,7 @@ export interface Product {
   description: string
 }
 
-export const filters = ["Tất cả", "499K", "599K", "699K", "799K", "899K", "999K", "1.2M+"]
+export const filters = ["Tất cả", "399K", "499K", "599K", "699K", "800K", "1 triệu"]
 
 import productData from "./products.json"
 

@@ -7,7 +7,10 @@ export function PhoneIcon({ className = "" }: IconProps) {
 }
 
 export function ZaloIcon({ className = "" }: IconProps) {
-  return <span className={`${className} inline-flex items-center justify-center rounded-md bg-current font-sans text-[0.62em] font-bold leading-none text-white`} aria-hidden="true">Z</span>
+  return <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M5.5 4.5h13A2.5 2.5 0 0 1 21 7v8.5a2.5 2.5 0 0 1-2.5 2.5H12l-4.2 2.5.8-2.5H5.5A2.5 2.5 0 0 1 3 15.5V7a2.5 2.5 0 0 1 2.5-2.5Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+    <path d="M8 9h5l-5 5h5M15.5 9v5M15.5 9h1.8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
 }
 
 export function ChatIcon({ className = "" }: IconProps) {
