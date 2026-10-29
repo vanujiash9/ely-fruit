@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build && node scripts/prerender.mjs",
     "typecheck": "tsc --noEmit",
+    "images:guides": "node scripts/optimize-guide-images.mjs",
     "test:routing": "node --experimental-strip-types --test src/app/routing.test.ts",
     "preview": "vite preview",
     "format": "oxfmt"

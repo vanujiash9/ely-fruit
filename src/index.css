@@ -481,17 +481,40 @@ blockquote { font-family: 'DM Serif Display', serif; font-size: 20px; line-heigh
 .guide-article-header h1 { margin: 18px 0 22px; font-size: clamp(48px, 5.6vw, 78px); }
 .guide-article-header p { font-size: 15px; }
 .guide-article-header small { display: block; margin-top: 24px; color: #8b7e80; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
-.guide-article-header img { width: 100%; height: 540px; object-fit: cover; border-radius: 220px 220px 0 0; }
+.guide-article-header > img, .guide-article-header .guide-article-figure img { width: 100%; height: 540px; object-fit: cover; border-radius: 220px 220px 0 0; }
+.guide-article-header .guide-article-figure { margin: 0; }
+.guide-article-header .guide-article-figure figcaption { margin-top: 12px; }
 .guide-article-body { display: grid; grid-template-columns: 220px minmax(0, 760px); gap: 90px; justify-content: center; padding-top: 70px; border-top: 1px solid #ddd3c7; }
 .guide-article-body > aside { position: sticky; top: 120px; align-self: start; display: grid; }
 .guide-article-body > aside span { margin-bottom: 12px; color: var(--orchard-ink); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
 .guide-article-body > aside a { padding: 10px 0; border-bottom: 1px solid #e8dfd4; color: #675a5c; font-size: 10px; text-decoration: none; }
 .guide-article-body > aside a:hover, .guide-article-body > aside a:focus-visible { color: var(--orchard-ink); }
-.guide-article-copy h2 { margin: 16px 0 24px; color: var(--text-primary); }
+.guide-article-copy h2 { margin: 16px 0 24px; color: var(--text-primary); scroll-margin-top: 110px; }
+.guide-article-section { margin-top: 48px; }
+.guide-article-section:first-of-type { margin-top: 16px; }
+.guide-article-section p + p { margin-top: 16px; }
+.guide-article-figure { margin: 30px 0 0; }
+.guide-article-figure img { display: block; width: 100%; }
+.guide-article-figure img { aspect-ratio: 4 / 3; object-fit: cover; background: #eee7dc; }
+.guide-article-figure figcaption { margin-top: 10px; color: #75686a; font-size: 12px; line-height: 1.6; }
 .guide-article-copy h3 { margin: 42px 0 12px; color: var(--text-primary); font-family: 'DM Serif Display', serif; font-size: 29px; font-weight: 400; scroll-margin-top: 110px; }
 .guide-article-copy p, .guide-article-copy li { color: #51494a; font-size: 15px; line-height: 1.9; }
 .guide-article-copy li { margin: 12px 0; }
 .guide-article-copy a { color: var(--orchard-ink); font-weight: 700; }
+.article-product-recommendations, .article-faq { margin: 46px 0; padding: 30px; background: #edf1e9; }
+.article-product-recommendations h2, .article-faq h2 { margin: 12px 0 22px; font-size: 38px; }
+.article-product-recommendations > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.article-product-recommendations > div > a { display: grid; grid-template-columns: 72px 1fr auto; gap: 12px; align-items: center; padding: 10px; background: #fffdf8; color: var(--text-primary); text-decoration: none; }
+.article-product-recommendations img { width: 72px; height: 82px; object-fit: cover; }
+.article-product-recommendations span { display: grid; gap: 4px; }
+.article-product-recommendations small { color: var(--orchard-ink); font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+.article-product-recommendations strong { font-family: 'DM Serif Display', serif; font-size: 18px; font-weight: 400; line-height: 1.15; }
+.article-product-recommendations em { color: #75686a; font-size: 11px; font-style: normal; line-height: 1.45; }
+.article-product-recommendations svg { color: #a5803d; }
+.article-faq { background: #f6f2e9; }
+.article-faq details { border-top: 1px solid #d9d0c4; }
+.article-faq summary { padding: 17px 28px 17px 0; cursor: pointer; color: var(--text-primary); font-weight: 700; line-height: 1.5; }
+.article-faq p { padding-bottom: 18px; }
 .article-source { margin-top: 34px; padding: 18px; border-left: 3px solid #c6a15b; background: #f3eadc; }
 .article-source a { display: inline-flex; align-items: center; gap: 5px; }
 .article-recommendations { margin: 42px 0; padding: 28px; border: 1px solid #d9c8ad; background: #f6f2e9; }
@@ -544,7 +567,7 @@ blockquote { font-family: 'DM Serif Display', serif; font-size: 20px; line-heigh
   .featured-guide { grid-template-columns: 1fr; }.featured-guide .guide-card-image { min-height: 420px; }
   .guide-grid-editorial { grid-template-columns: 1fr 1fr; }.guide-grid-editorial article { grid-template-columns: 1fr; }.guide-grid-editorial article > .guide-card-image { height: 260px; }
   .guide-sources { grid-template-columns: 1fr; gap: 36px; padding: 42px; }
-  .guide-article-header img { height: 460px; }.guide-article-body { grid-template-columns: 170px minmax(0, 1fr); gap: 48px; }
+  .guide-article-header > img, .guide-article-header .guide-article-figure img { height: 460px; }.guide-article-body { grid-template-columns: 170px minmax(0, 1fr); gap: 48px; }
   .product-detail { grid-template-columns: 1fr; gap: 45px; }.gallery-main { max-height: 680px; }.product-copy { grid-template-columns: 1fr; gap: 40px; }
   .catalogue-grid { grid-template-columns: repeat(2,1fr); }.about-story { grid-template-columns: 1fr; gap: 30px; }.values-grid { grid-template-columns: 1fr 1fr; }.contact-page-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1.2fr .8fr; }.footer-cta { border-left: 0; padding-left: 0; }
@@ -581,7 +604,7 @@ blockquote { font-family: 'DM Serif Display', serif; font-size: 20px; line-heigh
   .guide-editorial { padding-top: 36px; }.featured-guide .guide-card-image { min-height: 280px; }.featured-guide > div { padding: 28px 22px; }
   .guide-grid-editorial { grid-template-columns: 1fr; }.guide-grid-editorial article { grid-template-columns: 1fr; }.guide-grid-editorial article > .guide-card-image { height: 230px; }
   .guide-sources { margin-top: 60px; padding: 28px 22px; }.guide-sources a strong { font-size: 16px; }
-  .guide-cta { padding: 28px 22px; }.guide-article-page { padding-top: 20px; }.guide-article-header { grid-template-columns: 1fr; gap: 30px; padding-bottom: 45px; }.guide-article-header img { height: 360px; border-radius: 160px 160px 0 0; }.guide-article-body { grid-template-columns: 1fr; padding-top: 45px; }.guide-article-body > aside { display: none; }.article-recommendations { padding: 22px 18px; }.article-recommendations h3 { font-size: 26px; }.article-recommendations > div > a { gap: 6px 12px; }.article-actions { flex-direction: column; align-items: stretch; }
+  .guide-cta { padding: 28px 22px; }.guide-article-page { padding-top: 20px; }.guide-article-header { grid-template-columns: 1fr; gap: 30px; padding-bottom: 45px; }.guide-article-header > img, .guide-article-header .guide-article-figure img { height: 360px; border-radius: 160px 160px 0 0; }.guide-article-figure { margin-top: 24px; }.guide-article-body { grid-template-columns: 1fr; padding-top: 45px; }.guide-article-body > aside { display: none; }.article-recommendations { padding: 22px 18px; }.article-product-recommendations, .article-faq { padding: 24px 18px; }.article-product-recommendations h2, .article-faq h2 { font-size: 29px; }.article-product-recommendations > div { grid-template-columns: 1fr; }.article-recommendations h3 { font-size: 26px; }.article-recommendations > div > a { gap: 6px 12px; }.article-actions { flex-direction: column; align-items: stretch; }
   .sheet-content { grid-template-columns: 1fr 1fr; }.filter-group label { font-size: 12px; }
   .product-page { padding-top: 20px; }.product-page > .breadcrumb { display: none; }.product-detail { gap: 30px; }.gallery-main { width: calc(100% + 28px); margin-left: -14px; }.gallery-thumbs span { display: none; }.detail-info h1 { font-size: 40px; }.detail-specs > div { grid-template-columns: 115px 1fr; }.detail-actions { display: grid; grid-template-columns: 1fr 1fr; }.detail-actions .btn:first-child { grid-column: span 2; }.product-copy { padding: 65px 0; }.related { padding-top: 65px; }
   .catalogue-intro { display: block; }.catalogue-intro span { display: block; margin-bottom: 10px; }.catalogue-grid { gap: 30px 10px; }.catalogue-info { grid-template-columns: 1fr; }.catalogue-info > span { display: none; }.catalogue-info h2 { font-size: 17px; }.catalogue-cover > span { font-size: 22px; left: 15px; bottom: 18px; }

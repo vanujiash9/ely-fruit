@@ -72,6 +72,7 @@ export function getPageSchema(path: string): string {
       dateModified: guide.updatedAt,
       datePublished: guide.updatedAt,
       mainEntityOfPage: metadata.canonical,
+      image: [new URL(guide.heroImage?.hero ?? guide.image, SITE_URL).href],
       author: { '@id': `${SITE_URL}/#business` },
       publisher: { '@id': `${SITE_URL}/#business` },
     })
