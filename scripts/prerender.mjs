@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { createServer } from 'vite'
 
-const SITE_URL = 'https://elyfruit.vn'
+const SITE_URL = 'https://ely-fruit.vn'
 const DIST_DIRECTORY = new URL('../dist/', import.meta.url)
 
 function escapeHtmlAttribute(value) {
