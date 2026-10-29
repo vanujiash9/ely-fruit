@@ -1,5 +1,6 @@
 import { products, type Product } from '../data/catalog.ts'
 import { guides } from '../data/guides.ts'
+import { localServices } from '../data/local-services.ts'
 
 export interface RouteDefinition {
   path: string
@@ -23,7 +24,8 @@ const CATEGORY_ROUTES: RouteDefinition[] = [
   ['/gio-trai-cay/sinh-nhat', 'Giỏ trái cây sinh nhật'],
   ['/gio-trai-cay/khai-truong', 'Quà khai trương'],
   ['/gio-trai-cay/tham-hoi', 'Giỏ trái cây thăm hỏi'],
-  ['/gio-trai-cay/399k', 'Giỏ trái cây giá tốt'],
+  ['/gio-trai-cay/399k', 'Giỏ trái cây 399K'],
+  ['/gio-trai-cay/499k', 'Giỏ trái cây 499K'],
   ['/gio-trai-cay/599k', 'Giỏ trái cây 599K'],
   ['/trai-cay-nhap-khau', 'Trái cây nhập khẩu'],
   ['/gio-qua-doanh-nghiep', 'Giỏ quà doanh nghiệp'],
@@ -40,6 +42,15 @@ export function getRoute(path: string): RouteDefinition | undefined {
 
   const route = [...ROUTES, ...CATEGORY_ROUTES].find(route => route.path === path)
   if (route) return route
+
+  const localService = localServices.find(service => `/${service.slug}` === path)
+  if (localService) {
+    return {
+      path,
+      title: localService.title,
+      description: localService.description,
+    }
+  }
 
   const productPrefix = path.startsWith('/san-pham/') ? '/san-pham/' : '/product/'
   if (path.startsWith(productPrefix)) {

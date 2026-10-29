@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { guides } from '../data/guides.ts'
+import { localServices } from '../data/local-services.ts'
 import { getRoute, getPageTitle } from './routing.ts'
 
 test('resolves the canonical basket category instead of the homepage', () => {
@@ -34,9 +35,31 @@ test('does not fall back to another article for an unknown guide slug', () => {
   assert.equal(getRoute('/guide/khong-ton-tai'), undefined)
 })
 
+test('provides a practical summary and FAQs for every guide', () => {
+  for (const guide of guides) {
+    assert.ok(guide.summary.length > 0)
+    assert.ok(guide.faqs.length >= 2)
+  }
+})
+
+test('resolves every local service page with unique metadata', () => {
+  for (const service of localServices) {
+    const route = getRoute(`/${service.slug}`)
+
+    assert.equal(route?.path, `/${service.slug}`)
+    assert.equal(route?.title, service.title)
+    assert.equal(route?.description, service.description)
+  }
+})
+
+test('does not resolve an unknown local service URL', () => {
+  assert.equal(getRoute('/gio-trai-cay-khong-ton-tai'), undefined)
+})
+
 test('canonicalizes legacy listing and product aliases', () => {
   assert.equal(getRoute('/gifts')?.path, '/gio-trai-cay')
   assert.equal(getRoute('/product/ely-06')?.path, '/san-pham/ely-06')
+  assert.equal(getRoute('/gio-trai-cay/499k')?.path, '/gio-trai-cay/499k')
   assert.equal(getPageTitle('/gifts'), getPageTitle('/gio-trai-cay'))
 })
 

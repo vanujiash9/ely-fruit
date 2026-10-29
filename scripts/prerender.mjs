@@ -1,52 +1,47 @@
-import { readFile, writeFile, mkdtemp, rm } from "node:fs/promises"
-import { tmpdir } from "node:os"
-import { join, resolve } from "node:path"
-import { pathToFileURL } from "node:url"
-import { build } from "vite"
-import { createHash } from "node:crypto"
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
+import { createServer } from 'vite'
 
-const escapeAttribute = (value) => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
-const output = resolve("dist/index.html")
-const temporaryDirectory = await mkdtemp(join(tmpdir(), "ely-prerender-"))
+const SITE_URL = 'https://elyfruit.vn'
+const DIST_DIRECTORY = new URL('../dist/', import.meta.url)
+
+function escapeHtmlAttribute(value) {
+  return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+const vite = await createServer({ appType: 'custom', server: { middlewareMode: true } })
 
 try {
-  await build({
-    build: {
-      ssr: "src/entry-server.tsx",
-      outDir: temporaryDirectory,
-      copyPublicDir: false,
-      rollupOptions: { output: { entryFileNames: "entry-server.mjs" } },
-    },
-    ssr: { noExternal: true },
-  })
-  const { render, business, businessSchema } = await import(pathToFileURL(join(temporaryDirectory, "entry-server.mjs")).href)
-  const template = await readFile(output, "utf8")
-  if (!template.includes('<div id="root"></div>')) throw new Error("Prerender requires an empty root in the client build")
-  const description = escapeAttribute(business.description)
-  const title = escapeAttribute(business.title)
-  const schemaJson = JSON.stringify(businessSchema).replaceAll("<", "\\u003c")
-  const schemaHash = createHash("sha256").update(schemaJson).digest("base64")
-  const csp = `default-src 'self'; script-src 'self' 'sha256-${schemaHash}'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'`
-  const metadata = [
-    `<meta http-equiv="Content-Security-Policy" content="${csp}" />`,
-    `<link rel="canonical" href="${business.url}" />`,
-    `<meta property="og:type" content="website" />`,
-    `<meta property="og:locale" content="vi_VN" />`,
-    `<meta property="og:site_name" content="${business.name}" />`,
-    `<meta property="og:url" content="${business.url}" />`,
-    `<meta property="og:title" content="${title}" />`,
-    `<meta property="og:description" content="${description}" />`,
-    `<meta name="twitter:card" content="summary" />`,
-    `<meta name="twitter:title" content="${title}" />`,
-    `<meta name="twitter:description" content="${description}" />`,
-    `<script type="application/ld+json">${schemaJson}</script>`,
-  ].join("\n    ")
-  const html = template
-    .replace(/<title>.*?<\/title>/s, () => `<title>${title}</title>`)
-    .replace(/<meta name="description" content="[^"]*"\s*\/>/, () => `<meta name="description" content="${description}" />`)
-    .replace("<head>", () => `<head>\n    ${metadata}`)
-    .replace('<div id="root"></div>', () => `<div id="root">${render()}</div>`)
-  await writeFile(output, html)
+  const { getPageMetadata, getPageSchema, render, staticRoutes } = await vite.ssrLoadModule('/src/entry-server.tsx')
+  const sitemapUrls = [...new Set(staticRoutes)].map(path => `  <url><loc>${SITE_URL}${path === '/' ? '/' : path}</loc></url>`)
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls.join('\n')}\n</urlset>\n`
+  const template = await readFile(new URL('index.html', DIST_DIRECTORY), 'utf8')
+
+  console.info(`Prerendering ${staticRoutes.length} routes...`)
+  await writeFile(new URL('sitemap.xml', DIST_DIRECTORY), sitemap)
+
+  for (const route of staticRoutes) {
+    try {
+      const metadata = getPageMetadata(route)
+      const html = template
+        .replace(/<title>.*?<\/title>/, `<title>${escapeHtmlAttribute(metadata.title)}</title>`)
+        .replace(/<meta name="description" content=".*?" \/>/, `<meta name="description" content="${escapeHtmlAttribute(metadata.description)}" />`)
+        .replace(/<link rel="canonical" href=".*?" \/>/, `<link rel="canonical" href="${escapeHtmlAttribute(metadata.canonical)}" />`)
+        .replace(/<meta property="og:title" content=".*?" \/>/, `<meta property="og:title" content="${escapeHtmlAttribute(metadata.title)}" />`)
+        .replace(/<meta property="og:description" content=".*?" \/>/, `<meta property="og:description" content="${escapeHtmlAttribute(metadata.description)}" />`)
+        .replace(/<meta property="og:url" content=".*?" \/>/, `<meta property="og:url" content="${escapeHtmlAttribute(metadata.canonical)}" />`)
+        .replace(/<script id="ely-fruit-local-business" type="application\/ld\+json">[\s\S]*?<\/script>/, `<script id="ely-fruit-local-business" type="application/ld+json">${getPageSchema(route).replace(/</g, '\\u003c')}</script>`)
+        .replace('<div id="root"></div>', `<div id="root">${render(route)}</div>`)
+      const directory = route === '/' ? DIST_DIRECTORY : new URL(`.${route}/`, DIST_DIRECTORY)
+
+      await mkdir(directory, { recursive: true })
+      await writeFile(join(directory.pathname, 'index.html'), html)
+    } catch (error) {
+      throw new Error(`Prerender failed for ${route}`, { cause: error })
+    }
+  }
+
+  console.info(`Prerendered ${staticRoutes.length} routes and sitemap.xml.`)
 } finally {
-  await rm(temporaryDirectory, { recursive: true, force: true })
+  await vite.close()
 }
