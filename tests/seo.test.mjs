@@ -37,6 +37,20 @@ test("metadata uses canonical production domain and matching business schema", (
   assert.doesNotMatch(html, /localhost|@vite\/client|\/src\/main/)
 })
 
+test("price listing pages use distinct requested hero copy", async () => {
+  const pages = [
+    ["399k", "Giỏ trái cây 399K", "Các mẫu giỏ trái cây 399.000đ tại Ely Fruit, phù hợp tặng sinh nhật, thăm hỏi, cảm ơn và người thân."],
+    ["499k", "Giỏ trái cây 499K", "Khám phá các mẫu giỏ trái cây 499.000đ được Ely Fruit chuẩn bị chỉn chu, phù hợp sinh nhật, thăm hỏi và biếu tặng."],
+    ["599k", "Giỏ trái cây 599K", "Các mẫu giỏ trái cây 599.000đ với thiết kế đầy đặn, phù hợp tặng gia đình, đối tác, sinh nhật và các dịp chúc mừng."],
+  ]
+
+  for (const [path, title, intro] of pages) {
+    const page = await readFile(new URL(`../dist/gio-trai-cay/${path}/index.html`, import.meta.url), "utf8")
+    assert.match(page, new RegExp(`<h1[^>]*>${title}</h1>`))
+    assert.ok(page.includes(intro))
+  }
+})
+
 test("footer embeds a lazy-loaded map with an accessible title and directions link", () => {
   const footer = html.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/)?.[1]
   assert.ok(footer)
@@ -52,6 +66,11 @@ test("footer embeds a lazy-loaded map with an accessible title and directions li
   assert.equal(mapUrl.searchParams.get("output"), "embed")
   assert.equal(mapUrl.searchParams.get("q"), "Ely Fruit, Số 22 đường 30/4, Phú Lợi, Thủ Dầu Một, TP. Hồ Chí Minh")
   assert.ok(footer.includes("https://maps.app.goo.gl/JwQ1uLf4Ym1GPQWL6?g_st=ic"))
+  assert.ok(footer.includes(`© ${new Date().getFullYear()} Ely Fruit. All rights reserved.`))
+})
+
+test("header sends the Tết menu entry to the catalogue", () => {
+  assert.match(html, /href="\/gio-trai-cay">Giỏ quà Tết<\/a>/)
 })
 
 test("discovery files contain production URLs rather than HTML fallbacks", async () => {
