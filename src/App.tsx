@@ -110,6 +110,7 @@ function Logo({ light = false }: { light?: boolean }) {
 
 function Header({ currentPath }: { currentPath: string }) {
   const [open, setOpen] = useState(false)
+  const [openDrawerSection, setOpenDrawerSection] = useState<'products' | 'guides' | null>(null)
   const [searchOpen, setSearchOpen] = useState(false)
   const links = [
     ['Trang chủ', '/'],
@@ -178,11 +179,18 @@ function Header({ currentPath }: { currentPath: string }) {
           <div className="drawer-head"><Logo /><button className="icon-btn" onClick={() => setOpen(false)}><X /></button></div>
           <nav>
             <a href="/" onClick={() => setOpen(false)}>Trang chủ<ArrowRight size={16} /></a>
-            <a href="/#products" onClick={() => setOpen(false)}>Sản phẩm<ArrowRight size={16} /></a>
-            <div className="drawer-subnav">{giftLinks.map(([label, path]) => <a href={path} key={label} onClick={() => setOpen(false)}>{label}</a>)}</div>
+            <section className={`drawer-nav-group ${openDrawerSection === 'products' ? 'is-open' : ''}`}>
+              <button type="button" onClick={() => setOpenDrawerSection(section => section === 'products' ? null : 'products')} aria-expanded={openDrawerSection === 'products'}>Sản phẩm<ChevronDown size={18} /></button>
+              <div className="drawer-subnav">
+                <a href="/#products" onClick={() => setOpen(false)}>Xem sản phẩm nổi bật <ArrowRight size={14} /></a>
+                {giftLinks.map(([label, path]) => <a href={path} key={label} onClick={() => setOpen(false)}>{label}</a>)}
+              </div>
+            </section>
             {links.slice(1, 3).map(([label, path]) => <a href={path} key={label} onClick={() => setOpen(false)}>{label}<ArrowRight size={16} /></a>)}
-            <a href="/#guides" onClick={() => setOpen(false)}>Cẩm nang<ArrowRight size={16} /></a>
-            <div className="drawer-subnav">{guideLinks.map(([label, path]) => <a href={path} key={path} onClick={() => setOpen(false)}>{label}</a>)}</div>
+            <section className={`drawer-nav-group ${openDrawerSection === 'guides' ? 'is-open' : ''}`}>
+              <button type="button" onClick={() => setOpenDrawerSection(section => section === 'guides' ? null : 'guides')} aria-expanded={openDrawerSection === 'guides'}>Cẩm nang<ChevronDown size={18} /></button>
+              <div className="drawer-subnav">{guideLinks.map(([label, path]) => <a href={path} key={path} onClick={() => setOpen(false)}>{label}</a>)}</div>
+            </section>
             <a href="/#contact" onClick={() => setOpen(false)}>Liên hệ<ArrowRight size={16} /></a>
           </nav>
           <div className="drawer-contact"><small>Tư vấn & đặt hàng</small><a href={PHONE_LINK}>{PHONE}</a><p>07:30–21:00 mỗi ngày</p></div>
