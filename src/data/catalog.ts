@@ -20,6 +20,35 @@ export function sortProductsByPrice(items: readonly Product[], direction: PriceS
   return [...items].sort((first, second) => (first.priceValue - second.priceValue) * multiplier)
 }
 
+const ingredientsByCode: Readonly<Record<string, string>> = {
+  ELY01: 'Hoa tươi, quýt Úc, táo Dazzle, táo xanh và táo Nam Phi.',
+  ELY02: 'Hoa tươi, lê nâu, cam Nam Phi, táo Dazzle, quýt Úc, nho mẫu đơn và táo Nam Phi.',
+  ELY03: 'Hoa tươi, lê sữa, kiwi vàng, táo Envy, táo xanh và quýt Úc.',
+  ELY04: 'Hoa tươi, quýt Úc, táo xanh và táo Nam Phi.',
+  ELY05: 'Hoa tươi, nho mẫu đơn, táo xanh, quýt Úc và táo Dazzle.',
+  ELY08: 'Hoa tươi hai bên, nho mẫu đơn, cam Nam Phi, lê nâu, táo Dazzle, táo Envy, quýt Úc và táo Nam Phi.',
+  ELY09: 'Hoa tươi hai bên, cam Nam Phi, quýt Úc, táo Dazzle, táo xanh, lê nâu và táo Nam Phi.',
+  HQ01: 'Táo Dazzle, nho mẫu đơn và nho đỏ.',
+  HQ02: 'Nho mẫu đơn, táo Dazzle, táo Envy, lê nâu, kiwi vàng, quýt Úc và cam Nam Phi.',
+  HQ03: 'Táo Dazzle, kiwi vàng, nho mẫu đơn và quýt Úc.',
+  HQ04: 'Táo Envy, lê nâu, kiwi vàng, nho mẫu đơn, cherry và quýt Úc.',
+  HQ05: 'Quýt Úc, nho mẫu đơn, nho đỏ và táo Dazzle.',
+  K01: 'Quýt Úc, kiwi vàng, táo Envy, cam Úc, lê nâu, táo Dazzle, nho mẫu đơn và táo Nam Phi.',
+  K02: 'Quýt Úc, kiwi vàng, táo Envy, cam Úc, lê nâu, táo Dazzle, nho mẫu đơn và táo Nam Phi.',
+  KH02: 'Cam Nam Phi, lê nâu, táo xanh, táo Dazzle, quýt Úc, lê đường Hà Giang và táo Nam Phi.',
+  KH04: 'Cam Nam Phi, lê nâu, táo Dazzle, quýt Úc, lê đường Hà Giang và táo Nam Phi.',
+  KH08: 'Cam Nam Phi, lê nâu, táo Dazzle, quýt Úc, táo Nam Phi, táo xanh, lê Nam Phi và nho mẫu đơn.',
+  KH09: 'Lê sữa, lê Nam Phi, táo xanh, quýt Úc, táo Dazzle, táo Golden, kiwi vàng và táo Nam Phi.',
+  KH12: 'Nho đỏ, lê đường Hà Giang, lê nâu, cam Nam Phi, táo xanh, táo Dazzle và táo Nam Phi.',
+  KH14: 'Dưa Đài Queen, cam Úc, lê nâu, táo Envy, táo Dazzle, quýt Úc, nho mẫu đơn và táo Nam Phi.',
+  KH15: 'Dưa Đài Queen, cherry, lê nâu, táo xanh, táo Dazzle, quýt Úc, nho mẫu đơn và táo Nam Phi.',
+  KH16: 'Dưa Đài Queen, nho mẫu đơn, kiwi vàng, táo Dazzle, quýt Úc, táo Envy và táo Nam Phi.',
+  KH53: 'Dưa lưới dài Aladin, lê nâu, dưa lê Hàn, táo Dazzle, cam Nam Phi, quýt Úc, kiwi vàng và táo Nam Phi.',
+  Q01: 'Táo Envy, táo Dazzle và táo cherry.',
+  Q02: 'Táo xanh, táo Envy, kiwi vàng và nho mẫu đơn.',
+  Q03: 'Kiwi vàng và táo cherry.',
+}
+
 export const products: Product[] = [
   { slug: 'ely-06', name: 'Giỏ Trái Cây Ely 06', code: 'ELY06', price: '800.000đ', priceValue: 800000, ingredients: 'Hoa tươi, cam Nam Phi, lê nâu, táo xanh, táo Dazzle, táo Envy, quýt Úc và táo Nam Phi.', tag: 'Bán chạy', image: '/products/ely06-front.png', imageBack: '/products/ely06-back.png', occasion: 'Sinh nhật', type: 'Giỏ trái cây' },
   { slug: 'ely-07', name: 'Giỏ Trái Cây Ely 07', code: 'ELY07', price: '800.000đ', priceValue: 800000, ingredients: 'Hoa tươi, cam Nam Phi, lê nâu, táo xanh, táo Dazzle, kiwi vàng, quýt Úc và táo Nam Phi.', tag: 'Mẫu mới', image: '/products/ely07-front.png', imageBack: '/products/ely07-back.png', occasion: 'Cảm ơn', type: 'Giỏ trái cây' },
@@ -41,7 +70,7 @@ export const products: Product[] = [
     code,
     price: `${priceValue.toLocaleString('vi-VN')}đ`,
     priceValue,
-    ingredients: 'Trái cây tươi tuyển chọn, phối hợp theo mùa và gói quà thủ công.',
+    ingredients: ingredientsByCode[code] ?? 'Trái cây tươi tuyển chọn, phối hợp theo mùa và gói quà thủ công.',
     image: `/products/${id}-front.${id === 'ely03' ? 'jpg' : 'png'}`,
     imageBack: `/products/${id}-back.${id === 'ely03' ? 'jpg' : 'png'}`,
     occasion: index % 2 ? 'Sinh nhật' : 'Biếu đối tác',

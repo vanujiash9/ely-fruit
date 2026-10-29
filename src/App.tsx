@@ -26,7 +26,6 @@ import {
   SquareArrowOutUpRight,
   Sparkles,
   Store,
-  Truck,
   X,
   ZoomIn,
 } from 'lucide-react'
@@ -43,15 +42,25 @@ const images = {
   store: 'https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?auto=format&fit=crop&w=1200&q=85',
   grapes: '/products/kh11-front.png',
   gift: '/products/kh01-front.png',
+  ceremonialTray: '/catalogue/774362917_122119190679389872_5327334756948379778_n.jpg',
+  weddingTray: '/catalogue/774382389_122119926015389872_2431011871162465769_n.jpg',
+  colleagueGift: '/catalogue/781805005_122121104535389872_8987291988136903197_n.jpg',
+  importedFruit: '/catalogue/787459582_122123550429389872_2941272962711906410_n.jpg',
+  premiumGiftBox: '/catalogue/793924956_122124875997389872_422513923435991868_n.jpg',
+  tetBasket: '/catalogue/812427189_122127112641389872_1347517099385289311_n.jpg',
+  heroGiftBasket: '/hero/760654682_122115472743389872_8303192440324641836_n.jpg',
+  heroCorporateGift: '/hero/772853552_122118641781389872_3702766060213897876_n (1).jpg',
+  heroTetGift: '/hero/773981840_122119689135389872_7635825443695055975_n.jpg',
+  heroAccent: '/hero/783255795_122121343185389872_4119006571327875134_n.jpg',
 }
 
 const categories = [
-  ['Giỏ quà trái cây', 'Trái cây tươi tuyển chọn, gói mới mỗi ngày.', images.basket],
-  ['Hộp quà cao cấp', 'Chỉn chu từ chất liệu hộp đến từng món quà.', images.boxes],
-  ['Trái cây nhập khẩu', 'Nguồn gốc rõ ràng, tươi ngon theo mùa.', images.fruit],
-  ['Giỏ quà doanh nghiệp', 'Cá nhân hóa theo ngân sách và thương hiệu.', images.fruitBox],
-  ['Giỏ quà Tết', 'Sắc xuân sang trọng, trao gửi thịnh vượng.', images.gift],
-  ['Mâm lễ & Tráp cưới', 'Trang trọng, đúng nghi thức và giao đúng giờ.', images.grapes],
+  ['Mâm lễ gia tiên', 'Chuẩn bị trang trọng, cân đối cho ngày lễ quan trọng.', images.ceremonialTray],
+  ['Tráp lễ cưới hỏi', 'Chỉn chu từng lễ vật để gửi trọn lời chúc phúc.', images.weddingTray],
+  ['Quà tặng đồng nghiệp', 'Lời cảm ơn tinh tế cho những người cùng đồng hành.', images.colleagueGift],
+  ['Trái cây nhập khẩu', 'Nguồn gốc rõ ràng, tươi ngon theo mùa.', images.importedFruit],
+  ['Hộp quà cao cấp', 'Chỉn chu từ chất liệu hộp đến từng món quà.', images.premiumGiftBox],
+  ['Giỏ quà Tết', 'Sắc xuân sang trọng, trao gửi thịnh vượng.', images.tetBasket],
 ]
 
 const catalogues = [
@@ -242,20 +251,15 @@ function FilterBar({ active, setActive }: { active: string; setActive: (value: s
   )
 }
 
-function TrustStrip() {
-  const items = [[ShieldCheck, 'Trái cây tuyển chọn', 'Kiểm tra kỹ trước khi gói'], [Gift, 'Gói quà theo yêu cầu', 'Mỗi món quà là một thiết kế'], [HeartHandshake, 'Tư vấn trực tiếp', 'Theo ngân sách và dịp tặng'], [Truck, 'Giao hàng tận nơi', 'Nhanh chóng, cẩn thận']]
-  return <div className="trust-strip container">{items.map(([Icon, title, text]) => { const C = Icon as typeof ShieldCheck; return <div key={title as string}><C /><span><strong>{title as string}</strong><small>{text as string}</small></span></div> })}</div>
-}
-
 function TrustMetrics() {
   return <section className="trust-metrics" aria-label="Những con số được khách hàng tin tưởng"><div className="container trust-metrics-grid"><div className="trust-metrics-intro"><span className="eyebrow">Được tin chọn tại Thủ Dầu Một</span><p>Những con số được công khai từ các kênh của Ely Fruit và hành trình phục vụ khách hàng.</p></div>{TRUST_METRICS.map(metric => { const content = <><strong>{metric.value}</strong><span>{metric.label}</span><small>{metric.detail}</small></>; return metric.href ? <a key={metric.label} href={metric.href} target="_blank" rel="noreferrer">{content}<SquareArrowOutUpRight size={15} /></a> : <div key={metric.label}>{content}</div> })}</div></section>
 }
 
 function Hero() {
   const heroSlides = [
-    { image: images.hero, alt: 'Giỏ trái cây cao cấp Ely Fruit', eyebrow: 'Trao tặng điều tươi lành', title: 'Giỏ Quà Cao Cấp', emphasis: 'Ely Fruit', text: 'Trái cây nhập khẩu, giỏ quà, mâm lễ và tráp cưới hỏi tại Thủ Dầu Một.' },
-    { image: '/products/ely11-front.png', alt: 'Giỏ quà doanh nghiệp Ely Fruit', eyebrow: 'Quà tặng doanh nghiệp', title: 'Chỉn Chu Từng', emphasis: 'Món Quà', text: 'Thiết kế giỏ quà theo ngân sách, thương hiệu và dịp tặng của bạn.' },
-    { image: '/products/kq02-front.png', alt: 'Giỏ quà Tết Ely Fruit', eyebrow: 'Gửi trao thịnh vượng', title: 'Quà Tết Đầy', emphasis: 'Sắc Xuân', text: 'Những giỏ quà tươi ngon, sang trọng để kết nối yêu thương dịp đầu năm.' },
+    { image: images.heroGiftBasket, alt: 'Giỏ trái cây cao cấp Ely Fruit', eyebrow: 'Trao tặng điều tươi lành', title: 'Giỏ Quà Cao Cấp', emphasis: 'Ely Fruit', text: 'Trái cây nhập khẩu, giỏ quà, mâm lễ và tráp cưới hỏi tại Thủ Dầu Một.' },
+    { image: images.heroCorporateGift, alt: 'Giỏ quà doanh nghiệp Ely Fruit', eyebrow: 'Quà tặng doanh nghiệp', title: 'Chỉn Chu Từng', emphasis: 'Món Quà', text: 'Thiết kế giỏ quà theo ngân sách, thương hiệu và dịp tặng của bạn.' },
+    { image: images.heroTetGift, alt: 'Giỏ quà Tết Ely Fruit', eyebrow: 'Gửi trao thịnh vượng', title: 'Quà Tết Đầy', emphasis: 'Sắc Xuân', text: 'Những giỏ quà tươi ngon, sang trọng để kết nối yêu thương dịp đầu năm.' },
   ]
   const [activeSlide, setActiveSlide] = useState(0)
   const slide = heroSlides[activeSlide]
@@ -278,11 +282,11 @@ function Hero() {
         <div className="hero-visual">
           <div className="hero-image-main"><img key={slide.image} src={slide.image} alt={slide.alt} /></div>
           <div className="hero-carousel-controls"><button onClick={() => setActiveSlide((activeSlide + heroSlides.length - 1) % heroSlides.length)} aria-label="Ảnh trước"><ChevronLeft /></button><div>{heroSlides.map((item, index) => <button key={item.image} className={index === activeSlide ? 'active' : ''} onClick={() => setActiveSlide(index)} aria-label={`Chọn ảnh ${index + 1}`} />)}</div><button onClick={() => setActiveSlide((activeSlide + 1) % heroSlides.length)} aria-label="Ảnh tiếp theo"><ChevronRight /></button></div>
-          <div className="hero-image-small"><img src={images.apples} alt="Trái cây nhập khẩu tuyển chọn" /></div>
+          <div className="hero-image-small"><img src={images.heroAccent} alt="Trái cây nhập khẩu tuyển chọn" /></div>
           <div className="hero-badge"><Sparkles size={18} /><span><strong>Gói mới mỗi ngày</strong><small>Tươi ngon & chỉn chu</small></span></div>
         </div>
       </div>
-      <TrustStrip />
+      <div className="hero-marquee" aria-label="Dịch vụ Ely Fruit"><div className="hero-marquee-track"><span>Trái cây nhập khẩu</span><span>Giỏ quà cao cấp</span><span>Mâm lễ chỉn chu</span><span>Tráp cưới hỏi</span><span>Giao tận nơi tại Thủ Dầu Một</span><span aria-hidden="true">Trái cây nhập khẩu</span><span aria-hidden="true">Giỏ quà cao cấp</span><span aria-hidden="true">Mâm lễ chỉn chu</span><span aria-hidden="true">Tráp cưới hỏi</span><span aria-hidden="true">Giao tận nơi tại Thủ Dầu Một</span></div></div>
     </section>
   )
 }
