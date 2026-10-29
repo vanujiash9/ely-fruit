@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react'
 import { ProductCard } from './components/ProductCard'
 import { PageHero } from './components/PageHero'
+import { ResponsiveImage } from './components/ResponsiveImage'
 import { products, sortProductsByPrice, type Product } from './data/catalog'
 import { ADDRESS, ADDRESS_COUNTRY, ADDRESS_LOCALITY, ADDRESS_REGION, AREA_SERVED, BUSINESS_EMAIL, BUSINESS_NAME, DELIVERY_SCOPE, FACEBOOK_URL, MAP_URL, PHONE, PHONE_E164, PHONE_LINK, SITE_URL, STREET_ADDRESS, TIKTOK_URL, TRUST_METRICS, ZALO_URL } from './data/site'
 import { getPageTitle, getRoute } from './app/routing'
@@ -200,7 +201,7 @@ function SectionHeading({ eyebrow, title, text, action }: { eyebrow?: string; ti
 function CategoryGrid() {
   return <div className="category-grid">{categories.map(([name, desc, image], index) => (
     <article className={`category-card category-${index + 1}`} key={name}>
-      <img src={image} alt={name} />
+      <ResponsiveImage src={image} alt={name} sizes="(max-width: 600px) 50vw, (max-width: 900px) 50vw, 33vw" loading="lazy" />
       <div className="category-overlay"><span>0{index + 1}</span><h3>{name}</h3><p>{desc}</p><button onClick={() => routeTo('/gio-trai-cay')}>Xem sản phẩm <ArrowRight size={16} /></button></div>
     </article>
   ))}</div>
@@ -258,9 +259,9 @@ function Hero() {
           <div className="hero-meta"><a href={PHONE_LINK}><Phone size={17} />{PHONE}</a><span><Clock3 size={17} />07:30–21:00</span><span><MapPin size={17} />Thủ Dầu Một</span></div>
         </div>
         <div className="hero-visual">
-          <div className="hero-image-main"><img key={slide.image} src={slide.image} alt={slide.alt} /></div>
+          <div className="hero-image-main"><ResponsiveImage key={slide.image} src={slide.image} alt={slide.alt} sizes="(max-width: 900px) 75vw, 600px" mobileSizes="82vw" desktopVariant="landscape" loading={activeSlide === 0 ? 'eager' : 'lazy'} fetchPriority={activeSlide === 0 ? 'high' : 'auto'} /></div>
           <div className="hero-carousel-controls"><button onClick={() => setActiveSlide((activeSlide + heroSlides.length - 1) % heroSlides.length)} aria-label="Ảnh trước"><ChevronLeft /></button><div>{heroSlides.map((item, index) => <button key={item.image} className={index === activeSlide ? 'active' : ''} onClick={() => setActiveSlide(index)} aria-label={`Chọn ảnh ${index + 1}`} />)}</div><button onClick={() => setActiveSlide((activeSlide + 1) % heroSlides.length)} aria-label="Ảnh tiếp theo"><ChevronRight /></button></div>
-          <div className="hero-image-small"><img src={images.apples} alt="Trái cây nhập khẩu tuyển chọn" /></div>
+          <div className="hero-image-small"><ResponsiveImage src={images.apples} alt="Trái cây nhập khẩu tuyển chọn" sizes="190px" mobileSizes="130px" loading="lazy" /></div>
           <div className="hero-badge"><Sparkles size={18} /><span><strong>Gói mới mỗi ngày</strong><small>Tươi ngon & chỉn chu</small></span></div>
         </div>
       </div>
