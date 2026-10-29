@@ -202,7 +202,7 @@ function Header({ currentPath }: { currentPath: string }) {
             <section className={`drawer-nav-group ${openDrawerSection === 'products' ? 'is-open' : ''}`}>
               <button type="button" onClick={() => setOpenDrawerSection(section => section === 'products' ? null : 'products')} aria-expanded={openDrawerSection === 'products'}>Sản phẩm<ChevronDown size={18} /></button>
               <div className="drawer-subnav">
-                <a href="/#products" onClick={() => setOpen(false)}>Xem sản phẩm nổi bật <ArrowRight size={14} /></a>
+                <a href="/#products" onClick={() => setOpen(false)}>Xem tất cả giỏ quà <ArrowRight size={14} /></a>
                 {giftLinks.map(([label, path]) => <a href={path} key={label} onClick={() => setOpen(false)}>{label}</a>)}
               </div>
             </section>
@@ -276,7 +276,7 @@ function Hero() {
           <span className="eyebrow">{slide.eyebrow}</span>
           <h1>{slide.title} <em>{slide.emphasis}</em></h1>
           <p>{slide.text}</p>
-          <div className="hero-buttons"><Button onClick={() => routeTo('/gio-trai-cay')}>Xem giỏ quà <ArrowRight size={18} /></Button><Button href={ZALO_URL} variant="cream">Nhắn Zalo tư vấn</Button></div>
+          <div className="hero-buttons"><Button onClick={() => routeTo('/gio-trai-cay')}>Xem giỏ quà <ArrowRight size={18} /></Button><Button href={ZALO_URL} variant="cream" className="mobile-zalo-pulse">Nhắn Zalo tư vấn</Button></div>
           <div className="hero-meta"><a href={PHONE_LINK}><Phone size={17} />{PHONE}</a><span><Clock3 size={17} />07:30–21:00</span><span><MapPin size={17} />Thủ Dầu Một</span></div>
         </div>
         <div className="hero-visual">
@@ -321,7 +321,7 @@ function LocalSection() {
 }
 
 function FAQSection() {
-  const [open, setOpen] = useState(0)
+  const [open, setOpen] = useState(-1)
   return <section className="section faq-section"><div className="container faq-grid"><div className="faq-intro"><span className="eyebrow">Câu hỏi thường gặp</span><h2>Thông tin trước khi đặt quà</h2><p>Mọi món quà đều có thể được tư vấn và điều chỉnh để phù hợp hơn với người nhận.</p><Button href={FACEBOOK_URL} variant="secondary">Gửi câu hỏi cho Ely Fruit</Button></div><div className="accordion">{faqs.map(([q, a], i) => <article className={open === i ? 'open' : ''} key={q}><button onClick={() => setOpen(open === i ? -1 : i)}><span>{q}</span><ChevronDown /></button><div><p>{a}</p></div></article>)}</div></div></section>
 }
 
@@ -352,7 +352,7 @@ function HomePage() {
     <TrustMetrics />
     <main>
       <section className="section categories-section"><div className="container"><SectionHeading eyebrow="Danh mục" title="Chọn quà theo nhu cầu" text="Tìm nhanh giỏ quà, trái cây, mâm lễ và quà doanh nghiệp phù hợp." action={<Button href="/catalogue" variant="ghost">Xem catalogue <ArrowRight size={17} /></Button>} /><CategoryGrid /></div></section>
-      <section id="products" className="section products-section landing-anchor"><div className="container"><SectionHeading eyebrow="Sản phẩm" title="Giỏ quà nổi bật" text="Giá, mã sản phẩm và thành phần được hiển thị rõ ràng để bạn dễ lựa chọn." action={<Button href="/gio-trai-cay" variant="secondary">Xem tất cả giỏ quà</Button>} /><div className="product-grid mobile-snap-rail">{products.slice(0, 8).map(p => <ProductCard key={p.slug} product={p} />)}</div><Button href="/gio-trai-cay" variant="secondary" className="mobile-product-catalogue-link">Xem tất cả giỏ quà <ArrowRight size={17} /></Button></div></section>
+      <section id="products" className="section products-section landing-anchor"><div className="container"><SectionHeading eyebrow="Sản phẩm" title="Giỏ quà Ely Fruit" text="Giá, mã sản phẩm và thành phần được hiển thị rõ ràng để bạn dễ lựa chọn." action={<Button href="/gio-trai-cay" variant="secondary">Xem tất cả giỏ quà</Button>} /><Button href="/gio-trai-cay" variant="secondary" className="mobile-product-catalogue-link">Xem tất cả giỏ quà <ArrowRight size={17} /></Button><div className="product-grid mobile-snap-rail">{products.slice(0, 8).map(p => <ProductCard key={p.slug} product={p} />)}</div></div></section>
       <section id="process" className="section order-steps landing-anchor"><div className="container"><div className="process-heading-wrap"><SectionHeading eyebrow="Đặt quà đơn giản" title="Ba bước để gửi một món quà chỉn chu" text="Từ lúc chọn mẫu đến khi người nhận mở quà, Ely Fruit đồng hành cùng bạn." /><span className="process-mark" aria-hidden="true">Từ vườn đến tay người nhận</span></div><div className="process-timeline"><article><span className="process-step">01</span><div className="process-icon"><Gift /></div><h3>Chọn mẫu</h3><p>Xem nhanh các mẫu theo ngân sách, dịp tặng và phong cách bạn muốn.</p><a href="/gio-trai-cay">Khám phá giỏ quà <ArrowRight size={15} /></a></article><article><span className="process-step">02</span><div className="process-icon"><MessageCircle /></div><h3>Xác nhận</h3><p>Nhắn Zalo để thống nhất thành phần, thiệp, ngân sách và thời gian chuẩn bị.</p><a href={ZALO_URL} target="_blank" rel="noreferrer">Nhắn Zalo tư vấn <ArrowRight size={15} /></a></article><article><span className="process-step">03</span><div className="process-icon"><PackageCheck /></div><h3>Giao nhận</h3><p>Xác nhận địa chỉ và khung giờ trước khi hoàn thiện đơn quà chỉn chu.</p><a href={PHONE_LINK}>Gọi xác nhận đơn <ArrowRight size={15} /></a></article></div></div></section>
       <div id="about" className="landing-anchor"><LocalSection /></div>
       <FAQSection />
