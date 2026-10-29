@@ -80,3 +80,12 @@ test('exposes product data required for structured metadata', () => {
   assert.equal(route?.product?.code, 'ELY06')
   assert.equal(route?.product?.priceValue, 800000)
 })
+
+test('gives every product an explicit ingredient note', () => {
+  const genericIngredients = 'Trái cây tươi tuyển chọn, phối hợp theo mùa và gói quà thủ công.'
+
+  for (const product of products) {
+    assert.notEqual(product.ingredients, genericIngredients)
+    assert.ok(product.ingredients.length >= 20)
+  }
+})
