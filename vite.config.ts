@@ -4,8 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import fs from 'node:fs'
 import path from 'node:path'
 
-import siteConfiguration from './.figma/make/site.json'
-
+const siteConfiguration = loadSiteConfiguration()
 
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -73,6 +72,23 @@ type FigmaSiteConfiguration = {
   }
   accessibility?: {
     addBypassLinks?: boolean
+  }
+}
+
+function loadSiteConfiguration(): FigmaSiteConfiguration {
+  const configurationPath = path.resolve(__dirname, '.figma/make/site.json')
+
+  if (!fs.existsSync(configurationPath)) {
+    return {}
+  }
+
+  try {
+    return JSON.parse(fs.readFileSync(configurationPath, 'utf8')) as FigmaSiteConfiguration
+  } catch (error: unknown) {
+    throw new Error(
+      `Unable to parse Figma Make site configuration at ${configurationPath}.`,
+      { cause: error },
+    )
   }
 }
 
