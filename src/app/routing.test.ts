@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { products } from '../data/catalog.ts'
 import { guides } from '../data/guides.ts'
 import { getRoute, getPageTitle } from './routing.ts'
+import { staticRoutes } from './static-routes.ts'
 
 test('resolves the canonical basket category instead of the homepage', () => {
   assert.equal(getRoute('/gio-trai-cay')?.path, '/gio-trai-cay')
@@ -27,6 +29,36 @@ test('resolves every guide detail route with article metadata', () => {
     assert.equal(route?.description, guide.intro)
     assert.equal(route?.image, guide.image)
     assert.equal(route?.type, 'article')
+  }
+})
+
+test('uses complete local image data for image-led guides', () => {
+  for (const guide of guides) {
+    if (!guide.heroImage) continue
+
+    assert.match(guide.image, /^\/guides\/optimized\/.+-hero\.webp$/)
+    assert.match(guide.heroImage.fallback, /^\/guides\/originals\/.+\.(jpg|jpeg|png)$/)
+    assert.ok(guide.heroImage.alt.length >= 10)
+    assert.ok(guide.heroImage.caption.length >= 10)
+    assert.ok(guide.sections?.every(section => section.heading.length > 0 && section.paragraphs.length > 0))
+  }
+})
+
+test('uses real catalogue products and FAQs for every guide', () => {
+  for (const guide of guides) {
+    assert.ok((guide.productRecommendations?.length ?? 0) >= 2)
+    assert.ok((guide.faqs?.length ?? 0) >= 2)
+
+    for (const recommendation of guide.productRecommendations ?? []) {
+      assert.ok(products.some(product => product.slug === recommendation.productSlug))
+      assert.ok(recommendation.suitableFor.length >= 10)
+    }
+  }
+})
+
+test('includes every guide detail route in the static route list', () => {
+  for (const guide of guides) {
+    assert.ok(staticRoutes.includes(`/guide/${guide.slug}`))
   }
 })
 
