@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react'
 import { ProductCard } from './components/ProductCard'
 import { PageHero } from './components/PageHero'
-import { products, type Product } from './data/catalog'
+import { products, sortProductsByPrice, type Product } from './data/catalog'
 import { ADDRESS, FACEBOOK_URL, MAP_URL, PHONE, PHONE_LINK, SITE_URL, TIKTOK_URL, TRUST_METRICS, ZALO_URL } from './data/site'
 import { getPageTitle, getRoute } from './app/routing'
 import { guides, guideSources } from './data/guides'
@@ -66,7 +66,8 @@ const catalogues = [
 ]
 
 const faqs = [
-  ['Ely Fruit có giao giỏ quà tận nơi không?', 'Có. Ely Fruit hỗ trợ giao hàng tận nơi tại Thủ Dầu Một và các khu vực lân cận. Thời gian, phí giao hàng sẽ được tư vấn cụ thể theo địa chỉ nhận.'],
+  ['Ely Fruit có giao giỏ quà tận nơi không?', 'Có. Ely Fruit hỗ trợ giao hàng tại Thủ Dầu Một và các khu vực lân cận. Thời gian, phí giao hàng sẽ được tư vấn theo địa chỉ nhận.'],
+  ['Đặt giỏ quà nhanh cần gửi thông tin gì?', 'Bạn có thể gọi trực tiếp để chốt nhanh, hoặc nhắn Zalo kèm ảnh mẫu, ngân sách, địa chỉ giao và thời gian mong muốn để Ely Fruit tư vấn.'],
   ['Có thể đặt giỏ quà theo ngân sách không?', 'Hoàn toàn có thể. Bạn chỉ cần cho biết ngân sách, đối tượng và dịp tặng, đội ngũ sẽ đề xuất mẫu phù hợp nhất.'],
   ['Giỏ quà có thể thay đổi loại trái cây không?', 'Có. Thành phần có thể điều chỉnh theo sở thích, tình trạng trái cây theo mùa và mức ngân sách của bạn.'],
   ['Ely Fruit có nhận làm quà doanh nghiệp số lượng lớn không?', 'Có. Chúng tôi nhận đơn số lượng lớn, hỗ trợ thiết kế theo nhận diện và giao đến nhiều địa chỉ.'],
@@ -117,11 +118,13 @@ function Header({ currentPath }: { currentPath: string }) {
     ['Liên hệ', '/#contact'],
   ]
   const giftLinks = [
+    ['Xem tất cả giỏ quà', '/gio-trai-cay'],
     ['Giỏ quà trái cây', '/gio-trai-cay'],
     ['Quà sinh nhật', '/gio-trai-cay/sinh-nhat'],
     ['Mâm lễ & Tráp cưới', '/catalogue'],
     ['Giỏ quà Tết', '/gio-trai-cay/khai-truong'],
-    ['Theo giá 499.000đ', '/gio-trai-cay/399k'],
+    ['Theo giá 399.000đ', '/gio-trai-cay/399k'],
+    ['Theo giá 499.000đ', '/gio-trai-cay/499k'],
     ['Theo giá 599.000đ', '/gio-trai-cay/599k'],
     ['Catalogue tổng hợp', '/catalogue'],
   ]
@@ -146,7 +149,7 @@ function Header({ currentPath }: { currentPath: string }) {
             <div className={`nav-dropdown ${currentPath.startsWith('/gio-') || currentPath.startsWith('/trai-cay') || currentPath.startsWith('/san-pham') || currentPath === '/catalogue' ? 'is-active' : ''}`}>
               <a href="/#products" aria-haspopup="true">Sản phẩm <ChevronDown size={14} /></a>
               <div className="nav-dropdown-menu nav-dropdown-wide">
-                <span>Khám phá sản phẩm</span>
+                <span>Giỏ quà Ely Fruit · Thủ Dầu Một</span>
                 {giftLinks.map(([label, path]) => <a key={label} href={path}>{label}<ArrowRight size={14} /></a>)}
               </div>
             </div>
@@ -163,7 +166,7 @@ function Header({ currentPath }: { currentPath: string }) {
           <div className="header-actions">
             <button className="icon-btn search-button" onClick={() => setSearchOpen(!searchOpen)} aria-label="Tìm kiếm"><Search /></button>
             <a className="hotline desktop-hotline" href={PHONE_LINK}><Phone size={17} /><span><small>Hotline</small>{PHONE}</span></a>
-            <Button href={PHONE_LINK} className="desktop-cta order-pulse"><Phone size={16} /> Liên hệ đặt hàng</Button>
+            <Button href={PHONE_LINK} className="desktop-cta order-pulse"><Phone size={16} /> Gọi đặt nhanh</Button>
             <a className="mobile-call" href={PHONE_LINK}><Phone size={19} /></a>
           </div>
         </div>
@@ -205,7 +208,7 @@ function CategoryGrid() {
 function FilterBar({ active, setActive }: { active: string; setActive: (value: string) => void }) {
   const [open, setOpen] = useState(false)
   const groups = [
-    ['Khoảng giá', ['499.000đ', '599.000đ', '699.000đ', '800.000đ', '1.000.000đ']],
+    ['Khoảng giá', ['399.000đ', '499.000đ', '599.000đ', '699.000đ', '800.000đ', '1.000.000đ']],
     ['Dịp tặng', ['Tết', 'Sinh nhật', 'Biếu đối tác', 'Quà doanh nghiệp', 'Thăm bệnh', 'Cảm ơn', 'Cưới hỏi']],
     ['Loại sản phẩm', ['Giỏ trái cây', 'Hộp quà', 'Set quà cao cấp', 'Mâm lễ', 'Tráp cưới']],
     ['Phong cách', ['Sang trọng', 'Hiện đại', 'Tối giản', 'Truyền thống']],
@@ -250,7 +253,7 @@ function Hero() {
           <span className="eyebrow">{slide.eyebrow}</span>
           <h1>{slide.title} <em>{slide.emphasis}</em></h1>
           <p>{slide.text}</p>
-          <div className="hero-buttons"><Button onClick={() => routeTo('/gio-trai-cay')}>Xem giỏ quà <ArrowRight size={18} /></Button><Button href={FACEBOOK_URL} variant="cream">Liên hệ tư vấn</Button></div>
+          <div className="hero-buttons"><Button onClick={() => routeTo('/gio-trai-cay')}>Xem giỏ quà <ArrowRight size={18} /></Button><Button href={ZALO_URL} variant="cream">Nhắn Zalo tư vấn</Button></div>
           <div className="hero-meta"><a href={PHONE_LINK}><Phone size={17} />{PHONE}</a><span><Clock3 size={17} />07:30–21:00</span><span><MapPin size={17} />Thủ Dầu Một</span></div>
         </div>
         <div className="hero-visual">
@@ -267,16 +270,18 @@ function Hero() {
 
 function LocalSection() {
   return (
-    <section className="section local-section">
+    <section className="section local-section" aria-labelledby="local-heading">
       <div className="container local-grid">
         <div className="local-content">
-          <span className="eyebrow">Cửa hàng tại Thủ Dầu Một</span>
-          <h2>Ely Fruit – Giỏ Quà & Trái Cây Cao Cấp tại Thủ Dầu Một</h2>
-          <p>Ely Fruit phục vụ giỏ quà Thủ Dầu Một, giỏ trái cây Thủ Dầu Một và trái cây nhập khẩu Thủ Dầu Một với lựa chọn đa dạng. Chúng tôi cũng nhận giỏ quà Bình Dương, mâm lễ cưới hỏi và tráp cưới hỏi theo yêu cầu.</p>
-          <div className="contact-lines"><div><MapPin /><span><small>Địa chỉ</small><strong>{ADDRESS}</strong></span></div><div><Clock3 /><span><small>Giờ mở cửa</small><strong>07:30–21:00, tất cả các ngày</strong></span></div><div><Phone /><span><small>Hotline</small><strong>{PHONE}</strong></span></div></div>
-          <Button href={MAP_URL}>Xem trên Google Maps <ArrowRight size={18} /></Button>
+          <span className="eyebrow">Ghé vườn quà Ely Fruit</span>
+          <p className="local-kicker">Ely Fruit là cửa hàng trái cây và quà tặng cao cấp tại Thủ Dầu Một.</p>
+          <h2 id="local-heading">Một điểm hẹn để chọn quà tươi lành, chỉn chu</h2>
+          <p>Ely Fruit phục vụ giỏ quà, trái cây nhập khẩu, mâm lễ và tráp cưới hỏi tại Thủ Dầu Một. Ghé cửa hàng để xem mẫu thực tế hoặc để đội ngũ tư vấn một món quà phù hợp với dịp tặng và ngân sách của bạn.</p>
+          <div className="contact-lines"><div><MapPin /><span><small>Địa chỉ cửa hàng</small><strong>{ADDRESS}</strong></span></div><div><Clock3 /><span><small>Mở cửa mỗi ngày</small><strong>07:30–21:00</strong></span></div><div><Phone /><span><small>Tư vấn & đặt quà</small><strong>{PHONE}</strong></span></div></div>
+          <Button href={MAP_URL}>Chỉ đường đến cửa hàng <ArrowRight size={18} /></Button>
         </div>
         <div className="map-card">
+          <div className="map-card-label"><span>Điểm hẹn tại Phú Lợi</span><small>Thủ Dầu Một · Bình Dương</small></div>
           <iframe
             className="real-map"
             src="https://www.google.com/maps?q=S%E1%BB%91+22+%C4%91%C6%B0%E1%BB%9Dng+30%2F4%2C+Ph%C3%BA+L%E1%BB%A3i%2C+Th%E1%BB%A7+D%E1%BA%A7u+M%E1%BB%99t&output=embed"
@@ -285,7 +290,7 @@ function LocalSection() {
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
           />
-          <div className="map-info"><img src="/ely-fruit-logo.png" alt="" /><span><strong>Ely Fruit</strong><small>Phú Lợi, Thủ Dầu Một</small></span><a href={MAP_URL} target="_blank" rel="noreferrer"><ArrowRight /></a></div>
+          <div className="map-info"><img src="/ely-fruit-logo.png" alt="" /><span><strong>Ely Fruit</strong><small>Giỏ quà & trái cây cao cấp</small></span><a href={MAP_URL} target="_blank" rel="noreferrer" aria-label="Mở chỉ đường đến Ely Fruit trên Google Maps"><ArrowRight /></a></div>
         </div>
       </div>
     </section>
@@ -325,7 +330,7 @@ function HomePage() {
     <main>
       <section className="section categories-section"><div className="container"><SectionHeading eyebrow="Danh mục" title="Chọn quà theo nhu cầu" text="Tìm nhanh giỏ quà, trái cây, mâm lễ và quà doanh nghiệp phù hợp." action={<Button href="/catalogue" variant="ghost">Xem catalogue <ArrowRight size={17} /></Button>} /><CategoryGrid /></div></section>
       <section id="products" className="section products-section landing-anchor"><div className="container"><SectionHeading eyebrow="Sản phẩm" title="Giỏ quà nổi bật" text="Giá, mã sản phẩm và thành phần được hiển thị rõ ràng để bạn dễ lựa chọn." action={<Button href="/gio-trai-cay" variant="secondary">Xem tất cả giỏ quà</Button>} /><div className="product-grid">{products.slice(0, 8).map(p => <ProductCard key={p.slug} product={p} />)}</div></div></section>
-      <section id="process" className="section order-steps landing-anchor"><div className="container"><SectionHeading eyebrow="Đặt quà đơn giản" title="Ba bước để gửi một món quà chỉn chu" text="Từ lúc chọn mẫu đến khi người nhận mở quà, Ely Fruit đồng hành cùng bạn." /><div className="process-timeline"><article><span className="process-step">01</span><div className="process-icon"><Gift /></div><h3>Chọn mẫu</h3><p>Xem nhanh các mẫu theo ngân sách, dịp tặng và phong cách bạn muốn.</p><a href="/gio-trai-cay">Khám phá giỏ quà <ArrowRight size={15} /></a></article><article><span className="process-step">02</span><div className="process-icon"><MessageCircle /></div><h3>Xác nhận</h3><p>Nhắn Zalo để thống nhất thành phần, thiệp, ngân sách và thời gian chuẩn bị.</p><a href={ZALO_URL} target="_blank" rel="noreferrer">Nhắn Zalo tư vấn <ArrowRight size={15} /></a></article><article><span className="process-step">03</span><div className="process-icon"><PackageCheck /></div><h3>Giao nhận</h3><p>Xác nhận địa chỉ và khung giờ trước khi hoàn thiện đơn quà chỉn chu.</p><a href={PHONE_LINK}>Gọi xác nhận đơn <ArrowRight size={15} /></a></article></div></div></section>
+      <section id="process" className="section order-steps landing-anchor"><div className="container"><div className="process-heading-wrap"><SectionHeading eyebrow="Đặt quà đơn giản" title="Ba bước để gửi một món quà chỉn chu" text="Từ lúc chọn mẫu đến khi người nhận mở quà, Ely Fruit đồng hành cùng bạn." /><span className="process-mark" aria-hidden="true">Từ vườn đến tay người nhận</span></div><div className="process-timeline"><article><span className="process-step">01</span><div className="process-icon"><Gift /></div><h3>Chọn mẫu</h3><p>Xem nhanh các mẫu theo ngân sách, dịp tặng và phong cách bạn muốn.</p><a href="/gio-trai-cay">Khám phá giỏ quà <ArrowRight size={15} /></a></article><article><span className="process-step">02</span><div className="process-icon"><MessageCircle /></div><h3>Xác nhận</h3><p>Nhắn Zalo để thống nhất thành phần, thiệp, ngân sách và thời gian chuẩn bị.</p><a href={ZALO_URL} target="_blank" rel="noreferrer">Nhắn Zalo tư vấn <ArrowRight size={15} /></a></article><article><span className="process-step">03</span><div className="process-icon"><PackageCheck /></div><h3>Giao nhận</h3><p>Xác nhận địa chỉ và khung giờ trước khi hoàn thiện đơn quà chỉn chu.</p><a href={PHONE_LINK}>Gọi xác nhận đơn <ArrowRight size={15} /></a></article></div></div></section>
       <div id="about" className="landing-anchor"><LocalSection /></div>
       <FAQSection />
       <section id="guides" className="section guide-preview landing-anchor"><div className="container"><SectionHeading eyebrow="Cẩm nang" title="Gợi ý chọn quà từ Ely Fruit" text="Một vài hướng dẫn thực tế để chọn giỏ quà đúng dịp và đúng ngân sách." action={<Button href="/guide" variant="ghost">Xem tất cả cẩm nang <ArrowRight size={17} /></Button>} /><div className="guide-grid">{guides.slice(0, 3).map(guide => <article key={guide.slug}><a className="guide-card-image" href={`/guide/${guide.slug}`}><img src={guide.image} alt={guide.title} loading="lazy" /></a><div className="guide-card-content"><span className="guide-number">{guide.category}</span><h2><a href={`/guide/${guide.slug}`}>{guide.title}</a></h2><a href={`/guide/${guide.slug}`}>Xem bài viết <ArrowRight size={16} /></a></div></article>)}</div></div></section>
@@ -338,22 +343,24 @@ function Breadcrumb({ items }: { items: string[] }) {
   return <div className="breadcrumb"><button onClick={() => routeTo('/')}>Trang chủ</button>{items.map(item => <span key={item}><ChevronRight />{item}</span>)}</div>
 }
 
+type SortOption = 'featured' | 'newest' | 'price-ascending' | 'price-descending'
+
 function GiftsPage({ initialFilter = '' }: { initialFilter?: string }) {
   const [active, setActive] = useState(initialFilter)
-  const [sort, setSort] = useState('Nổi bật')
+  const [sort, setSort] = useState<SortOption>('featured')
   const shown = useMemo(() => {
     let list = [...products]
     if (active.endsWith('đ')) list = list.filter(p => p.price === active)
     else if (['Giỏ trái cây', 'Hộp quà', 'Set quà cao cấp'].includes(active)) list = list.filter(p => p.type === active)
     else if (active) list = list.filter(p => p.occasion === active || p.tag === active)
-    if (sort.includes('thấp')) list.sort((a, b) => a.priceValue - b.priceValue)
-    if (sort.includes('cao')) list.sort((a, b) => b.priceValue - a.priceValue)
+    if (sort === 'price-ascending') return sortProductsByPrice(list, 'ascending')
+    if (sort === 'price-descending') return sortProductsByPrice(list, 'descending')
     return list
   }, [active, sort])
   return <>
     <PageHero onHome={() => routeTo('/')} eyebrow="Giỏ quà Ely Fruit" title="Giỏ Quà Cao Cấp" text="Các mẫu giỏ quà tại Thủ Dầu Một có giá, mã hàng và thành phần rõ ràng. Lọc nhanh theo ngân sách, dịp tặng hoặc loại sản phẩm." image={images.basket} />
     <main className="listing-section container">
-      <div className="listing-toolbar"><div><span className="eyebrow">Danh mục giỏ quà</span><strong>{shown.length} sản phẩm</strong><span>Giá, mã hàng và thành phần rõ ràng · Chọn một mẫu để xem chi tiết</span></div><label>Sắp xếp<select value={sort} onChange={e => setSort(e.target.value)}><option>Nổi bật</option><option>Mới nhất</option><option>Giá thấp → cao</option><option>Giá cao → thấp</option></select></label></div>
+      <div className="listing-toolbar"><div><span className="eyebrow">Danh mục giỏ quà</span><strong>{shown.length} sản phẩm</strong><span>Giá, mã hàng và thành phần rõ ràng · Chọn một mẫu để xem chi tiết</span></div><label>Sắp xếp<select value={sort} onChange={e => setSort(e.target.value as SortOption)}><option value="featured">Nổi bật</option><option value="newest">Mới nhất</option><option value="price-ascending">Giá thấp → cao</option><option value="price-descending">Giá cao → thấp</option></select></label></div>
       {active && <div className="active-filters"><span>Đang lọc:</span><button onClick={() => setActive('')}>{active}<X size={14} /></button><button className="clear-filter" onClick={() => setActive('')}>Xóa tất cả</button></div>}
       <div className="listing-layout"><FilterBar active={active} setActive={setActive} /><div>{shown.length ? <div className="product-grid listing-grid">{shown.map(p => <ProductCard key={p.slug} product={p} />)}</div> : <div className="empty-state"><Gift /><h3>Chưa có sản phẩm phù hợp</h3><p>Hãy thử một tiêu chí khác hoặc liên hệ để Ely Fruit thiết kế riêng.</p><Button onClick={() => setActive('')}>Xem tất cả sản phẩm</Button></div>}</div></div>
     </main>
@@ -383,7 +390,7 @@ function ProductPage({ slug }: { slug: string }) {
           <div className="stock"><span /> Sẵn sàng tư vấn & thực hiện</div>
           <p className="lead">Một lựa chọn trang nhã với trái cây nhập khẩu tươi ngon, phù hợp để gửi lời chúc tinh tế đến người nhận.</p>
           <div className="detail-specs"><div><small>Thành phần chính</small><p>{product.ingredients}</p></div><div><small>Phù hợp tặng</small><p>Gia đình, bạn bè, đối tác, khách hàng và cấp trên.</p></div><div><small>Dịp tặng phù hợp</small><p>{product.occasion}, cảm ơn, chúc mừng và thăm hỏi.</p></div></div>
-          <div className="detail-actions"><Button href={PHONE_LINK}><Phone size={18} /> Gọi {PHONE}</Button><Button href={ZALO_URL} variant="secondary"><MessageCircle size={18} /> Nhắn Zalo</Button><Button href={FACEBOOK_URL} variant="ghost"><MessageCircle size={18} /> Xem Facebook</Button></div>
+          <div className="detail-actions"><Button href={PHONE_LINK}><Phone size={18} /> Gọi đặt nhanh</Button><Button href={ZALO_URL} variant="secondary"><MessageCircle size={18} /> Nhắn Zalo gửi yêu cầu</Button><Button href={FACEBOOK_URL} variant="ghost"><MessageCircle size={18} /> Nhắn Facebook</Button></div><p className="detail-contact-note">Gửi ảnh mẫu, ngân sách, địa chỉ giao và thời gian mong muốn qua Zalo để được tư vấn.</p>
         </div>
       </div>
       <div className="product-copy"><article><span className="eyebrow">Chi tiết sản phẩm</span><h2>Món quà tươi lành, được chuẩn bị bằng sự chỉn chu</h2><p>{product.name} được phối hợp hài hòa giữa hương vị, màu sắc và hình thức. Mỗi loại trái cây đều được kiểm tra trước khi sắp xếp và hoàn thiện tại cửa hàng.</p><h3>Hướng dẫn bảo quản</h3><p>Nên sử dụng sớm để đảm bảo độ tươi ngon. Bảo quản nơi thoáng mát hoặc ngăn mát tủ lạnh tùy loại trái cây.</p></article><aside><h3>Chính sách giao hàng</h3><ul><li><Check /> Hỗ trợ giao tận nơi</li><li><Check /> Xác nhận mẫu trước khi giao</li><li><Check /> Tư vấn khung giờ phù hợp</li><li><Check /> Hỗ trợ thiệp theo yêu cầu</li></ul></aside></div>
@@ -466,13 +473,17 @@ function Footer() {
   return (
     <>
       <footer className="footer"><div className="container footer-grid"><div className="footer-brand"><Logo light /><p>Trái cây, bánh kẹo nhập khẩu · Giỏ quà cao cấp · Mâm lễ, tráp cưới hỏi.</p><div className="footer-social"><a href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="Facebook Ely Fruit"><MessageCircle /></a><a href={TIKTOK_URL} target="_blank" rel="noreferrer" aria-label="TikTok Ely Fruit"><Music2 /></a><a href={MAP_URL} target="_blank" rel="noreferrer" aria-label="Google Maps Ely Fruit"><MapPin /></a></div></div><nav aria-label="Liên kết chân trang"><h3>Khám phá</h3><a href="/">Trang chủ</a><a href="/#products">Sản phẩm</a><a href="/#process">Quy trình</a><a href="/#about">Về Ely Fruit</a><a href="/#guides">Cẩm nang</a><a href="/#contact">Liên hệ</a></nav><div><h3>Liên hệ</h3><a href={PHONE_LINK}>{PHONE}</a><a href="mailto:ctythucphamelyfruit@gmail.com">ctythucphamelyfruit@gmail.com</a><a href={MAP_URL} target="_blank" rel="noreferrer">Địa chỉ cửa hàng</a><p>{ADDRESS}</p><p>07:30–21:00 mỗi ngày</p></div><div className="footer-cta"><span className="eyebrow">Cần tư vấn ngay?</span><h3>Chúng tôi giúp bạn chọn món quà phù hợp.</h3><Button href={PHONE_LINK} variant="cream"><Phone /> Gọi {PHONE}</Button></div></div><div className="container footer-bottom"><span>© 2025 Ely Fruit. All rights reserved.</span><span>Tươi lành trong từng món quà.</span></div></footer>
-      <div className="mobile-sticky"><a href={PHONE_LINK}><Phone /> Gọi ngay</a><a href={ZALO_URL} target="_blank" rel="noreferrer"><MessageCircle /> Zalo</a><a href={FACEBOOK_URL} target="_blank" rel="noreferrer"><MessageCircle /> Liên hệ</a></div>
+      <div className="mobile-sticky"><a href={PHONE_LINK}><Phone /> Gọi đặt nhanh</a><a href={ZALO_URL} target="_blank" rel="noreferrer"><MessageCircle /> Nhắn Zalo</a><a href={FACEBOOK_URL} target="_blank" rel="noreferrer"><MessageCircle /> Facebook</a></div>
     </>
   )
 }
 
-export default function App() {
-  const [path, setPath] = useState(window.location.pathname)
+interface AppProps {
+  initialPath?: string
+}
+
+export default function App({ initialPath }: AppProps) {
+  const [path, setPath] = useState(initialPath ?? (typeof window === 'undefined' ? '/' : window.location.pathname))
   useEffect(() => {
     const onInternalLink = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
@@ -503,6 +514,8 @@ export default function App() {
     }
   }, [])
   useEffect(() => {
+    if (typeof document === 'undefined') return
+
     const route = getRoute(path)
     const canonicalPath = route?.path ?? path
     const canonical = `${SITE_URL}${canonicalPath === '/' ? '/' : canonicalPath}`
@@ -579,6 +592,17 @@ export default function App() {
       inLanguage: 'vi-VN',
       publisher: { '@id': `${SITE_URL}/#business` },
     }]
+    if (path === '/') {
+      graph.push({
+        '@type': 'FAQPage',
+        '@id': `${SITE_URL}/#faq`,
+        mainEntity: faqs.map(([name, text]) => ({
+          '@type': 'Question',
+          name,
+          acceptedAnswer: { '@type': 'Answer', text },
+        })),
+      })
+    }
     const product = route?.product
     if (product) {
       graph.push({
@@ -632,7 +656,8 @@ export default function App() {
   else if (path === '/gio-trai-cay/sinh-nhat') page = <GiftsPage initialFilter="Sinh nhật" />
   else if (path === '/gio-trai-cay/khai-truong') page = <GiftsPage initialFilter="Khai trương" />
   else if (path === '/gio-trai-cay/tham-hoi') page = <GiftsPage initialFilter="Thăm bệnh" />
-  else if (path === '/gio-trai-cay/399k') page = <GiftsPage initialFilter="499.000đ" />
+  else if (path === '/gio-trai-cay/399k') page = <GiftsPage initialFilter="399.000đ" />
+  else if (path === '/gio-trai-cay/499k') page = <GiftsPage initialFilter="499.000đ" />
   else if (path === '/gio-trai-cay/599k') page = <GiftsPage initialFilter="599.000đ" />
   else if (path === '/trai-cay-nhap-khau') page = <GiftsPage initialFilter="Giỏ trái cây" />
   else if (path.startsWith('/product/') || path.startsWith('/san-pham/')) page = <ProductPage slug={path.split('/').pop() || ''} />

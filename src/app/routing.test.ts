@@ -37,6 +37,7 @@ test('does not fall back to another article for an unknown guide slug', () => {
 test('canonicalizes legacy listing and product aliases', () => {
   assert.equal(getRoute('/gifts')?.path, '/gio-trai-cay')
   assert.equal(getRoute('/product/ely-06')?.path, '/san-pham/ely-06')
+  assert.equal(getRoute('/gio-trai-cay/499k')?.path, '/gio-trai-cay/499k')
   assert.equal(getPageTitle('/gifts'), getPageTitle('/gio-trai-cay'))
 })
 

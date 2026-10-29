@@ -1,0 +1,17 @@
+# Ely Fruit
+> Ely Fruit là cửa hàng giỏ quà trái cây, trái cây nhập khẩu và quà tặng theo yêu cầu tại Thủ Dầu Một.
+
+## Nội dung chính
+- [Trang chủ](https://elyfruit.vn/): Giỏ quà cao cấp, dịch vụ quà tặng và thông tin cửa hàng.
+- [Giỏ trái cây](https://elyfruit.vn/gio-trai-cay): Các mẫu giỏ quà theo dịp, ngân sách và phong cách.
+- [Catalogue](https://elyfruit.vn/catalogue): Catalogue giỏ quà, mâm lễ và tráp cưới hỏi.
+- [Cẩm nang](https://elyfruit.vn/guide): Gợi ý chọn quà và trái cây theo nhu cầu.
+- [Liên hệ](https://elyfruit.vn/contact): Địa chỉ, giờ mở cửa và hotline.
+
+## Thông tin hữu ích
+- Địa chỉ: Số 22 đường 30/4, Phú Lợi, Thủ Dầu Một, HCM.
+- Hotline: 0981.370.970.
+- Giờ mở cửa: 07:30–21:00 mỗi ngày.
+- Dịch vụ: Giỏ quà trái cây, trái cây nhập khẩu, quà doanh nghiệp, mâm lễ và tráp cưới hỏi.
+
+> llms.txt là tài liệu điều hướng tùy chọn; khả năng được hệ thống AI sử dụng không được đảm bảo và không thay thế SEO kỹ thuật.
