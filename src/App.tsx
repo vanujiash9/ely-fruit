@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useMemo, useState } from 'react'
 import { ProductCard } from './components/ProductCard'
 import { PageHero } from './components/PageHero'
 import { products, sortProductsByPrice, type Product } from './data/catalog'
-import { ADDRESS, FACEBOOK_URL, MAP_URL, PHONE, PHONE_LINK, SITE_URL, TIKTOK_URL, TRUST_METRICS, ZALO_URL } from './data/site'
+import { ADDRESS, FACEBOOK_URL, MAP_URL, PHONE, PHONE_LINK, SITE_URL, TIKTOK_URL, TRUST_METRICS, ZALO_TEST_URL, ZALO_URL } from './data/site'
 import { getPageTitle, getRoute } from './app/routing'
 import { guides, guideSources, type Guide, type GuideImage } from './data/guides'
 import {
@@ -324,18 +324,19 @@ function FAQSection() {
 }
 
 function ContactForm({ compact = false }: { compact?: boolean }) {
-  const [sent, setSent] = useState(false)
-  function submit(e: FormEvent) { e.preventDefault(); setSent(true) }
+  function submit(e: FormEvent) {
+    e.preventDefault()
+    window.open(ZALO_TEST_URL, '_blank', 'noopener,noreferrer')
+  }
+
   return (
     <form id={compact ? 'contact-form' : undefined} className={`contact-form ${compact ? 'compact-form' : ''}`} onSubmit={submit}>
-      {sent ? <div className="form-success"><span><Check /></span><h3>Đã ghi nhận yêu cầu</h3><p>Cảm ơn bạn. Vui lòng gọi {PHONE} để được tư vấn ngay.</p><Button onClick={() => setSent(false)} variant="secondary">Gửi yêu cầu khác</Button></div> : <>
-        <div className="field-row"><label>Họ và tên<input required placeholder="Nguyễn Anh" /></label><label>Số điện thoại<input required type="tel" placeholder="09xx xxx xxx" /></label></div>
-        <div className="field-row"><label>Dịp tặng<select defaultValue=""><option value="" disabled>Chọn dịp tặng</option><option>Sinh nhật</option><option>Biếu đối tác</option><option>Quà doanh nghiệp</option><option>Cưới hỏi</option><option>Khác</option></select></label><label>Ngân sách<select defaultValue=""><option value="" disabled>Chọn ngân sách</option><option>Dưới 500.000đ</option><option>500.000đ–1.000.000đ</option><option>1.000.000đ</option></select></label></div>
-        <label>Số lượng<input type="number" min="1" placeholder="Ví dụ: 2" /></label>
-        <label>Ghi chú<textarea rows={compact ? 3 : 4} placeholder="Bạn muốn giỏ quà gồm những gì, giao khi nào..." /></label>
-        <Button type="submit">Gửi yêu cầu tư vấn <Send size={17} /></Button>
-        <small className="privacy-note">Ely Fruit chỉ dùng thông tin để tư vấn đơn hàng của bạn.</small>
-      </>}
+      <div className="field-row"><label>Họ và tên<input required placeholder="Nguyễn Anh" /></label><label>Số điện thoại<input required type="tel" placeholder="09xx xxx xxx" /></label></div>
+      <div className="field-row"><label>Dịp tặng<select required defaultValue=""><option value="" disabled>Chọn dịp tặng</option><option>Sinh nhật</option><option>Biếu đối tác</option><option>Quà doanh nghiệp</option><option>Cưới hỏi</option><option>Khác</option></select></label><label>Ngân sách<select required defaultValue=""><option value="" disabled>Chọn ngân sách</option><option>Dưới 500.000đ</option><option>500.000đ–1.000.000đ</option><option>1.000.000đ</option></select></label></div>
+      <label>Số lượng<input type="number" min="1" placeholder="Ví dụ: 2" /></label>
+      <label>Ghi chú<textarea rows={compact ? 3 : 4} placeholder="Bạn muốn giỏ quà gồm những gì, giao khi nào..." /></label>
+      <Button type="submit">Nhắn Zalo để tư vấn <Send size={17} /></Button>
+      <small className="privacy-note">Sau khi bấm nút, Zalo sẽ mở để bạn gửi yêu cầu trực tiếp cho Ely Fruit.</small>
     </form>
   )
 }
