@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://elyfruit.vn/sitemap.xml
+Sitemap: https://ely-fruit.vn/sitemap.xml

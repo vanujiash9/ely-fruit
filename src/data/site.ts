@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://elyfruit.vn'
+export const SITE_URL = 'https://ely-fruit.vn'
 export const PHONE = '0981.370.970'
 export const PHONE_LINK = 'tel:0981370970'
 export const ZALO_URL = 'https://zalo.me/0981370970'
