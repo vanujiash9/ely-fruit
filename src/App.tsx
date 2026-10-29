@@ -202,7 +202,6 @@ function Header({ currentPath }: { currentPath: string }) {
             <section className={`drawer-nav-group ${openDrawerSection === 'products' ? 'is-open' : ''}`}>
               <button type="button" onClick={() => setOpenDrawerSection(section => section === 'products' ? null : 'products')} aria-expanded={openDrawerSection === 'products'}>Sản phẩm<ChevronDown size={18} /></button>
               <div className="drawer-subnav">
-                <a href="/#products" onClick={() => setOpen(false)}>Xem tất cả giỏ quà <ArrowRight size={14} /></a>
                 {giftLinks.map(([label, path]) => <a href={path} key={label} onClick={() => setOpen(false)}>{label}</a>)}
               </div>
             </section>
