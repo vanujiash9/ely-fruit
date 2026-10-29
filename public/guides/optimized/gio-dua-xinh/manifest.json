@@ -1,0 +1,86 @@
+[
+  {
+    "source": "814785797_122127778311389872_670124288488676268_n.jpg",
+    "id": "gio-dua-xinh-photo-01",
+    "variants": [
+      {
+        "name": "mobile",
+        "width": 640,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-01-mobile.webp"
+      },
+      {
+        "name": "content",
+        "width": 960,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-01-content.webp"
+      },
+      {
+        "name": "hero",
+        "width": 1440,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-01-hero.webp"
+      }
+    ]
+  },
+  {
+    "source": "815701235_122127778323389872_792652729537907881_n.jpg",
+    "id": "gio-dua-xinh-photo-02",
+    "variants": [
+      {
+        "name": "mobile",
+        "width": 640,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-02-mobile.webp"
+      },
+      {
+        "name": "content",
+        "width": 960,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-02-content.webp"
+      },
+      {
+        "name": "hero",
+        "width": 1440,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-02-hero.webp"
+      }
+    ]
+  },
+  {
+    "source": "817217372_122127778347389872_5448231877174088933_n.jpg",
+    "id": "gio-dua-xinh-photo-03",
+    "variants": [
+      {
+        "name": "mobile",
+        "width": 640,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-03-mobile.webp"
+      },
+      {
+        "name": "content",
+        "width": 960,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-03-content.webp"
+      },
+      {
+        "name": "hero",
+        "width": 1440,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-03-hero.webp"
+      }
+    ]
+  },
+  {
+    "source": "821523607_122129104467389872_2622371087731887626_n.jpg",
+    "id": "gio-dua-xinh-photo-04",
+    "variants": [
+      {
+        "name": "mobile",
+        "width": 640,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-04-mobile.webp"
+      },
+      {
+        "name": "content",
+        "width": 960,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-04-content.webp"
+      },
+      {
+        "name": "hero",
+        "width": 1440,
+        "path": "/guides/optimized/gio-dua-xinh/gio-dua-xinh-photo-04-hero.webp"
+      }
+    ]
+  }
+]

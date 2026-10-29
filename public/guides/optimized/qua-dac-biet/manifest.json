@@ -1,0 +1,65 @@
+[
+  {
+    "source": "798261949_122125358031389872_765179713268643781_n.jpg",
+    "id": "qua-dac-biet-photo-01",
+    "variants": [
+      {
+        "name": "mobile",
+        "width": 640,
+        "path": "/guides/optimized/qua-dac-biet/qua-dac-biet-photo-01-mobile.webp"
+      },
+      {
+        "name": "content",
+        "width": 960,
+        "path": "/guides/optimized/qua-dac-biet/qua-dac-biet-photo-01-content.webp"
+      },
+      {
+        "name": "hero",
+        "width": 1440,
+        "path": "/guides/optimized/qua-dac-biet/qua-dac-biet-photo-01-hero.webp"
+      }
+    ]
+  },
+  {
+    "source": "798317549_122125358001389872_7749250043839945788_n (1).jpg",
+    "id": "qua-dac-biet-photo-02",
+    "variants": [
+      {
+        "name": "mobile",
+        "width": 640,
+        "path": "/guides/optimized/qua-dac-biet/qua-dac-biet-photo-02-mobile.webp"
+      },
+      {
+        "name": "content",
+        "width": 960,
+        "path": "/guides/optimized/qua-dac-biet/qua-dac-biet-photo-02-content.webp"
+      },
+      {
+        "name": "hero",
+        "width": 1440,
+        "path": "/guides/optimized/qua-dac-biet/qua-dac-biet-photo-02-hero.webp"
+      }
+    ]
+  },
+  {
+    "source": "798351030_122125357995389872_3503751435128947103_n.jpg",
+    "id": "qua-dac-biet-photo-03",
+    "variants": [
+      {
+        "name": "mobile",
+        "width": 640,
+        "path": "/guides/optimized/qua-dac-biet/qua-dac-biet-photo-03-mobile.webp"
+      },
+      {
+        "name": "content",
+        "width": 960,
+        "path": "/guides/optimized/qua-dac-biet/qua-dac-biet-photo-03-content.webp"
+      },
+      {
+        "name": "hero",
+        "width": 1440,
+        "path": "/guides/optimized/qua-dac-biet/qua-dac-biet-photo-03-hero.webp"
+      }
+    ]
+  }
+]
