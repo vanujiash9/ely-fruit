@@ -111,7 +111,6 @@ function routeTo(path: string): void {
   window.history.pushState(null, '', `${nextUrl.pathname}${nextUrl.hash}`)
   window.dispatchEvent(new PopStateEvent('popstate'))
   if (nextUrl.hash) scrollToHash(nextUrl.hash)
-  else window.scrollTo({ top: 0, behavior: getScrollBehavior() })
 }
 
 function Button({ children, href, variant = 'primary', onClick, type = 'button', className = '' }: { children: React.ReactNode; href?: string; variant?: 'primary' | 'secondary' | 'cream' | 'ghost'; onClick?: () => void; type?: 'button' | 'submit'; className?: string }) {
@@ -581,7 +580,6 @@ export default function App({ initialPath }: AppProps) {
       window.history.pushState(null, '', `${nextUrl.pathname}${nextUrl.hash}`)
       window.dispatchEvent(new PopStateEvent('popstate'))
       if (nextUrl.hash) scrollToHash(nextUrl.hash)
-      else window.scrollTo({ top: 0, behavior: getScrollBehavior() })
     }
     const onLocationChange = () => {
       const legacyPath = window.location.hash.slice(1)
@@ -600,6 +598,14 @@ export default function App({ initialPath }: AppProps) {
       window.removeEventListener('popstate', onLocationChange)
     }
   }, [])
+  useEffect(() => {
+    if (window.location.hash) {
+      scrollToHash(window.location.hash)
+      return
+    }
+
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }, [path])
   useEffect(() => {
     if (typeof document === 'undefined') return
 
