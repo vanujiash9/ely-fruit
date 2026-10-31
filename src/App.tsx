@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 import { ProductCard } from './components/ProductCard'
 import { PageHero } from './components/PageHero'
 import { fruitProducts, products, sortProductsByPrice, type FruitProduct, type Product } from './data/catalog'
@@ -346,12 +346,23 @@ function ContactSection() {
   return <section className="section contact-section"><div className="container contact-wrap"><div className="contact-copy"><span className="eyebrow">Tư vấn riêng cho bạn</span><h2>Bạn cần tư vấn giỏ quà?</h2><p>Để lại nhu cầu, Ely Fruit sẽ gợi ý mẫu phù hợp với dịp tặng và ngân sách.</p><div className="contact-mini"><a href={PHONE_LINK}><Phone /> <span><small>Gọi trực tiếp</small><strong>{PHONE}</strong></span></a><a href={ZALO_URL} target="_blank" rel="noreferrer"><MessageCircle /> <span><small>Nhắn tin nhanh</small><strong>Zalo Ely Fruit</strong></span></a><a href={FACEBOOK_URL} target="_blank" rel="noreferrer"><MessageCircle /> <span><small>Cộng đồng</small><strong>Facebook Ely Fruit</strong></span></a></div></div><ContactForm compact /></div></section>
 }
 
+function DailyFruitCarousel() {
+  const railRef = useRef<HTMLDivElement>(null)
+
+  function scrollRail(direction: -1 | 1): void {
+    railRef.current?.scrollBy({ left: direction * 320, behavior: getScrollBehavior() })
+  }
+
+  return <section className="daily-fruit" aria-labelledby="daily-fruit-heading"><div className="container"><div className="daily-fruit-header"><div><span className="eyebrow">Tuyển chọn theo mùa</span><h2 id="daily-fruit-heading">Trái cây tươi mỗi ngày</h2><p>Chọn nhanh trái cây nhập khẩu tươi ngon, cập nhật theo từng đợt hàng.</p></div><div className="daily-fruit-actions"><a href="/trai-cay">Xem tất cả <ArrowRight size={16} /></a><div><button type="button" onClick={() => scrollRail(-1)} aria-label="Xem trái cây trước"><ChevronLeft /></button><button type="button" onClick={() => scrollRail(1)} aria-label="Xem thêm trái cây"><ChevronRight /></button></div></div></div><div className="daily-fruit-rail" ref={railRef}>{fruitProducts.slice(0, 6).map(fruit => <a className="daily-fruit-card" href="/trai-cay" key={fruit.slug}><img src={fruit.image} alt={fruit.name} loading="lazy" /><span>{fruit.origin}</span><strong>{fruit.name}</strong></a>)}</div></div></section>
+}
+
 function HomePage() {
   return <>
     <Hero />
     <TrustMetrics />
     <main>
       <section className="section categories-section"><div className="container"><SectionHeading eyebrow="Danh mục" title="Chọn quà theo nhu cầu" text="Tìm nhanh giỏ quà, trái cây, mâm lễ và quà doanh nghiệp phù hợp." action={<Button href="/catalogue" variant="ghost">Xem catalogue <ArrowRight size={17} /></Button>} /><CategoryGrid /></div></section>
+      <DailyFruitCarousel />
       <section id="products" className="section products-section landing-anchor"><div className="container"><SectionHeading eyebrow="Sản phẩm" title="Giỏ quà Ely Fruit" text="Giá, mã sản phẩm và thành phần được hiển thị rõ ràng để bạn dễ lựa chọn." action={<Button href="/gio-trai-cay" variant="secondary">Xem tất cả giỏ quà</Button>} /><Button href="/gio-trai-cay" variant="secondary" className="mobile-product-catalogue-link">Xem tất cả giỏ quà <ArrowRight size={17} /></Button><div className="product-grid mobile-snap-rail">{products.slice(0, 8).map(p => <ProductCard key={p.slug} product={p} />)}</div></div></section>
       <section id="process" className="section order-steps landing-anchor"><div className="container"><div className="process-heading-wrap"><SectionHeading eyebrow="Đặt quà đơn giản" title="Ba bước để gửi một món quà chỉn chu" text="Từ lúc chọn mẫu đến khi người nhận mở quà, Ely Fruit đồng hành cùng bạn." /><span className="process-mark" aria-hidden="true">Từ vườn đến tay người nhận</span></div><div className="process-timeline"><article><span className="process-step">01</span><div className="process-icon"><Gift /></div><h3>Chọn mẫu</h3><p>Xem nhanh các mẫu theo ngân sách, dịp tặng và phong cách bạn muốn.</p><a href="/gio-trai-cay">Khám phá giỏ quà <ArrowRight size={15} /></a></article><article><span className="process-step">02</span><div className="process-icon"><MessageCircle /></div><h3>Xác nhận</h3><p>Nhắn Zalo để thống nhất thành phần, thiệp, ngân sách và thời gian chuẩn bị.</p><a href={ZALO_URL} target="_blank" rel="noreferrer">Nhắn Zalo tư vấn <ArrowRight size={15} /></a></article><article><span className="process-step">03</span><div className="process-icon"><PackageCheck /></div><h3>Giao nhận</h3><p>Xác nhận địa chỉ và khung giờ trước khi hoàn thiện đơn quà chỉn chu.</p><a href={PHONE_LINK}>Gọi xác nhận đơn <ArrowRight size={15} /></a></article></div></div></section>
       <div id="about" className="landing-anchor"><LocalSection /></div>
