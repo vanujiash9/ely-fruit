@@ -209,11 +209,11 @@ function Header({ currentPath }: { currentPath: string }) {
                 {giftLinks.map(([label, path]) => <a href={path} key={label} onClick={() => setOpen(false)}>{label}</a>)}
               </div>
             </section>
-            {links.slice(1, 3).map(([label, path]) => <a href={path} key={label} onClick={() => setOpen(false)}>{label}<ArrowRight size={16} /></a>)}
             <section className={`drawer-nav-group ${openDrawerSection === 'guides' ? 'is-open' : ''}`}>
               <button type="button" onClick={() => setOpenDrawerSection(section => section === 'guides' ? null : 'guides')} aria-expanded={openDrawerSection === 'guides'}>Cẩm nang<ChevronDown size={18} /></button>
               <div className="drawer-subnav">{guideLinks.map(([label, path]) => <a href={path} key={path} onClick={() => setOpen(false)}>{label}</a>)}</div>
             </section>
+            {links.slice(1, 3).map(([label, path]) => <a href={path} key={label} onClick={() => setOpen(false)}>{label}<ArrowRight size={16} /></a>)}
             <a href="/#contact" onClick={() => setOpen(false)}>Liên hệ<ArrowRight size={16} /></a>
           </nav>
           <div className="drawer-contact"><small>Tư vấn & đặt hàng</small><a href={PHONE_LINK}>{PHONE}</a><p>07:30–21:00 mỗi ngày</p></div>
