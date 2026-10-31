@@ -2,7 +2,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 're
 import { ProductCard } from './components/ProductCard'
 import { PageHero } from './components/PageHero'
 import { fruitProducts, products, sortProductsByPrice, type FruitProduct, type Product } from './data/catalog'
-import { ADDRESS, FACEBOOK_URL, MAP_URL, PHONE, PHONE_LINK, SITE_URL, TIKTOK_URL, TRUST_METRICS, ZALO_TEST_URL, ZALO_URL } from './data/site'
+import { ADDRESS, FACEBOOK_URL, MAP_URL, PHONE, PHONE_LINK, SITE_URL, TIKTOK_URL, TRUST_METRICS, ZALO_URL } from './data/site'
 import { getPageTitle, getRoute } from './app/routing'
 import { guides, guideSources, type Guide, type GuideImage } from './data/guides'
 import {
@@ -17,7 +17,6 @@ import {
   MapPin,
   Menu,
   MessageCircle,
-  Music2,
   PackageCheck,
   Phone,
   Search,
@@ -73,6 +72,8 @@ const catalogues = [
   ['Catalogue Trái Cây Nhập Khẩu', '42 sản phẩm', images.fruit],
   ['Catalogue Quà Sinh Nhật', '28 mẫu', images.hero],
 ]
+
+const MOBILE_ADDRESS = '22 Đ. 30/4, Phú Lợi, Thủ Dầu Một'
 
 const faqs = [
   ['Ely Fruit có giao giỏ quà tận nơi không?', 'Có. Ely Fruit hỗ trợ giao hàng tại Thủ Dầu Một và các khu vực lân cận. Thời gian, phí giao hàng sẽ được tư vấn theo địa chỉ nhận.'],
@@ -335,7 +336,7 @@ function LocalSection() {
           <p className="local-kicker">Ely Fruit là cửa hàng trái cây và quà tặng cao cấp tại Thủ Dầu Một.</p>
           <h2 id="local-heading">Một điểm hẹn để chọn quà tươi lành, chỉn chu</h2>
           <p>Ghé cửa hàng để xem trái cây theo mùa, trao đổi trực tiếp về món quà và nhận tư vấn phù hợp với dịp tặng của bạn.</p>
-          <div className="contact-lines"><div><MapPin /><span><small>Địa chỉ cửa hàng</small><strong>{ADDRESS}</strong></span></div><div><Clock3 /><span><small>Mở cửa mỗi ngày</small><strong>07:30–21:00</strong></span></div><div><Phone /><span><small>Tư vấn & đặt quà</small><strong>{PHONE}</strong></span></div></div>
+          <div className="contact-lines"><div><MapPin /><span><small>Địa chỉ cửa hàng</small><strong className="responsive-address" aria-label={ADDRESS}><span className="address-full">{ADDRESS}</span><span className="address-compact">{MOBILE_ADDRESS}</span></strong></span></div><div><Clock3 /><span><small>Mở cửa mỗi ngày</small><strong>07:30–21:00</strong></span></div><div><Phone /><span><small>Tư vấn & đặt quà</small><strong>{PHONE}</strong></span></div></div>
           <Button href={MAP_URL}>Chỉ đường đến cửa hàng <ArrowRight size={18} /></Button>
         </div>
         <div className="map-card">
@@ -357,23 +358,54 @@ function LocalSection() {
 
 function FAQSection() {
   const [open, setOpen] = useState(-1)
-  return <section className="section faq-section"><div className="container faq-grid"><div className="faq-intro"><span className="eyebrow">Câu hỏi thường gặp</span><h2>Thông tin trước khi đặt quà</h2><p>Mọi món quà đều có thể được tư vấn và điều chỉnh để phù hợp hơn với người nhận.</p><Button href={FACEBOOK_URL} variant="secondary">Gửi câu hỏi cho Ely Fruit</Button></div><div className="accordion">{faqs.map(([q, a], i) => <article className={open === i ? 'open' : ''} key={q}><button onClick={() => setOpen(open === i ? -1 : i)}><span>{q}</span><ChevronDown /></button><div><p>{a}</p></div></article>)}</div></div></section>
+  const [showAll, setShowAll] = useState(false)
+  return <section className="section faq-section"><div className="container faq-grid"><div className="faq-intro"><span className="eyebrow">Câu hỏi thường gặp</span><h2>Thông tin trước khi đặt quà</h2><p>Mọi món quà đều có thể được tư vấn và điều chỉnh để phù hợp hơn với người nhận.</p><Button href={FACEBOOK_URL} variant="secondary">Gửi câu hỏi cho Ely Fruit</Button></div><div className={`accordion ${showAll ? 'show-all' : ''}`}>{faqs.map(([q, a], i) => <article className={open === i ? 'open' : ''} key={q}><button onClick={() => setOpen(open === i ? -1 : i)}><span>{q}</span><ChevronDown /></button><div><p>{a}</p></div></article>)}<button type="button" className="faq-more-button" onClick={() => setShowAll(isShowingAll => !isShowingAll)} aria-expanded={showAll}>{showAll ? 'Thu gọn câu hỏi' : `Xem thêm ${faqs.length - 2} câu hỏi`}<ChevronDown /></button></div></div></section>
+}
+
+interface ContactRequest {
+  name: string
+  phone: string
+  occasion: string
+  budget: string
+  note: string
+}
+
+const INITIAL_CONTACT_REQUEST: ContactRequest = {
+  name: '',
+  phone: '',
+  occasion: '',
+  budget: '',
+  note: '',
 }
 
 function ContactForm({ compact = false }: { compact?: boolean }) {
+  const [request, setRequest] = useState<ContactRequest>(INITIAL_CONTACT_REQUEST)
+
+  function updateRequest(field: keyof ContactRequest, value: string): void {
+    setRequest(currentRequest => ({ ...currentRequest, [field]: value }))
+  }
+
   function submit(e: FormEvent) {
     e.preventDefault()
-    window.open(ZALO_TEST_URL, '_blank', 'noopener,noreferrer')
+
+    const message = [
+      'Chào Ely Fruit,',
+      `Tôi là ${request.name}.`,
+      `Số điện thoại: ${request.phone}.`,
+      `Tôi cần giỏ quà ${request.occasion.toLowerCase()}, ngân sách ${request.budget}.`,
+      request.note ? `Ghi chú: ${request.note}.` : '',
+    ].filter(Boolean).join('\n')
+
+    window.open(`${ZALO_URL}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer')
   }
 
   return (
     <form id={compact ? 'contact-form' : undefined} className={`contact-form ${compact ? 'compact-form' : ''}`} onSubmit={submit}>
-      <div className="field-row"><label>Họ và tên<input required placeholder="Nguyễn Anh" /></label><label>Số điện thoại<input required type="tel" placeholder="09xx xxx xxx" /></label></div>
-      <div className="field-row"><label>Dịp tặng<select required defaultValue=""><option value="" disabled>Chọn dịp tặng</option><option>Sinh nhật</option><option>Biếu đối tác</option><option>Quà doanh nghiệp</option><option>Cưới hỏi</option><option>Khác</option></select></label><label>Ngân sách<select required defaultValue=""><option value="" disabled>Chọn ngân sách</option><option>Dưới 500.000đ</option><option>500.000đ–1.000.000đ</option><option>1.000.000đ</option></select></label></div>
-      <label>Số lượng<input type="number" min="1" placeholder="Ví dụ: 2" /></label>
-      <label>Ghi chú<textarea rows={compact ? 3 : 4} placeholder="Bạn muốn giỏ quà gồm những gì, giao khi nào..." /></label>
-      <Button type="submit">Nhắn Zalo để tư vấn <Send size={17} /></Button>
-      <small className="privacy-note">Sau khi bấm nút, Zalo sẽ mở để bạn gửi yêu cầu trực tiếp cho Ely Fruit.</small>
+      <div className="field-row"><label>Họ và tên<input required value={request.name} onChange={event => updateRequest('name', event.target.value)} placeholder="Nguyễn Anh" /></label><label>Số điện thoại<input required type="tel" value={request.phone} onChange={event => updateRequest('phone', event.target.value)} placeholder="09xx xxx xxx" /></label></div>
+      <div className="field-row"><label>Dịp tặng<select required value={request.occasion} onChange={event => updateRequest('occasion', event.target.value)}><option value="" disabled>Chọn dịp tặng</option><option>Sinh nhật</option><option>Biếu đối tác</option><option>Quà doanh nghiệp</option><option>Cưới hỏi</option><option>Khác</option></select></label><label>Ngân sách<select required value={request.budget} onChange={event => updateRequest('budget', event.target.value)}><option value="" disabled>Chọn ngân sách</option><option>Dưới 500.000đ</option><option>500.000đ–1.000.000đ</option><option>Trên 1.000.000đ</option></select></label></div>
+      <label>Ghi chú<textarea rows={compact ? 3 : 4} value={request.note} onChange={event => updateRequest('note', event.target.value)} placeholder="Bạn muốn giỏ quà gồm những gì, giao khi nào..." /></label>
+      <Button type="submit">Nhắn Zalo nhận tư vấn <Send size={17} /></Button>
+      <small className="privacy-note">Zalo sẽ mở với yêu cầu tư vấn đã được soạn sẵn để bạn gửi trực tiếp cho Ely Fruit.</small>
     </form>
   )
 }
@@ -650,7 +682,7 @@ function ContactRail({ isVisible }: ContactRailProps) {
 function Footer() {
   return (
     <>
-      <footer className="footer"><div className="container footer-grid"><div className="footer-brand"><Logo light /><p>Trái cây, bánh kẹo nhập khẩu · Giỏ quà cao cấp · Mâm lễ, tráp cưới hỏi.</p><div className="footer-social"><a href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="Facebook Ely Fruit"><MessageCircle /></a><a href={TIKTOK_URL} target="_blank" rel="noreferrer" aria-label="TikTok Ely Fruit"><Music2 /></a><a href={MAP_URL} target="_blank" rel="noreferrer" aria-label="Google Maps Ely Fruit"><MapPin /></a></div></div><nav aria-label="Liên kết chân trang"><h3>Khám phá</h3><a href="/">Trang chủ</a><a href="/trai-cay">Trái cây bán lẻ</a><a href="/gio-trai-cay">Giỏ quà</a><a href="/#products">Sản phẩm</a><a href="/#process">Quy trình</a><a href="/#about">Về Ely Fruit</a><a href="/#guides">Cẩm nang</a><a href="/#contact">Liên hệ</a></nav><div><h3>Liên hệ</h3><a href={PHONE_LINK}>{PHONE}</a><a href="mailto:ctythucphamelyfruit@gmail.com">ctythucphamelyfruit@gmail.com</a><a href={MAP_URL} target="_blank" rel="noreferrer">Địa chỉ cửa hàng</a><p>{ADDRESS}</p><p>07:30–21:00 mỗi ngày</p></div><div className="footer-cta"><span className="eyebrow">Cần tư vấn ngay?</span><h3>Chúng tôi giúp bạn chọn món quà phù hợp.</h3><Button href={PHONE_LINK} variant="cream"><Phone /> Gọi {PHONE}</Button></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Ely Fruit. All rights reserved.</span><span>Tươi lành trong từng món quà.</span></div></footer>
+      <footer className="footer"><div className="container footer-grid"><div className="footer-brand"><Logo light /><p>Trái cây, bánh kẹo nhập khẩu · Giỏ quà cao cấp · Mâm lễ, tráp cưới hỏi.</p><div className="footer-social"><a href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="Facebook Ely Fruit"><img src="https://cdn.simpleicons.org/facebook/ffffff" alt="" /></a><a href={TIKTOK_URL} target="_blank" rel="noreferrer" aria-label="TikTok Ely Fruit"><img src="https://cdn.simpleicons.org/tiktok/ffffff" alt="" /></a><a href={MAP_URL} target="_blank" rel="noreferrer" aria-label="Google Maps Ely Fruit"><img src="https://cdn.simpleicons.org/googlemaps/ffffff" alt="" /></a></div></div><nav aria-label="Liên kết chân trang"><h3>Khám phá</h3><a href="/">Trang chủ</a><a href="/trai-cay">Trái cây bán lẻ</a><a href="/gio-trai-cay">Giỏ quà</a><a href="/#products">Sản phẩm</a><a href="/#process">Quy trình</a><a href="/#about">Về Ely Fruit</a><a href="/#guides">Cẩm nang</a><a href="/#contact">Liên hệ</a></nav><div><h3>Liên hệ</h3><a href={PHONE_LINK}>{PHONE}</a><a href="mailto:ctythucphamelyfruit@gmail.com">ctythucphamelyfruit@gmail.com</a><a href={MAP_URL} target="_blank" rel="noreferrer">Địa chỉ cửa hàng</a><p className="responsive-address" aria-label={ADDRESS}><span className="address-full">{ADDRESS}</span><span className="address-compact">{MOBILE_ADDRESS}</span></p><p>07:30–21:00 mỗi ngày</p></div><div className="footer-cta"><span className="eyebrow">Cần tư vấn ngay?</span><h3>Chúng tôi giúp bạn chọn món quà phù hợp.</h3><Button href={PHONE_LINK} variant="cream"><Phone /> Gọi {PHONE}</Button></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Ely Fruit. All rights reserved.</span><span>Tươi lành trong từng món quà.</span></div></footer>
       <div className="mobile-sticky"><a href={PHONE_LINK}><Phone /> Gọi đặt nhanh</a><a href={ZALO_URL} target="_blank" rel="noreferrer"><MessageCircle /> Nhắn Zalo</a><a href={FACEBOOK_URL} target="_blank" rel="noreferrer"><MessageCircle /> Facebook</a></div>
     </>
   )
