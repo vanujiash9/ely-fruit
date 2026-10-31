@@ -255,8 +255,62 @@ function FilterBar({ active, setActive }: { active: string; setActive: (value: s
   )
 }
 
+interface AnimatedMetricValueProps {
+  value: string
+}
+
+function AnimatedMetricValue({ value }: AnimatedMetricValueProps) {
+  const valueRef = useRef<HTMLSpanElement>(null)
+  const [displayValue, setDisplayValue] = useState('0')
+
+  useEffect(() => {
+    const element = valueRef.current
+    if (!element) return
+
+    const numericPart = value.split('/')[0]
+    const numericValue = Number(numericPart.replace(/[^\d,]/g, '').replace(',', '.'))
+    const hasDecimal = numericPart.includes(',')
+    const prefix = value.startsWith('~') ? '~' : ''
+    const suffix = value.endsWith('+') ? '+' : value.includes('/') ? value.slice(value.indexOf('/')) : ''
+    const formatter = new Intl.NumberFormat('vi-VN', {
+      maximumFractionDigits: hasDecimal ? 1 : 0,
+      minimumFractionDigits: hasDecimal ? 1 : 0,
+    })
+    const formatValue = (number: number): string => `${prefix}${formatter.format(number)}${suffix}`
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setDisplayValue(value)
+        observer.disconnect()
+        return
+      }
+
+      const startTime = performance.now()
+      const duration = 1200
+      const updateValue = (currentTime: number): void => {
+        const progress = Math.min((currentTime - startTime) / duration, 1)
+        const easedProgress = 1 - Math.pow(1 - progress, 3)
+        setDisplayValue(formatValue(numericValue * easedProgress))
+        if (progress < 1) {
+          window.requestAnimationFrame(updateValue)
+        }
+      }
+
+      window.requestAnimationFrame(updateValue)
+      observer.disconnect()
+    }, { threshold: .65 })
+
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [value])
+
+  return <strong ref={valueRef}>{displayValue}</strong>
+}
+
 function TrustMetrics() {
-  return <section className="trust-metrics" aria-label="Những con số được khách hàng tin tưởng"><div className="container trust-metrics-grid"><div className="trust-metrics-intro"><span className="eyebrow">Được tin chọn tại Thủ Dầu Một</span><p>Những con số được công khai từ các kênh của Ely Fruit và hành trình phục vụ khách hàng.</p></div>{TRUST_METRICS.map(metric => { const content = <><strong>{metric.value}</strong><span>{metric.label}</span><small>{metric.detail}</small></>; return metric.href ? <a key={metric.label} href={metric.href} target="_blank" rel="noreferrer">{content}<SquareArrowOutUpRight size={15} /></a> : <div key={metric.label}>{content}</div> })}</div></section>
+  return <section className="trust-metrics" aria-label="Những con số được khách hàng tin tưởng"><div className="container trust-metrics-grid"><div className="trust-metrics-intro"><span className="eyebrow">Được tin chọn tại Thủ Dầu Một</span><p>Những con số được công khai từ các kênh của Ely Fruit và hành trình phục vụ khách hàng.</p></div>{TRUST_METRICS.map(metric => { const content = <><AnimatedMetricValue value={metric.value} /><span>{metric.label}</span><small>{metric.detail}</small></>; return metric.href ? <a key={metric.label} href={metric.href} target="_blank" rel="noreferrer">{content}<SquareArrowOutUpRight size={15} /></a> : <div key={metric.label}>{content}</div> })}</div></section>
 }
 
 interface HeroProps {
@@ -551,7 +605,40 @@ function ProductPage({ slug }: { slug: string }) {
           <div className="detail-actions"><Button href={PHONE_LINK}><Phone size={18} /> Gọi đặt nhanh</Button><Button href={ZALO_URL} variant="secondary"><MessageCircle size={18} /> Nhắn Zalo gửi yêu cầu</Button><Button href={FACEBOOK_URL} variant="ghost"><MessageCircle size={18} /> Nhắn Facebook</Button></div><p className="detail-contact-note">Gửi ảnh mẫu, ngân sách, địa chỉ giao và thời gian mong muốn qua Zalo để được tư vấn.</p>
         </div>
       </div>
-      <div className="product-copy"><article><span className="eyebrow">Chi tiết sản phẩm</span><h2>Món quà tươi lành, được chuẩn bị bằng sự chỉn chu</h2><p>{product.name} được phối hợp hài hòa giữa hương vị, màu sắc và hình thức. Mỗi loại trái cây đều được kiểm tra trước khi sắp xếp và hoàn thiện tại cửa hàng.</p><h3>Chuẩn bị để trao tặng</h3><p>Hãy gửi Ely Fruit ngân sách, thời gian giao và lời nhắn mong muốn. Đội ngũ sẽ xác nhận mẫu thực tế, thiệp và khung giờ phù hợp trước khi hoàn thiện.</p><h3>Hướng dẫn bảo quản</h3><p>Nên sử dụng sớm để đảm bảo độ tươi ngon. Bảo quản nơi thoáng mát hoặc ngăn mát tủ lạnh tùy loại trái cây.</p><a className="product-guide-link" href={`/guide/${productGuide.slug}`}><span>Chọn theo dịp</span><strong>{productGuide.title}</strong><small>Đọc cẩm nang để cân nhắc món quà phù hợp hơn.</small><ArrowRight size={17} /></a></article><aside><h3>Chính sách giao hàng</h3><ul><li><Check /> Hỗ trợ giao tận nơi</li><li><Check /> Xác nhận mẫu trước khi giao</li><li><Check /> Tư vấn khung giờ phù hợp</li><li><Check /> Hỗ trợ thiệp theo yêu cầu</li></ul></aside></div>
+      <section className="product-copy" aria-labelledby="product-copy-heading">
+        <article className="product-copy-content">
+          <span className="eyebrow">Chi tiết sản phẩm</span>
+          <h2 id="product-copy-heading">Món quà tươi lành, được chuẩn bị bằng sự chỉn chu</h2>
+          <p>{product.name} được phối hợp hài hòa giữa hương vị, màu sắc và hình thức. Mỗi loại trái cây đều được kiểm tra trước khi sắp xếp và hoàn thiện tại cửa hàng.</p>
+          <div className="product-care-grid">
+            <section>
+              <span>01</span>
+              <div>
+                <h3>Chuẩn bị để trao tặng</h3>
+                <p>Hãy gửi Ely Fruit ngân sách, thời gian giao và lời nhắn mong muốn. Đội ngũ sẽ xác nhận mẫu thực tế, thiệp và khung giờ phù hợp trước khi hoàn thiện.</p>
+              </div>
+            </section>
+            <section>
+              <span>02</span>
+              <div>
+                <h3>Hướng dẫn bảo quản</h3>
+                <p>Nên sử dụng sớm để đảm bảo độ tươi ngon. Bảo quản nơi thoáng mát hoặc ngăn mát tủ lạnh tùy loại trái cây.</p>
+              </div>
+            </section>
+          </div>
+          <a className="product-guide-link" href={`/guide/${productGuide.slug}`}>
+            <span>Chọn theo dịp</span>
+            <strong>{productGuide.title}</strong>
+            <small>Đọc cẩm nang để cân nhắc món quà phù hợp hơn.</small>
+            <ArrowRight size={17} />
+          </a>
+        </article>
+        <aside className="product-delivery-policy">
+          <span className="eyebrow">An tâm đặt quà</span>
+          <h3>Chính sách giao hàng</h3>
+          <ul><li><Check /> Hỗ trợ giao tận nơi</li><li><Check /> Xác nhận mẫu trước khi giao</li><li><Check /> Tư vấn khung giờ phù hợp</li><li><Check /> Hỗ trợ thiệp theo yêu cầu</li></ul>
+        </aside>
+      </section>
       <section className="related"><SectionHeading eyebrow="Có thể bạn sẽ thích" title="Sản phẩm tương tự" /><div className="product-grid">{products.filter(p => p.slug !== product.slug).slice(0, 4).map(p => <ProductCard key={p.slug} product={p} />)}</div></section>
     </main>
     <FAQSection />
@@ -644,11 +731,11 @@ function GuideArticle({ guide }: GuideArticleProps) {
       <aside><span>Trong bài viết</span>{sections.map(section => <a href={`#${section.id}`} key={section.id}>{section.heading}</a>)}{recommendedProducts.length > 0 && <a href="#san-pham-goi-y">Mẫu Ely Fruit phù hợp</a>}<a href="#goi-y-ely">Gợi ý từ Ely Fruit</a>{guide.faqs?.length && <a href="#cau-hoi-thuong-gap">Câu hỏi thường gặp</a>}<a href="#tu-van">Tư vấn từ Ely Fruit</a></aside>
       <div className="guide-article-copy">
         <span className="eyebrow">Cẩm nang Ely Fruit</span>
-        {sections.map(section => <section className="guide-article-section" id={section.id} key={section.id}><h2>{section.heading}</h2>{section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}{section.points && <ul>{section.points.map(point => <li key={point}>{point}</li>)}</ul>}{section.image && <GuideFigure image={section.image} />}</section>)}
+        {sections.map(section => <section className="guide-article-section" id={section.id} key={section.id}><h2>{section.heading}</h2>{section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}{section.table && <div className="guide-table-wrap"><table><caption>{section.table.caption}</caption><thead><tr>{section.table.columns.map(column => <th scope="col" key={column}>{column}</th>)}</tr></thead><tbody>{section.table.rows.map(([need, guidance]) => <tr key={need}><th scope="row">{need}</th><td>{guidance}</td></tr>)}</tbody></table></div>}{section.points && <ul>{section.points.map(point => <li key={point}>{point}</li>)}</ul>}{section.image && <GuideFigure image={section.image} />}</section>)}
         {recommendedProducts.length > 0 && <section id="san-pham-goi-y" className="article-product-recommendations" aria-labelledby="article-product-recommendations-heading"><span className="eyebrow">Mẫu Ely Fruit phù hợp</span><h2 id="article-product-recommendations-heading">Chọn từ những mẫu có giá và mã rõ ràng</h2><div>{recommendedProducts.map(({ product, suitableFor }) => <a href={`/san-pham/${product.slug}`} key={product.slug}><img src={product.image} alt={product.name} loading="lazy" decoding="async" /><span className="article-product-copy"><small className="article-product-meta"><b>{product.code}</b><b>{product.price}</b></small><strong>{product.name}</strong><em>Phù hợp: {suitableFor}</em></span><span className="article-product-arrow" aria-hidden="true"><ArrowRight size={18} /></span></a>)}</div></section>}
         <section id="goi-y-ely" className="article-recommendations" aria-labelledby="article-recommendations-heading"><span className="eyebrow">Gợi ý từ Ely Fruit</span><h3 id="article-recommendations-heading">Một vài điểm dừng hữu ích khi bạn đã sẵn sàng chọn quà</h3><div>{guide.relatedLinks.map(link => <a href={link.href} key={link.href}><strong>{link.label}</strong><span>{link.description}</span><ArrowRight size={16} /></a>)}</div><a className="article-guide-index" href="/guide">Xem tất cả cẩm nang chọn quà <ArrowRight size={15} /></a></section>
         {guide.faqs?.length ? <section id="cau-hoi-thuong-gap" className="article-faq" aria-labelledby="article-faq-heading"><span className="eyebrow">Giải đáp nhanh</span><h2 id="article-faq-heading">Câu hỏi thường gặp</h2>{guide.faqs.map(faq => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</section> : null}
-        <section id="tu-van"><h2>Một món quà chỉn chu bắt đầu từ cuộc trò chuyện</h2><p>Nếu bạn chưa chắc nên chọn mẫu nào, hãy gọi <a href={PHONE_LINK}>{PHONE}</a> hoặc ghé cửa hàng tại {ADDRESS}. Đội ngũ Ely Fruit sẽ tư vấn mẫu thực tế theo dịp tặng và ngân sách.</p></section>
+        <section id="tu-van"><h2>Một món quà chỉn chu bắt đầu từ cuộc trò chuyện</h2><p>Nếu bạn chưa chắc nên chọn mẫu nào, hãy gọi <a href={PHONE_LINK}>{PHONE}</a> hoặc ghé cửa hàng tại {ADDRESS}. Đội ngũ <a href="/">Ely Fruit</a> sẽ tư vấn mẫu thực tế theo dịp tặng và ngân sách.</p><p className="article-site-link">Xem thêm mẫu quà, hướng dẫn và thông tin cửa hàng tại <a href="/">ely-fruit.vn</a>.</p></section>
         {guide.source && <p className="article-source">Nguồn tham khảo: <a href={guide.source.url} target="_blank" rel="noreferrer">{guide.source.name} — {guide.source.title} <SquareArrowOutUpRight size={14} /></a></p>}
         <div className="article-actions"><Button href="/gio-trai-cay">Xem giỏ quà phù hợp <ArrowRight size={16} /></Button><Button href="/#contact" variant="secondary">Nhận tư vấn</Button></div>
       </div>
