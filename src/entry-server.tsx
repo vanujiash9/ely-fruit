@@ -1,7 +1,7 @@
 import { renderToString } from 'react-dom/server'
 import App from './App'
 import { getPageTitle, getRoute } from './app/routing.ts'
-import { ADDRESS, FACEBOOK_URL, MAP_URL, SITE_URL, TIKTOK_URL } from './data/site.ts'
+import { ADDRESS, EMAIL, FACEBOOK_URL, MAP_URL, OPENING_HOURS, PRICE_RANGE, SITE_URL, SOCIAL_IMAGE_PATH, TIKTOK_URL } from './data/site.ts'
 import { guides } from './data/guides.ts'
 import { staticRoutes } from './app/static-routes.ts'
 
@@ -11,13 +11,18 @@ export function render(path: string): string {
   return renderToString(<App initialPath={path} />)
 }
 
-export function getPageMetadata(path: string): { canonical: string; description: string; title: string } {
+export function getPageMetadata(path: string): { canonical: string; description: string; image: string; imageAlt: string; title: string } {
   const route = getRoute(path)
   const canonicalPath = route?.path ?? path
+  const guide = guides.find(item => `/guide/${item.slug}` === canonicalPath)
+  const image = route?.product?.image ?? guide?.heroImage?.hero ?? guide?.image ?? SOCIAL_IMAGE_PATH
+  const imageAlt = route?.product?.name ?? guide?.heroImage?.alt ?? guide?.title ?? 'Hộp quà trái cây cao cấp Ely Fruit tại Thủ Dầu Một, Bình Dương'
 
   return {
     canonical: `${SITE_URL}${canonicalPath === '/' ? '/' : canonicalPath}`,
     description: route?.description ?? 'Trang bạn tìm không tồn tại tại Ely Fruit.',
+    image: new URL(image, SITE_URL).href,
+    imageAlt,
     title: getPageTitle(path),
   }
 }
@@ -31,13 +36,23 @@ export function getPageSchema(path: string): string {
     name: 'Ely Fruit',
     url: SITE_URL,
     telephone: '+84981370970',
+    email: EMAIL,
+    priceRange: PRICE_RANGE,
+    image: new URL(SOCIAL_IMAGE_PATH, SITE_URL).href,
+    logo: new URL('/ely-fruit-logo.png', SITE_URL).href,
     address: {
       '@type': 'PostalAddress',
       streetAddress: ADDRESS,
       addressLocality: 'Thủ Dầu Một',
-      addressRegion: 'Hồ Chí Minh',
+      addressRegion: 'Bình Dương',
       addressCountry: 'VN',
     },
+    openingHoursSpecification: [{
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: OPENING_HOURS.opens,
+      closes: OPENING_HOURS.closes,
+    }],
     sameAs: [FACEBOOK_URL, TIKTOK_URL, MAP_URL],
   }]
 
