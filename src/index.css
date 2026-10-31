@@ -130,7 +130,7 @@ p { line-height: 1.72; color: var(--text-secondary); }
 .trust-metrics-grid small { color: #897d7e; font-size: 9px; }
 .trust-metrics-grid > a > svg { position: absolute; right: 18px; top: 18px; color: #b18a47; }
 .welcome-section { overflow: hidden; padding: 50px 0; background: #f7fbf5; border-bottom: 1px solid #dce9da; }
-.welcome-layout { position: relative; display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(34px, 6vw, 100px); align-items: center; }
+.welcome-layout { position: relative; display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr); gap: clamp(34px, 6vw, 100px); align-items: center; }
 .welcome-layout::before { content: ''; position: absolute; width: 168px; height: 168px; left: 32%; top: 50%; border: 1px solid #c6a15b55; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
 .welcome-heading { position: relative; z-index: 1; }
 .welcome-heading h2 { margin-top: 14px; color: #174c31; font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 3.7vw, 56px); font-weight: 600; letter-spacing: -.025em; }
