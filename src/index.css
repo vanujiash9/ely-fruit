@@ -712,4 +712,68 @@ blockquote { font-family: 'Playfair Display', serif; font-size: 20px; line-heigh
   .info-page-copy { max-width: 860px; margin: 0 auto 70px; display: grid; gap: 34px; }.info-page-copy article { border-bottom: 1px solid #e5dbd0; padding-bottom: 28px; }.info-page-copy h2 { font-size: 30px; margin-bottom: 10px; }.info-page-copy p { font-size: 13px; }
   .footer { padding: 24px 0 74px; }.footer-grid { grid-template-columns: 1fr; gap: 0; }.footer-brand { padding-bottom: 15px; border-bottom: 1px solid #ffffff1c; }.footer-brand > p { max-width: 280px; margin: 9px 0; font-size: 11px; line-height: 1.5; }.footer-social { gap: 7px; }.footer-social a { width: 30px; height: 30px; }.footer-social img { width: 14px; height: 14px; }.footer-grid > nav { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; padding: 15px 0; border-bottom: 1px solid #ffffff1c; }.footer-grid > nav h3 { grid-column: span 2; margin-bottom: 5px; }.footer-grid > nav a { min-height: 28px; padding: 4px 0; font-size: 11px; }.footer-grid > div:nth-child(3) { padding: 15px 0 0; }.footer-grid > div:nth-child(3) h3 { margin-bottom: 6px; }.footer-grid > div:nth-child(3) a, .footer-grid > div:nth-child(3) p { font-size: 11px; margin-bottom: 4px; }.footer-cta { display: none; }.footer-bottom { display: flex; flex-wrap: wrap; gap: 3px 12px; margin-top: 15px; padding-top: 10px; font-size: 9px; }
   .mobile-sticky { position: fixed; z-index: 60; bottom: 0; left: 0; right: 0; height: 62px; display: grid; grid-template-columns: repeat(3, 1fr); background: white; box-shadow: 0 -8px 25px #2b11182b; padding: 7px; gap: 7px; }.mobile-sticky a { display: flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid #236b38; background: white; color: #236b38; text-decoration: none; font-size: 11px; font-weight: 700; }.mobile-sticky a:last-child { background: #236b38; color: white; }.mobile-sticky svg { width: 17px; }
+
+  /* Mobile rhythm: align page surfaces with the compact header and fixed contact bar. */
+  body { padding-bottom: 70px; }
+  .section { padding-block: 56px; }
+  h1 { font-size: clamp(36px, 10vw, 44px); line-height: 1.08; }
+  h2 { font-size: clamp(30px, 8.5vw, 36px); line-height: 1.1; }
+  .eyebrow { font-size: 10px; letter-spacing: .12em; }
+  .header-inner { gap: 10px; }
+  .header-inner > .logo-lockup { width: 54px; height: 54px; }
+  .icon-btn, .mobile-call { width: 40px; height: 40px; }
+  .drawer-panel { width: min(90%, 390px); padding: 16px; }
+  .drawer-head { top: -16px; padding: 16px 0; }
+  .drawer-panel nav > a, .drawer-nav-group > button { min-height: 50px; font-size: 19px; }
+  .drawer-contact { margin-top: 6px; padding: 17px; }
+  .drawer-contact a { font-size: 23px; }
+  .hero, .hero-grid { min-height: 470px; }
+  .hero-content { padding-top: 16px; }
+  .hero-content h1 { margin: 11px 0 14px; font-size: clamp(40px, 11vw, 48px); }
+  .hero-content > p { font-size: 14px; line-height: 1.6; }
+  .hero-buttons { margin: 20px 0; }
+  .hero-meta { gap: 9px; padding: 9px 10px; }
+  .hero-meta a, .hero-meta span { font-size: 10px; }
+  .section-heading { margin-bottom: 22px; }
+  .section-heading p { font-size: 12px; line-height: 1.6; }
+  .category-heading .section-heading h2 { font-size: 34px; }
+  .category-grid { grid-auto-columns: minmax(80%, 1fr); grid-template-rows: repeat(2, 166px); }
+  .mobile-snap-rail { grid-auto-columns: minmax(72%, 1fr); scroll-padding-inline: 1px; }
+  .product-title { font-size: 18px; line-height: 1.12; }
+  .daily-fruit-card { flex-basis: 70%; }
+  .daily-fruit-actions > a { font-size: 10px; }
+  .page-hero { padding: 28px 0 32px; }
+  .page-hero h1 { font-size: clamp(36px, 10vw, 42px); }
+  .breadcrumb { margin-bottom: 18px; }
+  .listing-section { padding-top: 32px; padding-bottom: 60px; }
+  .listing-toolbar { align-items: flex-start; gap: 14px; min-height: 0; padding-bottom: 18px; }
+  .listing-toolbar strong { font-size: 19px; }
+  .mobile-filter-button { min-height: 50px; }
+  .detail-info h1 { font-size: clamp(34px, 9.5vw, 40px); }
+  .detail-actions { gap: 8px; }
+  .detail-actions .btn { min-height: 46px; font-size: 12px; }
+  .fruit-selection .section-heading h2, .guide-masthead h1 { font-size: clamp(34px, 9.5vw, 42px); }
+  .fruit-gift-bridge-content { padding-block: 42px; }
+  .guide-article-header h1 { font-size: clamp(35px, 9.7vw, 42px); }
+  .guide-article-copy h2 { font-size: 31px; }
+  .guide-article-copy p, .guide-article-copy li { font-size: 14px; line-height: 1.8; }
+  .guide-article-section { margin-top: 38px; }
+  .guide-table-wrap { margin-inline: 0; }
+  .guide-table-wrap table { min-width: 480px; }
+  .footer { padding-bottom: 82px; }
+  .footer-brand .logo-lockup { min-height: 48px; }
+  .footer-bottom { padding-bottom: 4px; }
+  .mobile-sticky { height: 66px; padding: 8px; }
+  .mobile-sticky a { min-width: 0; gap: 5px; font-size: 10px; text-align: center; }
+  .mobile-sticky svg { width: 16px; flex: 0 0 auto; }
+}
+
+@media (max-width: 360px) {
+  .container { width: min(100% - 24px, 560px); }
+  .hero-content { padding-inline: 12px; margin-inline: -12px; }
+  .hero-content::before { inset-inline: -12px; }
+  .hero-buttons .btn { padding-inline: 8px; font-size: 12px; }
+  .mobile-sticky a { font-size: 9px; }
+  .mobile-sticky svg { display: none; }
+  .contact-map-card, .contact-info-grid { gap: 14px; }
 }
