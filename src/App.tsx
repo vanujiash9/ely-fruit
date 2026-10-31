@@ -144,7 +144,6 @@ function Header({ currentPath }: { currentPath: string }) {
   ]
   const giftLinks = [
     ['Trái cây bán lẻ', '/trai-cay'],
-    ['Xem tất cả giỏ quà', '/gio-trai-cay'],
     ['Giỏ quà trái cây', '/gio-trai-cay'],
     ['Quà sinh nhật', '/gio-trai-cay/sinh-nhat'],
     ['Mâm lễ & Tráp cưới', '/catalogue'],
