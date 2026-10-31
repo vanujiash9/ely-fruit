@@ -333,10 +333,9 @@ function LocalSection() {
       <div className="container local-grid">
         <div className="local-content">
           <span className="eyebrow">Ghé vườn quà Ely Fruit</span>
-          <p className="local-kicker">Ely Fruit là cửa hàng trái cây và quà tặng cao cấp tại Thủ Dầu Một.</p>
-          <h2 id="local-heading">Một điểm hẹn để chọn quà tươi lành, chỉn chu</h2>
-          <p>Ghé cửa hàng để xem trái cây theo mùa, trao đổi trực tiếp về món quà và nhận tư vấn phù hợp với dịp tặng của bạn.</p>
-          <div className="contact-lines"><div><MapPin /><span><small>Địa chỉ cửa hàng</small><strong className="responsive-address" aria-label={ADDRESS}><span className="address-full">{ADDRESS}</span><span className="address-compact">{MOBILE_ADDRESS}</span></strong></span></div><div><Clock3 /><span><small>Mở cửa mỗi ngày</small><strong>07:30–21:00</strong></span></div><div><Phone /><span><small>Tư vấn & đặt quà</small><strong>{PHONE}</strong></span></div></div>
+          <h2 id="local-heading">Ghé cửa hàng chọn quà</h2>
+          <p>Xem mẫu quà thực tế và nhận tư vấn theo dịp tặng, ngân sách của bạn.</p>
+          <div className="contact-lines"><div><MapPin /><span><small>Địa chỉ cửa hàng</small><strong>{ADDRESS}</strong></span></div><div><Clock3 /><span><small>Mở cửa mỗi ngày</small><strong>07:30–21:00</strong></span></div><div><Phone /><span><small>Tư vấn & đặt quà</small><strong>{PHONE}</strong></span></div></div>
           <Button href={MAP_URL}>Chỉ đường đến cửa hàng <ArrowRight size={18} /></Button>
         </div>
         <div className="map-card">
@@ -359,7 +358,7 @@ function LocalSection() {
 function FAQSection() {
   const [open, setOpen] = useState(-1)
   const [showAll, setShowAll] = useState(false)
-  return <section className="section faq-section"><div className="container faq-grid"><div className="faq-intro"><span className="eyebrow">Câu hỏi thường gặp</span><h2>Thông tin trước khi đặt quà</h2><p>Mọi món quà đều có thể được tư vấn và điều chỉnh để phù hợp hơn với người nhận.</p><Button href={FACEBOOK_URL} variant="secondary">Gửi câu hỏi cho Ely Fruit</Button></div><div className={`accordion ${showAll ? 'show-all' : ''}`}>{faqs.map(([q, a], i) => <article className={open === i ? 'open' : ''} key={q}><button onClick={() => setOpen(open === i ? -1 : i)}><span>{q}</span><ChevronDown /></button><div><p>{a}</p></div></article>)}<button type="button" className="faq-more-button" onClick={() => setShowAll(isShowingAll => !isShowingAll)} aria-expanded={showAll}>{showAll ? 'Thu gọn câu hỏi' : `Xem thêm ${faqs.length - 2} câu hỏi`}<ChevronDown /></button></div></div></section>
+  return <section className="section faq-section"><div className="container faq-grid"><div className="faq-intro"><span className="eyebrow">Câu hỏi thường gặp</span><h2>Thông tin trước khi đặt quà</h2><p>Mọi món quà đều có thể được tư vấn và điều chỉnh để phù hợp hơn với người nhận.</p><Button href={FACEBOOK_URL} variant="secondary">Gửi câu hỏi cho Ely Fruit</Button></div><div className={`accordion ${showAll ? 'show-all' : ''}`}>{faqs.map(([q, a], i) => <article className={open === i ? 'open' : ''} key={q}><button onClick={() => setOpen(open === i ? -1 : i)}><span>{q}</span><ChevronDown /></button><div><p>{a}</p></div></article>)}<button type="button" className="faq-more-button" onClick={() => setShowAll(isShowingAll => !isShowingAll)} aria-expanded={showAll}>{showAll ? 'Thu gọn câu hỏi' : `Xem thêm ${faqs.length - 3} câu hỏi`}<ChevronDown /></button></div></div></section>
 }
 
 interface ContactRequest {
