@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ProductCard } from './components/ProductCard'
 import { PageHero } from './components/PageHero'
 import { fruitProducts, products, sortProductsByPrice, type FruitProduct, type Product } from './data/catalog'
@@ -108,9 +108,13 @@ function scrollToHash(hash: string): void {
 
 function routeTo(path: string): void {
   const nextUrl = new URL(path, window.location.origin)
+  const isCurrentPage = nextUrl.pathname === window.location.pathname && !nextUrl.hash
+
   window.history.pushState(null, '', `${nextUrl.pathname}${nextUrl.hash}`)
   window.dispatchEvent(new PopStateEvent('popstate'))
+
   if (nextUrl.hash) scrollToHash(nextUrl.hash)
+  else if (isCurrentPage) window.scrollTo({ top: 0, behavior: getScrollBehavior() })
 }
 
 function Button({ children, href, variant = 'primary', onClick, type = 'button', className = '' }: { children: React.ReactNode; href?: string; variant?: 'primary' | 'secondary' | 'cream' | 'ghost'; onClick?: () => void; type?: 'button' | 'submit'; className?: string }) {
@@ -254,38 +258,70 @@ function TrustMetrics() {
   return <section className="trust-metrics" aria-label="Những con số được khách hàng tin tưởng"><div className="container trust-metrics-grid"><div className="trust-metrics-intro"><span className="eyebrow">Được tin chọn tại Thủ Dầu Một</span><p>Những con số được công khai từ các kênh của Ely Fruit và hành trình phục vụ khách hàng.</p></div>{TRUST_METRICS.map(metric => { const content = <><strong>{metric.value}</strong><span>{metric.label}</span><small>{metric.detail}</small></>; return metric.href ? <a key={metric.label} href={metric.href} target="_blank" rel="noreferrer">{content}<SquareArrowOutUpRight size={15} /></a> : <div key={metric.label}>{content}</div> })}</div></section>
 }
 
-function Hero() {
-  const heroSlides = [
-    { image: images.heroGiftBasket, alt: 'Giỏ trái cây cao cấp Ely Fruit', eyebrow: 'Trao tặng điều tươi lành', title: 'Giỏ Quà Cao Cấp', emphasis: 'Ely Fruit', text: 'Trái cây nhập khẩu, giỏ quà, mâm lễ và tráp cưới hỏi tại Thủ Dầu Một.' },
-    { image: images.heroCorporateGift, alt: 'Giỏ quà doanh nghiệp Ely Fruit', eyebrow: 'Quà tặng doanh nghiệp', title: 'Chỉn Chu Từng', emphasis: 'Món Quà', text: 'Thiết kế giỏ quà theo ngân sách, thương hiệu và dịp tặng của bạn.' },
-    { image: images.heroTetGift, alt: 'Giỏ quà Tết Ely Fruit', eyebrow: 'Gửi trao thịnh vượng', title: 'Quà Tết Đầy', emphasis: 'Sắc Xuân', text: 'Những giỏ quà tươi ngon, sang trọng để kết nối yêu thương dịp đầu năm.' },
-  ]
-  const [activeSlide, setActiveSlide] = useState(0)
-  const slide = heroSlides[activeSlide]
+interface HeroProps {
+  onVisibilityChange: (isVisible: boolean) => void
+}
+
+function Hero({ onVisibilityChange }: HeroProps) {
+  const heroRef = useRef<HTMLElement>(null)
+  const [isHeroVisible, setIsHeroVisible] = useState(true)
 
   useEffect(() => {
-    const timer = window.setInterval(() => setActiveSlide(current => (current + 1) % heroSlides.length), 5000)
-    return () => window.clearInterval(timer)
-  }, [heroSlides.length])
+    const hero = heroRef.current
+    if (!hero) return
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsHeroVisible(entry.isIntersecting)
+      onVisibilityChange(entry.isIntersecting)
+    }, { threshold: .35 })
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [onVisibilityChange])
 
   return (
-    <section className="hero">
+    <section className="hero" id="home-hero" ref={heroRef}>
+      <img className="hero-banner" src="/hero/ely-fruit-banner.png" alt="Giỏ quà trái cây cao cấp Ely Fruit với nho, dâu, cam và dưa lưới" fetchPriority="high" />
       <div className="container hero-grid">
-        <div className="hero-content" key={slide.image}>
-          <span className="eyebrow">{slide.eyebrow}</span>
-          <h1>{slide.title} <em>{slide.emphasis}</em></h1>
-          <p>{slide.text}</p>
-          <div className="hero-buttons"><Button onClick={() => routeTo('/gio-trai-cay')}>Xem giỏ quà <ArrowRight size={18} /></Button><Button href={ZALO_URL} variant="cream" className="mobile-zalo-pulse">Nhắn Zalo tư vấn</Button></div>
-          <div className="hero-meta"><a href={PHONE_LINK}><Phone size={17} />{PHONE}</a><span><Clock3 size={17} />07:30–21:00</span><span><MapPin size={17} />Thủ Dầu Một</span></div>
-        </div>
-        <div className="hero-visual">
-          <div className="hero-image-main"><img key={slide.image} src={slide.image} alt={slide.alt} /></div>
-          <div className="hero-carousel-controls"><button onClick={() => setActiveSlide((activeSlide + heroSlides.length - 1) % heroSlides.length)} aria-label="Ảnh trước"><ChevronLeft /></button><div>{heroSlides.map((item, index) => <button key={item.image} className={index === activeSlide ? 'active' : ''} onClick={() => setActiveSlide(index)} aria-label={`Chọn ảnh ${index + 1}`} />)}</div><button onClick={() => setActiveSlide((activeSlide + 1) % heroSlides.length)} aria-label="Ảnh tiếp theo"><ChevronRight /></button></div>
-          <div className="hero-image-small"><img src={images.heroAccent} alt="Trái cây nhập khẩu tuyển chọn" /></div>
-          <div className="hero-badge"><Sparkles size={18} /><span><strong>Gói mới mỗi ngày</strong><small>Tươi ngon & chỉn chu</small></span></div>
+        <div className={isHeroVisible ? 'hero-content is-visible' : 'hero-content'}>
+          <span className="eyebrow hero-reveal hero-reveal-eyebrow">Trao tặng điều tươi lành</span>
+          <h1><span className="hero-reveal hero-reveal-title">Giỏ quà cao cấp</span><em className="hero-reveal hero-reveal-brand">Ely Fruit</em></h1>
+          <p className="hero-reveal hero-reveal-copy">Trái cây nhập khẩu, giỏ quà, mâm lễ và tráp cưới hỏi tại Thủ Dầu Một.</p>
+          <div className="hero-buttons hero-reveal hero-reveal-actions"><Button onClick={() => routeTo('/gio-trai-cay')}>Xem giỏ quà <ArrowRight size={18} /></Button><Button href={ZALO_URL} variant="cream" className="mobile-zalo-pulse">Nhắn Zalo tư vấn</Button></div>
+          <div className="hero-meta hero-reveal hero-reveal-meta"><a href={PHONE_LINK}><Phone size={17} />{PHONE}</a><span><Clock3 size={17} />07:30–21:00</span><span><MapPin size={17} />Thủ Dầu Một</span></div>
         </div>
       </div>
       <div className="hero-marquee" aria-label="Dịch vụ Ely Fruit"><div className="hero-marquee-track"><span>Trái cây nhập khẩu</span><span>Giỏ quà cao cấp</span><span>Mâm lễ chỉn chu</span><span>Tráp cưới hỏi</span><span>Giao tận nơi tại Thủ Dầu Một</span><span aria-hidden="true">Trái cây nhập khẩu</span><span aria-hidden="true">Giỏ quà cao cấp</span><span aria-hidden="true">Mâm lễ chỉn chu</span><span aria-hidden="true">Tráp cưới hỏi</span><span aria-hidden="true">Giao tận nơi tại Thủ Dầu Một</span></div></div>
+    </section>
+  )
+}
+
+function WelcomeSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting)
+    }, { threshold: .35 })
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <section className={isVisible ? 'welcome-section is-visible' : 'welcome-section'} aria-labelledby="welcome-heading" ref={sectionRef}>
+      <div className="container welcome-layout">
+        <div className="welcome-heading">
+          <span className="eyebrow welcome-reveal welcome-reveal-eyebrow">Lời ngỏ từ Ely Fruit</span>
+          <h2 id="welcome-heading" className="welcome-reveal welcome-reveal-title">Một món quà tươi lành,<br />một lời chúc được nâng niu.</h2>
+        </div>
+        <div className="welcome-message welcome-reveal welcome-reveal-copy">
+          <span className="welcome-quote" aria-hidden="true">“</span>
+          <p>Chào mừng bạn đến với thế giới quà tặng từ thiên nhiên! Tại đây, mỗi giỏ trái cây nhập khẩu đều được chăm chút tỉ mỉ từ nguồn trái cây tươi ngon, chất lượng cao. Kết hợp cùng hoa tươi và các sản phẩm cao cấp, chúng tôi mang đến cho bạn những món quà vừa thiết thực, ý nghĩa, lại vô cùng sang trọng và hiện đại cho mọi dịp đặc biệt.</p>
+        </div>
+      </div>
     </section>
   )
 }
@@ -298,7 +334,7 @@ function LocalSection() {
           <span className="eyebrow">Ghé vườn quà Ely Fruit</span>
           <p className="local-kicker">Ely Fruit là cửa hàng trái cây và quà tặng cao cấp tại Thủ Dầu Một.</p>
           <h2 id="local-heading">Một điểm hẹn để chọn quà tươi lành, chỉn chu</h2>
-          <p>Ely Fruit phục vụ giỏ quà, trái cây nhập khẩu, mâm lễ và tráp cưới hỏi tại Thủ Dầu Một. Ghé cửa hàng để xem mẫu thực tế hoặc để đội ngũ tư vấn một món quà phù hợp với dịp tặng và ngân sách của bạn.</p>
+          <p>Ghé cửa hàng để xem trái cây theo mùa, trao đổi trực tiếp về món quà và nhận tư vấn phù hợp với dịp tặng của bạn.</p>
           <div className="contact-lines"><div><MapPin /><span><small>Địa chỉ cửa hàng</small><strong>{ADDRESS}</strong></span></div><div><Clock3 /><span><small>Mở cửa mỗi ngày</small><strong>07:30–21:00</strong></span></div><div><Phone /><span><small>Tư vấn & đặt quà</small><strong>{PHONE}</strong></span></div></div>
           <Button href={MAP_URL}>Chỉ đường đến cửa hàng <ArrowRight size={18} /></Button>
         </div>
@@ -356,14 +392,19 @@ function DailyFruitCarousel() {
   return <section className="daily-fruit" aria-labelledby="daily-fruit-heading"><div className="container"><div className="daily-fruit-header"><div><span className="eyebrow">Tuyển chọn theo mùa</span><h2 id="daily-fruit-heading">Trái cây tươi mỗi ngày</h2><p>Chọn nhanh trái cây nhập khẩu tươi ngon, cập nhật theo từng đợt hàng.</p></div><div className="daily-fruit-actions"><a href="/trai-cay">Xem tất cả <ArrowRight size={16} /></a><div><button type="button" onClick={() => scrollRail(-1)} aria-label="Xem trái cây trước"><ChevronLeft /></button><button type="button" onClick={() => scrollRail(1)} aria-label="Xem thêm trái cây"><ChevronRight /></button></div></div></div><div className="daily-fruit-rail" ref={railRef}>{fruitProducts.map(fruit => <article className="daily-fruit-card" key={fruit.slug}><a className="daily-fruit-detail" href="/trai-cay"><img src={fruit.image} alt={fruit.name} loading="lazy" /><span>{fruit.origin}</span><strong>{fruit.name}</strong></a><a className="daily-fruit-order" href={ZALO_URL} target="_blank" rel="noreferrer" aria-label={`Đặt nhanh ${fruit.name} qua Zalo`}>Đặt nhanh <ArrowRight size={14} /></a></article>)}</div></div></section>
 }
 
-function HomePage() {
+interface HomePageProps {
+  onHeroVisibilityChange: (isVisible: boolean) => void
+}
+
+function HomePage({ onHeroVisibilityChange }: HomePageProps) {
   return <>
-    <Hero />
+    <Hero onVisibilityChange={onHeroVisibilityChange} />
     <TrustMetrics />
+    <WelcomeSection />
     <main>
-      <section className="section categories-section"><div className="container"><SectionHeading eyebrow="Danh mục" title="Chọn quà theo nhu cầu" text="Tìm nhanh giỏ quà, trái cây, mâm lễ và quà doanh nghiệp phù hợp." action={<Button href="/catalogue" variant="ghost">Xem catalogue <ArrowRight size={17} /></Button>} /><CategoryGrid /></div></section>
+      <section className="section categories-section"><div className="container"><div className="category-heading"><SectionHeading eyebrow="Danh mục" title="Chọn quà theo nhu cầu" text="Tìm nhanh giỏ quà, trái cây, mâm lễ và quà doanh nghiệp phù hợp." action={<Button href="/catalogue" variant="ghost">Xem catalogue <ArrowRight size={17} /></Button>} /></div><CategoryGrid /></div></section>
       <DailyFruitCarousel />
-      <section id="products" className="section products-section landing-anchor"><div className="container"><SectionHeading eyebrow="Sản phẩm" title="Giỏ quà Ely Fruit" text="Giá, mã sản phẩm và thành phần được hiển thị rõ ràng để bạn dễ lựa chọn." action={<Button href="/gio-trai-cay" variant="secondary">Xem tất cả giỏ quà</Button>} /><Button href="/gio-trai-cay" variant="secondary" className="mobile-product-catalogue-link">Xem tất cả giỏ quà <ArrowRight size={17} /></Button><div className="product-grid mobile-snap-rail">{products.slice(0, 8).map(p => <ProductCard key={p.slug} product={p} />)}</div></div></section>
+      <section id="products" className="section products-section landing-anchor"><div className="container"><SectionHeading eyebrow="Sản phẩm" title="Giỏ quà Ely Fruit" text="Giá, mã sản phẩm và thành phần được hiển thị rõ ràng để bạn dễ lựa chọn." action={<Button href="/gio-trai-cay" variant="secondary">Xem tất cả giỏ quà</Button>} /><div className="product-grid mobile-snap-rail">{products.slice(0, 8).map(p => <ProductCard key={p.slug} product={p} />)}</div></div></section>
       <section id="process" className="section order-steps landing-anchor"><div className="container"><div className="process-heading-wrap"><SectionHeading eyebrow="Đặt quà đơn giản" title="Ba bước để gửi một món quà chỉn chu" text="Từ lúc chọn mẫu đến khi người nhận mở quà, Ely Fruit đồng hành cùng bạn." /><span className="process-mark" aria-hidden="true">Từ vườn đến tay người nhận</span></div><div className="process-timeline"><article><span className="process-step">01</span><div className="process-icon"><Gift /></div><h3>Chọn mẫu</h3><p>Xem nhanh các mẫu theo ngân sách, dịp tặng và phong cách bạn muốn.</p><a href="/gio-trai-cay">Khám phá giỏ quà <ArrowRight size={15} /></a></article><article><span className="process-step">02</span><div className="process-icon"><MessageCircle /></div><h3>Xác nhận</h3><p>Nhắn Zalo để thống nhất thành phần, thiệp, ngân sách và thời gian chuẩn bị.</p><a href={ZALO_URL} target="_blank" rel="noreferrer">Nhắn Zalo tư vấn <ArrowRight size={15} /></a></article><article><span className="process-step">03</span><div className="process-icon"><PackageCheck /></div><h3>Giao nhận</h3><p>Xác nhận địa chỉ và khung giờ trước khi hoàn thiện đơn quà chỉn chu.</p><a href={PHONE_LINK}>Gọi xác nhận đơn <ArrowRight size={15} /></a></article></div></div></section>
       <div id="about" className="landing-anchor"><LocalSection /></div>
       <FAQSection />
@@ -586,7 +627,13 @@ function GuidePage() {
   return <main className="guide-page"><header className="guide-masthead"><div className="container"><span className="eyebrow">Cẩm nang chọn quà</span><div className="guide-masthead-copy"><h1>Chọn quà có gu,<br /><em>trao lời có ý.</em></h1><p>Những ghi chú thực tế từ Ely Fruit giúp bạn chọn trái cây và giỏ quà đúng ngân sách, đúng dịp và đúng người nhận.</p></div></div></header><section className="section container guide-editorial"><article className="featured-guide"><a className="guide-card-image" href={`/guide/${featuredGuide.slug}`}><img src={getGuideCardImage(featuredGuide)} alt={featuredGuide.title} /></a><div><span className="guide-number">Bài viết nổi bật · {featuredGuide.category}</span><h2><a href={`/guide/${featuredGuide.slug}`}>{featuredGuide.title}</a></h2><p>{featuredGuide.intro}</p><a className="guide-read-link" href={`/guide/${featuredGuide.slug}`}>Đọc bài viết <ArrowRight size={17} /></a></div></article><div className="guide-section-title"><span>Tất cả bài viết</span><strong>{String(otherGuides.length).padStart(2, '0')} bài viết</strong></div><div className="guide-grid guide-grid-editorial">{otherGuides.map((guide, index) => <article key={guide.slug}><a className="guide-card-image" href={`/guide/${guide.slug}`}><img src={getGuideCardImage(guide)} alt={guide.title} loading="lazy" /></a><div className="guide-card-content"><span className="guide-number">0{index + 2} · {guide.category}</span><h2><a href={`/guide/${guide.slug}`}>{guide.title}</a></h2><p>{guide.intro}</p><a className="guide-read-link" href={`/guide/${guide.slug}`}>Xem bài viết <ArrowRight size={16} /></a></div></article>)}</div><section className="guide-sources"><div><span className="eyebrow">Đọc thêm</span><h2>Nguồn tham khảo</h2><p>Các nguồn bên ngoài giúp bạn tìm hiểu sâu hơn về dinh dưỡng và cách lựa chọn trái cây an toàn.</p></div><div>{guideSources.map((source, index) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}><span>0{index + 1}</span><div><small>{source.name}</small><strong>{source.title}</strong></div><SquareArrowOutUpRight /></a>)}</div></section><section className="guide-cta"><div><span className="eyebrow">Bạn cần chọn nhanh?</span><h2>Ely Fruit tư vấn mẫu quà theo ngân sách</h2><p>Gọi {PHONE} hoặc ghé cửa hàng tại {ADDRESS} để xem mẫu thực tế.</p></div><Button href="/#contact">Liên hệ tư vấn <ArrowRight size={17} /></Button></section></section></main>
 }
 
-function ContactRail() {
+interface ContactRailProps {
+  isVisible: boolean
+}
+
+function ContactRail({ isVisible }: ContactRailProps) {
+  if (!isVisible) return null
+
   return <aside className="contact-rail" aria-label="Liên hệ Ely Fruit">
     <span>Liên hệ</span>
     <a className="rail-phone" href={PHONE_LINK} aria-label={`Gọi ${PHONE}`}><Phone /></a>
@@ -612,16 +659,25 @@ interface AppProps {
 
 export default function App({ initialPath }: AppProps) {
   const [path, setPath] = useState(initialPath ?? (typeof window === 'undefined' ? '/' : window.location.pathname))
+  const [isHomeHeroVisible, setIsHomeHeroVisible] = useState(true)
+  const handleHeroVisibilityChange = useCallback((isVisible: boolean): void => setIsHomeHeroVisible(isVisible), [])
+
+  useEffect(() => {
+    if (path === '/') setIsHomeHeroVisible(true)
+  }, [path])
+
   useEffect(() => {
     const onInternalLink = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
       const target = (event.target as Element).closest<HTMLAnchorElement>('a[href]')
       if (!target || target.target === '_blank' || !target.href.startsWith(window.location.origin)) return
       const nextUrl = new URL(target.href)
+      const isCurrentPage = nextUrl.pathname === window.location.pathname && !nextUrl.hash
       event.preventDefault()
       window.history.pushState(null, '', `${nextUrl.pathname}${nextUrl.hash}`)
       window.dispatchEvent(new PopStateEvent('popstate'))
       if (nextUrl.hash) scrollToHash(nextUrl.hash)
+      else if (isCurrentPage) window.scrollTo({ top: 0, behavior: getScrollBehavior() })
     }
     const onLocationChange = () => {
       const legacyPath = window.location.hash.slice(1)
@@ -807,6 +863,7 @@ export default function App({ initialPath }: AppProps) {
   else if (path === '/mam-le-trap-cuoi') page = <GiftsPage initialFilter="Cưới hỏi" />
   else if (path === '/guide') page = <GuidePage />
   else if (path.startsWith('/guide/')) page = <GuideArticle guide={guides.find(item => item.slug === path.slice('/guide/'.length))!} />
-  else page = <HomePage />
-  return <><Header currentPath={path} /><ContactRail />{page}<Footer /></>
+  else page = <HomePage onHeroVisibilityChange={handleHeroVisibilityChange} />
+  const isContactRailVisible = path !== '/' || !isHomeHeroVisible
+  return <><Header currentPath={path} /><ContactRail isVisible={isContactRailVisible} />{page}<Footer /></>
 }
