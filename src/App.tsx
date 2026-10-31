@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react'
 import { ProductCard } from './components/ProductCard'
 import { PageHero } from './components/PageHero'
-import { products, sortProductsByPrice, type Product } from './data/catalog'
+import { fruitProducts, products, sortProductsByPrice, type FruitProduct, type Product } from './data/catalog'
 import { ADDRESS, FACEBOOK_URL, MAP_URL, PHONE, PHONE_LINK, SITE_URL, TIKTOK_URL, TRUST_METRICS, ZALO_TEST_URL, ZALO_URL } from './data/site'
 import { getPageTitle, getRoute } from './app/routing'
 import { guides, guideSources, type Guide, type GuideImage } from './data/guides'
@@ -138,6 +138,7 @@ function Header({ currentPath }: { currentPath: string }) {
     ['Liên hệ', '/#contact'],
   ]
   const giftLinks = [
+    ['Trái cây bán lẻ', '/trai-cay'],
     ['Xem tất cả giỏ quà', '/gio-trai-cay'],
     ['Giỏ quà trái cây', '/gio-trai-cay'],
     ['Quà sinh nhật', '/gio-trai-cay/sinh-nhat'],
@@ -226,7 +227,7 @@ function CategoryGrid() {
   return <div className="category-grid">{categories.map(([name, desc, image], index) => (
     <article className={`category-card category-${index + 1}`} key={name}>
       <img src={image} alt={name} />
-      <div className="category-overlay"><span>0{index + 1}</span><h3>{name}</h3><p>{desc}</p><button onClick={() => routeTo('/gio-trai-cay')}>Xem sản phẩm <ArrowRight size={16} /></button></div>
+      <div className="category-overlay"><span>0{index + 1}</span><h3>{name}</h3><p>{desc}</p><button onClick={() => routeTo(name === 'Trái cây nhập khẩu' ? '/trai-cay' : '/gio-trai-cay')}>Xem sản phẩm <ArrowRight size={16} /></button></div>
     </article>
   ))}</div>
 }
@@ -409,6 +410,35 @@ function GiftsPage({ initialFilter = '' }: { initialFilter?: string }) {
   </>
 }
 
+function FruitCard({ fruit }: { fruit: FruitProduct }) {
+  return <article className="fruit-card">
+    <img src={fruit.image} alt={fruit.name} loading="lazy" />
+    <div className="fruit-card-copy">
+      <div className="fruit-card-meta"><span>{fruit.origin}</span>{fruit.tag && <strong>{fruit.tag}</strong>}</div>
+      <span className="fruit-card-code">{fruit.code} · {fruit.category}</span>
+      <h2>{fruit.name}</h2>
+      <p>{fruit.description}</p>
+      <div className="fruit-card-bottom"><strong>{fruit.price}</strong><a href={ZALO_URL} target="_blank" rel="noreferrer">Đặt nhanh <ArrowRight size={15} /></a></div>
+    </div>
+  </article>
+}
+
+function FruitPage() {
+  const categories = ['Tất cả', 'Táo', 'Nho', 'Cam quýt', 'Kiwi', 'Dưa', 'Lê'] as const
+  const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>('Tất cả')
+  const shown = activeCategory === 'Tất cả' ? fruitProducts : fruitProducts.filter(fruit => fruit.category === activeCategory)
+
+  return <>
+    <PageHero onHome={() => routeTo('/')} eyebrow="Trái cây mỗi ngày" title="Trái cây tươi, tuyển chọn kỹ" text="Những loại trái cây nhập khẩu được Ely Fruit chọn theo mùa, tư vấn theo nhu cầu và cập nhật giá thực tế mỗi ngày." image={fruitProducts[5]!.image} />
+    <main className="fruit-page">
+      <section className="fruit-assurance"><div className="container fruit-assurance-grid"><div><span>01</span><p><strong>Nguồn gốc rõ ràng</strong>Chọn lọc theo từng lô hàng.</p></div><div><span>02</span><p><strong>Cập nhật mỗi ngày</strong>Giá và độ tươi theo mùa thực tế.</p></div><div><span>03</span><p><strong>Chọn đúng nhu cầu</strong>Tư vấn dùng tại nhà hoặc biếu tặng.</p></div></div></section>
+      <section className="section fruit-selection"><div className="container"><SectionHeading eyebrow="Chọn theo sở thích" title="Tươi ngon cho từng ngày" text="Một tuyển chọn gọn gàng để bạn dễ chọn loại trái cây mình yêu thích." /><div className="fruit-category-rail" role="tablist" aria-label="Nhóm trái cây">{categories.map(category => <button className={activeCategory === category ? 'is-active' : ''} key={category} onClick={() => setActiveCategory(category)} role="tab" aria-selected={activeCategory === category}>{category}</button>)}</div><div className="fruit-grid">{shown.map(fruit => <FruitCard key={fruit.slug} fruit={fruit} />)}</div></div></section>
+      <section className="fruit-gift-bridge"><div className="container fruit-gift-bridge-content"><div><span className="eyebrow">Từ trái cây đến món quà</span><h2>Muốn làm thành một giỏ quà?</h2><p>Chọn mẫu giỏ quà sẵn có hoặc gửi nhu cầu để Ely Fruit gợi ý cách phối phù hợp với người nhận và ngân sách.</p></div><Button href="/gio-trai-cay" variant="cream">Khám phá giỏ quà <ArrowRight size={18} /></Button></div></section>
+    </main>
+    <ContactSection />
+  </>
+}
+
 function ProductPage({ slug }: { slug: string }) {
   const product = products.find(p => p.slug === slug)
   if (!product) return <main className="section container"><h1>404 — Không tìm thấy sản phẩm</h1><p>Sản phẩm bạn tìm không tồn tại hoặc đã được chuyển đi.</p><a className="btn btn-primary" href="/gio-trai-cay">Xem giỏ quà</a></main>
@@ -559,7 +589,7 @@ function ContactRail() {
 function Footer() {
   return (
     <>
-      <footer className="footer"><div className="container footer-grid"><div className="footer-brand"><Logo light /><p>Trái cây, bánh kẹo nhập khẩu · Giỏ quà cao cấp · Mâm lễ, tráp cưới hỏi.</p><div className="footer-social"><a href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="Facebook Ely Fruit"><MessageCircle /></a><a href={TIKTOK_URL} target="_blank" rel="noreferrer" aria-label="TikTok Ely Fruit"><Music2 /></a><a href={MAP_URL} target="_blank" rel="noreferrer" aria-label="Google Maps Ely Fruit"><MapPin /></a></div></div><nav aria-label="Liên kết chân trang"><h3>Khám phá</h3><a href="/">Trang chủ</a><a href="/#products">Sản phẩm</a><a href="/#process">Quy trình</a><a href="/#about">Về Ely Fruit</a><a href="/#guides">Cẩm nang</a><a href="/#contact">Liên hệ</a></nav><div><h3>Liên hệ</h3><a href={PHONE_LINK}>{PHONE}</a><a href="mailto:ctythucphamelyfruit@gmail.com">ctythucphamelyfruit@gmail.com</a><a href={MAP_URL} target="_blank" rel="noreferrer">Địa chỉ cửa hàng</a><p>{ADDRESS}</p><p>07:30–21:00 mỗi ngày</p></div><div className="footer-cta"><span className="eyebrow">Cần tư vấn ngay?</span><h3>Chúng tôi giúp bạn chọn món quà phù hợp.</h3><Button href={PHONE_LINK} variant="cream"><Phone /> Gọi {PHONE}</Button></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Ely Fruit. All rights reserved.</span><span>Tươi lành trong từng món quà.</span></div></footer>
+      <footer className="footer"><div className="container footer-grid"><div className="footer-brand"><Logo light /><p>Trái cây, bánh kẹo nhập khẩu · Giỏ quà cao cấp · Mâm lễ, tráp cưới hỏi.</p><div className="footer-social"><a href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="Facebook Ely Fruit"><MessageCircle /></a><a href={TIKTOK_URL} target="_blank" rel="noreferrer" aria-label="TikTok Ely Fruit"><Music2 /></a><a href={MAP_URL} target="_blank" rel="noreferrer" aria-label="Google Maps Ely Fruit"><MapPin /></a></div></div><nav aria-label="Liên kết chân trang"><h3>Khám phá</h3><a href="/">Trang chủ</a><a href="/trai-cay">Trái cây bán lẻ</a><a href="/gio-trai-cay">Giỏ quà</a><a href="/#products">Sản phẩm</a><a href="/#process">Quy trình</a><a href="/#about">Về Ely Fruit</a><a href="/#guides">Cẩm nang</a><a href="/#contact">Liên hệ</a></nav><div><h3>Liên hệ</h3><a href={PHONE_LINK}>{PHONE}</a><a href="mailto:ctythucphamelyfruit@gmail.com">ctythucphamelyfruit@gmail.com</a><a href={MAP_URL} target="_blank" rel="noreferrer">Địa chỉ cửa hàng</a><p>{ADDRESS}</p><p>07:30–21:00 mỗi ngày</p></div><div className="footer-cta"><span className="eyebrow">Cần tư vấn ngay?</span><h3>Chúng tôi giúp bạn chọn món quà phù hợp.</h3><Button href={PHONE_LINK} variant="cream"><Phone /> Gọi {PHONE}</Button></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Ely Fruit. All rights reserved.</span><span>Tươi lành trong từng món quà.</span></div></footer>
       <div className="mobile-sticky"><a href={PHONE_LINK}><Phone /> Gọi đặt nhanh</a><a href={ZALO_URL} target="_blank" rel="noreferrer"><MessageCircle /> Nhắn Zalo</a><a href={FACEBOOK_URL} target="_blank" rel="noreferrer"><MessageCircle /> Facebook</a></div>
     </>
   )
@@ -753,7 +783,7 @@ export default function App({ initialPath }: AppProps) {
   else if (path === '/gio-trai-cay/399k') page = <GiftsPage initialFilter="399.000đ" />
   else if (path === '/gio-trai-cay/499k') page = <GiftsPage initialFilter="499.000đ" />
   else if (path === '/gio-trai-cay/599k') page = <GiftsPage initialFilter="599.000đ" />
-  else if (path === '/trai-cay-nhap-khau') page = <GiftsPage initialFilter="Giỏ trái cây" />
+  else if (path === '/trai-cay' || path === '/trai-cay-nhap-khau') page = <FruitPage />
   else if (path.startsWith('/product/') || path.startsWith('/san-pham/')) page = <ProductPage slug={path.split('/').pop() || ''} />
   else if (path === '/catalogue') page = <CataloguePage />
   else if (path === '/about' || path === '/gioi-thieu') page = <AboutPage />

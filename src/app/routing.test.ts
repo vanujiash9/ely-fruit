@@ -1,12 +1,19 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { products } from '../data/catalog.ts'
+import { fruitProducts, products } from '../data/catalog.ts'
 import { guides } from '../data/guides.ts'
 import { getRoute, getPageTitle } from './routing.ts'
 import { staticRoutes } from './static-routes.ts'
 
 test('resolves the canonical basket category instead of the homepage', () => {
   assert.equal(getRoute('/gio-trai-cay')?.path, '/gio-trai-cay')
+})
+
+test('resolves the retail fruit category with its own metadata', () => {
+  const route = getRoute('/trai-cay')
+
+  assert.equal(route?.path, '/trai-cay')
+  assert.match(route?.title ?? '', /Trái cây nhập khẩu/)
 })
 
 test('does not resolve an unknown URL to the homepage', () => {
@@ -79,6 +86,19 @@ test('exposes product data required for structured metadata', () => {
   assert.equal(route?.type, 'product')
   assert.equal(route?.product?.code, 'ELY06')
   assert.equal(route?.product?.priceValue, 800000)
+})
+
+test('canonicalizes the imported fruit alias to the retail fruit category', () => {
+  assert.equal(getRoute('/trai-cay-nhap-khau')?.path, '/trai-cay')
+})
+
+test('gives retail fruit products complete catalogue details', () => {
+  for (const fruit of fruitProducts) {
+    assert.match(fruit.image, /^\/Giỏ thiết kế-/)
+    assert.ok(fruit.origin.length >= 2)
+    assert.ok(fruit.description.length >= 20)
+    assert.ok(fruit.price.length > 0)
+  }
 })
 
 test('gives every product an explicit ingredient note', () => {

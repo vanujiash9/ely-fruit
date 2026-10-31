@@ -4,6 +4,7 @@ import { guides } from '../data/guides.ts'
 const categoryRoutes = [
   '/',
   '/gio-trai-cay',
+  '/trai-cay',
   '/gio-trai-cay/sinh-nhat',
   '/gio-trai-cay/khai-truong',
   '/gio-trai-cay/tham-hoi',

@@ -12,6 +12,18 @@ export type Product = {
   type: string
 }
 
+export interface FruitProduct {
+  slug: string
+  name: string
+  code: string
+  price: string
+  origin: string
+  description: string
+  category: 'Táo' | 'Nho' | 'Cam quýt' | 'Kiwi' | 'Dưa' | 'Lê'
+  tag?: string
+  image: string
+}
+
 export type PriceSortDirection = 'ascending' | 'descending'
 
 export function sortProductsByPrice(items: readonly Product[], direction: PriceSortDirection): Product[] {
@@ -81,4 +93,19 @@ export const products: Product[] = [
     occasion: code === 'KQ02' ? 'Tết' : index % 2 ? 'Sinh nhật' : 'Biếu đối tác',
     type: id.startsWith('hq') || id.startsWith('q') ? 'Hộp quà' : 'Giỏ trái cây',
   })),
+]
+
+const fruitImagePath = '/Giỏ thiết kế-20261031T041747Z-1-001/Giỏ thiết kế/Trái cây'
+
+export const fruitProducts: FruitProduct[] = [
+  { slug: 'cam-uc-vitor', name: 'Cam Úc Vitor', code: 'TC01', price: 'Giá theo ngày', origin: 'Úc', description: 'Vị ngọt thanh, mọng nước, phù hợp dùng hằng ngày hoặc làm quà.', category: 'Cam quýt', tag: 'Mới về', image: `${fruitImagePath}/Cam úc vitor.jpg` },
+  { slug: 'dua-le-han', name: 'Dưa lê Hàn', code: 'TC02', price: 'Giá theo ngày', origin: 'Hàn Quốc', description: 'Thơm dịu, giòn mát, tuyển chọn theo độ chín phù hợp.', category: 'Dưa', image: `${fruitImagePath}/Dưa lê hàn.jpg` },
+  { slug: 'dua-luoi-queen-vip', name: 'Dưa lưới Queen VIP', code: 'TC03', price: 'Giá theo ngày', origin: 'Tuyển chọn', description: 'Ruột cam ngọt đậm, phù hợp biếu tặng và dùng cho gia đình.', category: 'Dưa', tag: 'Được yêu thích', image: `${fruitImagePath}/Dưa Lưới Queen Vip.jpg` },
+  { slug: 'kiwi-zepri-vang', name: 'Kiwi Zespri vàng', code: 'TC04', price: 'Giá theo ngày', origin: 'New Zealand', description: 'Vị ngọt tươi, giàu vitamin, sẵn sàng dùng khi đạt độ chín đẹp.', category: 'Kiwi', image: `${fruitImagePath}/Kiwi Zepri vàng.jpg` },
+  { slug: 'le-sua-trung', name: 'Lê sữa', code: 'TC05', price: 'Giá theo ngày', origin: 'Tuyển chọn', description: 'Thịt lê giòn, nhiều nước, vị ngọt nhẹ nhàng.', category: 'Lê', image: `${fruitImagePath}/Lê sữa trung.jpg` },
+  { slug: 'nho-shine-muscat', name: 'Nho mẫu đơn Shine Muscat', code: 'TC06', price: 'Giá theo ngày', origin: 'Hàn Quốc', description: 'Chùm nho căng mọng, hương thơm đặc trưng, đẹp để biếu tặng.', category: 'Nho', tag: 'Cao cấp', image: `${fruitImagePath}/Nho Mẫu Đơn Shine muscat.jpg` },
+  { slug: 'nho-xanh-my-ipg', name: 'Nho xanh Mỹ IPG', code: 'TC07', price: 'Giá theo ngày', origin: 'Hoa Kỳ', description: 'Giòn ngọt, chùm quả tươi sáng, thích hợp cho cả gia đình.', category: 'Nho', image: `${fruitImagePath}/Nho xanh mỹ ipg.jpg` },
+  { slug: 'quyt-uc-2ph', name: 'Quýt Úc 2PH', code: 'TC08', price: 'Giá theo ngày', origin: 'Úc', description: 'Vỏ dễ bóc, vị ngọt thanh và hương thơm tươi mới.', category: 'Cam quýt', image: `${fruitImagePath}/Quýt Úc 2PH.jpg` },
+  { slug: 'tao-dazzle', name: 'Táo Dazzle', code: 'TC09', price: 'Giá theo ngày', origin: 'New Zealand', description: 'Táo giòn ngọt, sắc vỏ đẹp, tuyển lựa theo từng lô hàng.', category: 'Táo', tag: 'Bán chạy', image: `${fruitImagePath}/Táo Dazzle.jpg` },
+  { slug: 'tao-envy-new-zealand', name: 'Táo Envy New Zealand', code: 'TC10', price: 'Giá theo ngày', origin: 'New Zealand', description: 'Thịt táo giòn chắc, vị ngọt đậm và màu sắc sang trọng.', category: 'Táo', image: `${fruitImagePath}/Táo Envy New Zealand.jpg` },
 ]
