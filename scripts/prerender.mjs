@@ -4,6 +4,7 @@ import { createServer } from 'vite'
 
 const SITE_URL = 'https://ely-fruit.vn'
 const DIST_DIRECTORY = new URL('../dist/', import.meta.url)
+const PUBLIC_DIRECTORY = new URL('../public/', import.meta.url)
 
 function escapeHtmlAttribute(value) {
   return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -18,6 +19,7 @@ try {
   const template = await readFile(new URL('index.html', DIST_DIRECTORY), 'utf8')
 
   console.info(`Prerendering ${staticRoutes.length} routes...`)
+  await writeFile(new URL('sitemap.xml', PUBLIC_DIRECTORY), sitemap)
   await writeFile(new URL('sitemap.xml', DIST_DIRECTORY), sitemap)
 
   for (const route of staticRoutes) {

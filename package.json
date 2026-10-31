@@ -8,6 +8,7 @@
     "build": "vite build && node scripts/prerender.mjs",
     "typecheck": "tsc --noEmit",
     "images:guides": "node scripts/optimize-guide-images.mjs",
+    "images:baskets": "node scripts/prepare-basket-images.mjs",
     "images:ingredients": "node scripts/extract-product-ingredients.mjs",
     "test:ingredients": "node --test scripts/extract-product-ingredients.test.mjs",
     "test:routing": "node --experimental-strip-types --test src/app/routing.test.ts",

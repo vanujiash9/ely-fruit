@@ -239,7 +239,7 @@ function CategoryGrid() {
 function FilterBar({ active, setActive }: { active: string; setActive: (value: string) => void }) {
   const [open, setOpen] = useState(false)
   const groups = [
-    ['Khoảng giá', ['399.000đ', '499.000đ', '599.000đ', '699.000đ', '800.000đ', '1.000.000đ']],
+    ['Khoảng giá', ['399.000đ', '499.000đ', '599.000đ', '699.000đ', '800.000đ', '1.000.000đ', '1.200.000đ', '1.800.000đ', '2.000.000đ']],
     ['Dịp tặng', ['Tết', 'Sinh nhật', 'Biếu đối tác', 'Quà doanh nghiệp', 'Thăm bệnh', 'Cảm ơn', 'Cưới hỏi']],
     ['Loại sản phẩm', ['Giỏ trái cây', 'Hộp quà', 'Set quà cao cấp', 'Mâm lễ', 'Tráp cưới']],
     ['Phong cách', ['Sang trọng', 'Hiện đại', 'Tối giản', 'Truyền thống']],
@@ -280,7 +280,7 @@ function Hero({ onVisibilityChange }: HeroProps) {
 
   return (
     <section className="hero" id="home-hero" ref={heroRef}>
-      <img className="hero-banner" src="/hero/ely-fruit-banner.png" alt="Giỏ quà trái cây cao cấp Ely Fruit với nho, dâu, cam và dưa lưới" fetchPriority="high" />
+      <img className="hero-banner" src="/hero/ely-fruit-banner.png" alt="Hộp quà trái cây cao cấp Ely Fruit với dưa lưới, dâu, nho xanh, táo, cam và kiwi" fetchPriority="high" />
       <div className="container hero-grid">
         <div className={isHeroVisible ? 'hero-content is-visible' : 'hero-content'}>
           <span className="eyebrow hero-reveal hero-reveal-eyebrow">Trao tặng điều tươi lành</span>
@@ -397,6 +397,9 @@ interface HomePageProps {
 }
 
 function HomePage({ onHeroVisibilityChange }: HomePageProps) {
+  const featuredProductSlugs = ['ely-06', 'ely-07', 'ely-10', 'kh-13', 'ely-12', 'kh-17', 'ely-16', 'ely-18']
+  const featuredProducts = products.filter(product => featuredProductSlugs.includes(product.slug))
+
   return <>
     <Hero onVisibilityChange={onHeroVisibilityChange} />
     <TrustMetrics />
@@ -404,7 +407,7 @@ function HomePage({ onHeroVisibilityChange }: HomePageProps) {
     <main>
       <section className="section categories-section"><div className="container"><div className="category-heading"><SectionHeading eyebrow="Danh mục" title="Chọn quà theo nhu cầu" text="Tìm nhanh giỏ quà, trái cây, mâm lễ và quà doanh nghiệp phù hợp." action={<Button href="/catalogue" variant="ghost">Xem catalogue <ArrowRight size={17} /></Button>} /></div><CategoryGrid /></div></section>
       <DailyFruitCarousel />
-      <section id="products" className="section products-section landing-anchor"><div className="container"><SectionHeading eyebrow="Sản phẩm" title="Giỏ quà Ely Fruit" text="Giá, mã sản phẩm và thành phần được hiển thị rõ ràng để bạn dễ lựa chọn." action={<Button href="/gio-trai-cay" variant="secondary">Xem tất cả giỏ quà</Button>} /><div className="product-grid mobile-snap-rail">{products.slice(0, 8).map(p => <ProductCard key={p.slug} product={p} />)}</div></div></section>
+      <section id="products" className="section products-section landing-anchor"><div className="container"><SectionHeading eyebrow="Sản phẩm" title="Giỏ quà Ely Fruit" text="Giá, mã sản phẩm và thành phần được hiển thị rõ ràng để bạn dễ lựa chọn." action={<Button href="/gio-trai-cay" variant="secondary">Xem tất cả giỏ quà</Button>} /><div className="product-grid mobile-snap-rail">{featuredProducts.map(product => <ProductCard key={product.slug} product={product} />)}</div></div></section>
       <section id="process" className="section order-steps landing-anchor"><div className="container"><div className="process-heading-wrap"><SectionHeading eyebrow="Đặt quà đơn giản" title="Ba bước để gửi một món quà chỉn chu" text="Từ lúc chọn mẫu đến khi người nhận mở quà, Ely Fruit đồng hành cùng bạn." /><span className="process-mark" aria-hidden="true">Từ vườn đến tay người nhận</span></div><div className="process-timeline"><article><span className="process-step">01</span><div className="process-icon"><Gift /></div><h3>Chọn mẫu</h3><p>Xem nhanh các mẫu theo ngân sách, dịp tặng và phong cách bạn muốn.</p><a href="/gio-trai-cay">Khám phá giỏ quà <ArrowRight size={15} /></a></article><article><span className="process-step">02</span><div className="process-icon"><MessageCircle /></div><h3>Xác nhận</h3><p>Nhắn Zalo để thống nhất thành phần, thiệp, ngân sách và thời gian chuẩn bị.</p><a href={ZALO_URL} target="_blank" rel="noreferrer">Nhắn Zalo tư vấn <ArrowRight size={15} /></a></article><article><span className="process-step">03</span><div className="process-icon"><PackageCheck /></div><h3>Giao nhận</h3><p>Xác nhận địa chỉ và khung giờ trước khi hoàn thiện đơn quà chỉn chu.</p><a href={PHONE_LINK}>Gọi xác nhận đơn <ArrowRight size={15} /></a></article></div></div></section>
       <div id="about" className="landing-anchor"><LocalSection /></div>
       <FAQSection />

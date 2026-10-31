@@ -1,0 +1,74 @@
+[
+  {
+    "code": "ELY12",
+    "priceValue": 1200000,
+    "image": "/products/optimized/gio-trai-cay-ely12-thu-dau-mot.webp",
+    "imageBack": "/products/optimized/gio-trai-cay-ely12-thu-dau-mot.webp",
+    "source": "public/Giỏ thiết kế-20261031T041747Z-1-001/Giỏ thiết kế/1tr200 Ely12/1837fd3a-038d-48b3-bd0f-d910cdced942.png",
+    "sourceType": "edited"
+  },
+  {
+    "code": "KH16",
+    "priceValue": 1200000,
+    "image": "/products/optimized/gio-trai-cay-kh16-thu-dau-mot.webp",
+    "imageBack": "/products/optimized/gio-trai-cay-kh16-thu-dau-mot.webp",
+    "source": "public/Giỏ thiết kế-20261031T041747Z-1-001/Giỏ thiết kế/1tr200 KH16/ely_fruit_kh16_mat_sau.png",
+    "sourceType": "edited"
+  },
+  {
+    "code": "KH17",
+    "priceValue": 1200000,
+    "image": "/products/optimized/gio-trai-cay-kh17-thu-dau-mot.webp",
+    "imageBack": "/products/optimized/gio-trai-cay-kh17-thu-dau-mot.webp",
+    "source": "public/Giỏ thiết kế-20261031T041747Z-1-001/Giỏ thiết kế/1tr200 KH17/ChatGPT Image Oct 31, 2026, 12_29_16 PM-1.png",
+    "sourceType": "edited"
+  },
+  {
+    "code": "ELY13",
+    "priceValue": 1800000,
+    "image": "/products/optimized/gio-trai-cay-ely13-thu-dau-mot.webp",
+    "imageBack": "/products/optimized/gio-trai-cay-ely13-thu-dau-mot.webp",
+    "source": "public/Giỏ thiết kế-20261031T041747Z-1-001/Giỏ thiết kế/1tr800 Ely13/Giỏ Thiết Kế. 1tr800 Ely13_ hoa tươi , nho mẫu đơn, táo dazzel, quýt úc, kiwi vàng, táo xanh , táo tàu (theo mùa).jpg",
+    "sourceType": "named-display-fallback"
+  },
+  {
+    "code": "ELY14",
+    "priceValue": 1800000,
+    "image": "/products/optimized/gio-trai-cay-ely14-thu-dau-mot.webp",
+    "imageBack": "/products/optimized/gio-trai-cay-ely14-thu-dau-mot.webp",
+    "source": "public/Giỏ thiết kế-20261031T041747Z-1-001/Giỏ thiết kế/1tr800 Ely14/Giỏ Thiết Kế. 1tr800 Ely14_ hoa tươi , nho mẫu đơn, táo dazzel, quýt úc, kiwi vàng, táo xanh , Lê sữa, táo nam phi, lê nam phi.jpg",
+    "sourceType": "named-display-fallback"
+  },
+  {
+    "code": "ELY15",
+    "priceValue": 1800000,
+    "image": "/products/optimized/gio-trai-cay-ely15-thu-dau-mot.webp",
+    "imageBack": "/products/optimized/gio-trai-cay-ely15-thu-dau-mot.webp",
+    "source": "public/Giỏ thiết kế-20261031T041747Z-1-001/Giỏ thiết kế/1tr800 Ely15/Giỏ Thiết Kế. 1tr800 Ely15_ hoa tươi , táo dazzel, quýt úc, kiwi vàng, cherry , táo xanh , táo tàu (theo mùa.jpg",
+    "sourceType": "named-display-fallback"
+  },
+  {
+    "code": "ELY16",
+    "priceValue": 1800000,
+    "image": "/products/optimized/gio-trai-cay-ely16-thu-dau-mot.webp",
+    "imageBack": "/products/optimized/gio-trai-cay-ely16-thu-dau-mot.webp",
+    "source": "public/Giỏ thiết kế-20261031T041747Z-1-001/Giỏ thiết kế/1tr800 Ely16/7801a1c2-15c7-4aa3-aa8e-d04d013a6d99.png",
+    "sourceType": "edited"
+  },
+  {
+    "code": "ELY18",
+    "priceValue": 2000000,
+    "image": "/products/optimized/gio-trai-cay-ely18-thu-dau-mot.webp",
+    "imageBack": "/products/optimized/gio-trai-cay-ely18-thu-dau-mot.webp",
+    "source": "public/Giỏ thiết kế-20261031T041747Z-1-001/Giỏ thiết kế/2tr Ely18/5f5b36b4-0f57-4b28-a37f-d4810834f40a.png",
+    "sourceType": "edited"
+  },
+  {
+    "code": "KH18",
+    "priceValue": 2000000,
+    "image": "/products/optimized/gio-trai-cay-kh18-thu-dau-mot.webp",
+    "imageBack": "/products/optimized/gio-trai-cay-kh18-thu-dau-mot.webp",
+    "source": "public/Giỏ thiết kế-20261031T041747Z-1-001/Giỏ thiết kế/2tr KH18/b5dfde3f-043c-48ea-896b-e6a998b7a64d.png",
+    "sourceType": "edited"
+  }
+]

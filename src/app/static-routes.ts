@@ -11,7 +11,6 @@ const categoryRoutes = [
   '/gio-trai-cay/399k',
   '/gio-trai-cay/499k',
   '/gio-trai-cay/599k',
-  '/trai-cay-nhap-khau',
   '/gio-qua-doanh-nghiep',
   '/gio-qua-tet',
   '/mam-le-trap-cuoi',

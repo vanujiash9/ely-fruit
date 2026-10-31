@@ -92,6 +92,16 @@ test('canonicalizes the imported fruit alias to the retail fruit category', () =
   assert.equal(getRoute('/trai-cay-nhap-khau')?.path, '/trai-cay')
 })
 
+test('lists canonical routes for sitemap generation', () => {
+  assert.ok(staticRoutes.includes('/trai-cay'))
+  assert.ok(staticRoutes.includes('/gio-trai-cay/499k'))
+  assert.ok(staticRoutes.every(route => route !== '/trai-cay-nhap-khau'))
+
+  for (const product of products) {
+    assert.ok(staticRoutes.includes(`/san-pham/${product.slug}`))
+  }
+})
+
 test('gives retail fruit products complete catalogue details', () => {
   for (const fruit of fruitProducts) {
     assert.match(fruit.image, /^\/Giỏ thiết kế-/)
@@ -108,4 +118,35 @@ test('gives every product an explicit ingredient note', () => {
     assert.notEqual(product.ingredients, genericIngredients)
     assert.ok(product.ingredients.length >= 20)
   }
+})
+
+test('includes optimized local image metadata for the new basket designs', () => {
+  const expectedCodes = ['ELY12', 'KH16', 'KH17', 'ELY13', 'ELY14', 'ELY15', 'ELY16', 'ELY18', 'KH18']
+
+  for (const code of expectedCodes) {
+    const product = products.find(item => item.code === code)
+
+    assert.ok(product)
+    assert.match(product.image, new RegExp(`/products/optimized/gio-trai-cay-${code.toLowerCase()}-thu-dau-mot\\.webp$`))
+    assert.equal(product.imageBack, product.image)
+    assert.ok(product.priceValue >= 1200000)
+    assert.equal(getRoute(`/san-pham/${product.slug}`)?.product?.code, code)
+  }
+})
+
+test('includes the new high-price basket ranges', () => {
+  const prices = new Set(products.map(product => product.price))
+
+  assert.ok(prices.has('1.200.000đ'))
+  assert.ok(prices.has('1.800.000đ'))
+  assert.ok(prices.has('2.000.000đ'))
+})
+
+test('includes all nine new basket designs in the catalogue', () => {
+  const expectedCodes = ['ELY12', 'KH16', 'KH17', 'ELY13', 'ELY14', 'ELY15', 'ELY16', 'ELY18', 'KH18']
+
+  assert.equal(
+    products.filter(product => expectedCodes.includes(product.code)).length,
+    expectedCodes.length
+  )
 })
