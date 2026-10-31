@@ -16,7 +16,7 @@ export function getPageMetadata(path: string): { canonical: string; description:
   const canonicalPath = route?.path ?? path
   const guide = guides.find(item => `/guide/${item.slug}` === canonicalPath)
   const image = route?.product?.image ?? guide?.heroImage?.hero ?? guide?.image ?? SOCIAL_IMAGE_PATH
-  const imageAlt = route?.product?.name ?? guide?.heroImage?.alt ?? guide?.title ?? 'Hộp quà trái cây cao cấp Ely Fruit tại Thủ Dầu Một, Bình Dương'
+  const imageAlt = route?.product?.name ?? guide?.heroImage?.alt ?? guide?.title ?? 'Hộp quà trái cây cao cấp Ely Fruit tại Thủ Dầu Một, Hồ Chí Minh'
 
   return {
     canonical: `${SITE_URL}${canonicalPath === '/' ? '/' : canonicalPath}`,
@@ -44,7 +44,7 @@ export function getPageSchema(path: string): string {
       '@type': 'PostalAddress',
       streetAddress: ADDRESS,
       addressLocality: 'Thủ Dầu Một',
-      addressRegion: 'Bình Dương',
+      addressRegion: 'Hồ Chí Minh',
       addressCountry: 'VN',
     },
     openingHoursSpecification: [{

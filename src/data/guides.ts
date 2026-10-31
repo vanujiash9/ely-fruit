@@ -114,7 +114,7 @@ export const guides: Guide[] = [
       { productSlug: 'ely-06', suitableFor: 'món quà cần hình thức nổi bật hơn' },
     ],
     faqs: [
-      { question: 'Có thể xem trái cây trực tiếp trước khi chọn không?', answer: 'Bạn có thể ghé Ely Fruit tại Phú Lợi, Thủ Dầu Một để trao đổi trực tiếp về nhu cầu và các mẫu đang có.' },
+      { question: 'Có thể xem trái cây trực tiếp trước khi chọn không?', answer: 'Bạn có thể ghé Ely Fruit tại 22 Đường 30/04, Thủ Dầu Một để trao đổi trực tiếp về nhu cầu và các mẫu đang có.' },
       { question: 'Có thể dùng trái cây nhập khẩu để làm giỏ quà không?', answer: 'Có. Hãy cho Ely Fruit biết người nhận, dịp tặng và ngân sách để được tư vấn cách phối phù hợp.' },
       { question: 'Nên chuẩn bị gì khi nhờ tư vấn?', answer: 'Một vài thông tin như thời gian nhận quà, lời nhắn trên thiệp và ngân sách sẽ giúp việc chọn mẫu nhanh hơn.' },
     ],
@@ -232,7 +232,7 @@ export const guides: Guide[] = [
     faqs: [
       { question: 'Không biết người nhận thích gì thì bắt đầu từ đâu?', answer: 'Hãy xác định dịp tặng và ngân sách trước, sau đó chọn một tổng thể cân đối, dễ chia sẻ và có lời nhắn riêng.' },
       { question: 'Quà cá nhân và quà doanh nghiệp khác nhau thế nào?', answer: 'Quà cá nhân thường ưu tiên cảm xúc và sở thích; quà doanh nghiệp cần thêm sự trang trọng, nhận diện hoặc thông điệp rõ ràng.' },
-      { question: 'Có thể nhận tư vấn trực tiếp tại cửa hàng không?', answer: 'Có. Bạn có thể ghé Ely Fruit tại Phú Lợi, Thủ Dầu Một để trao đổi về nhu cầu chọn quà.' },
+      { question: 'Có thể nhận tư vấn trực tiếp tại cửa hàng không?', answer: 'Có. Bạn có thể ghé Ely Fruit tại 22 Đường 30/04, Thủ Dầu Một để trao đổi về nhu cầu chọn quà.' },
     ],
   },
   {

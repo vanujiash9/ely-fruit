@@ -73,7 +73,7 @@ const catalogues = [
   ['Catalogue Quà Sinh Nhật', '28 mẫu', images.hero],
 ]
 
-const MOBILE_ADDRESS = '22 Đ. 30/4, Phú Lợi, Thủ Dầu Một'
+const MOBILE_ADDRESS = '22 Đ. 30/04, Thủ Dầu Một, Hồ Chí Minh'
 
 const faqs = [
   ['Ely Fruit có giao giỏ quà tận nơi không?', 'Có. Ely Fruit hỗ trợ giao hàng tại Thủ Dầu Một và các khu vực lân cận. Thời gian, phí giao hàng sẽ được tư vấn theo địa chỉ nhận.'],
@@ -392,10 +392,10 @@ function LocalSection() {
           <Button href={MAP_URL}>Chỉ đường đến cửa hàng <ArrowRight size={18} /></Button>
         </div>
         <div className="map-card">
-          <div className="map-card-label"><span>Điểm hẹn tại Phú Lợi</span><small>Thủ Dầu Một · Bình Dương</small></div>
+          <div className="map-card-label"><span>Điểm hẹn Ely Fruit</span><small>Thủ Dầu Một · Hồ Chí Minh</small></div>
           <iframe
             className="real-map"
-            src="https://www.google.com/maps?q=S%E1%BB%91+22+%C4%91%C6%B0%E1%BB%9Dng+30%2F4%2C+Ph%C3%BA+L%E1%BB%A3i%2C+Th%E1%BB%A7+D%E1%BA%A7u+M%E1%BB%99t&output=embed"
+            src="https://www.google.com/maps?q=22+%C4%90%C6%B0%E1%BB%9Dng+30%2F04%2C+Th%E1%BB%A7+D%E1%BA%A7u+M%E1%BB%99t%2C+H%E1%BB%93+Ch%C3%AD+Minh&output=embed"
             title="Bản đồ cửa hàng Ely Fruit tại Thủ Dầu Một"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -854,7 +854,7 @@ export default function App({ initialPath }: AppProps) {
     meta.content = route?.description ?? 'Trang bạn tìm không tồn tại tại Ely Fruit.'
     const guide = path.startsWith('/guide/') ? guides.find(item => `/guide/${item.slug}` === path) : undefined
     const routeImage = route?.image ? new URL(route.image, SITE_URL).href : `${SITE_URL}${SOCIAL_IMAGE_PATH}`
-    const routeImageAlt = route?.product?.name ?? guide?.heroImage?.alt ?? guide?.title ?? 'Hộp quà trái cây cao cấp Ely Fruit tại Thủ Dầu Một, Bình Dương'
+    const routeImageAlt = route?.product?.name ?? guide?.heroImage?.alt ?? guide?.title ?? 'Hộp quà trái cây cao cấp Ely Fruit tại Thủ Dầu Một, Hồ Chí Minh'
     const metadata = [
       ['meta[property="og:title"]', 'property', 'og:title', route?.title ?? getPageTitle(path)],
       ['meta[property="og:description"]', 'property', 'og:description', meta.content],
@@ -890,7 +890,7 @@ export default function App({ initialPath }: AppProps) {
         '@type': 'PostalAddress',
         streetAddress: ADDRESS,
         addressLocality: 'Thủ Dầu Một',
-        addressRegion: 'Bình Dương',
+        addressRegion: 'Hồ Chí Minh',
         addressCountry: 'VN',
       },
       openingHoursSpecification: [{
