@@ -2,15 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ely-fruit.vn/</loc></url>
   <url><loc>https://ely-fruit.vn/gio-trai-cay</loc></url>
+  <url><loc>https://ely-fruit.vn/trai-cay</loc></url>
   <url><loc>https://ely-fruit.vn/gio-trai-cay/sinh-nhat</loc></url>
   <url><loc>https://ely-fruit.vn/gio-trai-cay/khai-truong</loc></url>
   <url><loc>https://ely-fruit.vn/gio-trai-cay/tham-hoi</loc></url>
   <url><loc>https://ely-fruit.vn/gio-trai-cay/399k</loc></url>
+  <url><loc>https://ely-fruit.vn/gio-trai-cay/499k</loc></url>
   <url><loc>https://ely-fruit.vn/gio-trai-cay/599k</loc></url>
   <url><loc>https://ely-fruit.vn/gio-qua-doanh-nghiep</loc></url>
   <url><loc>https://ely-fruit.vn/gio-qua-tet</loc></url>
   <url><loc>https://ely-fruit.vn/mam-le-trap-cuoi</loc></url>
-  <url><loc>https://ely-fruit.vn/trai-cay-nhap-khau</loc></url>
   <url><loc>https://ely-fruit.vn/catalogue</loc></url>
   <url><loc>https://ely-fruit.vn/gioi-thieu</loc></url>
   <url><loc>https://ely-fruit.vn/contact</loc></url>
@@ -18,11 +19,6 @@
   <url><loc>https://ely-fruit.vn/chinh-sach-giao-hang</loc></url>
   <url><loc>https://ely-fruit.vn/chinh-sach-doi-tra</loc></url>
   <url><loc>https://ely-fruit.vn/guide</loc></url>
-  <url><loc>https://ely-fruit.vn/guide/gio-trai-cay-bieu-tang-doi-tac</loc></url>
-  <url><loc>https://ely-fruit.vn/guide/gio-trai-cay-500k-nen-chon-gi</loc></url>
-  <url><loc>https://ely-fruit.vn/guide/qua-tham-benh-nen-chon-trai-cay-nao</loc></url>
-  <url><loc>https://ely-fruit.vn/guide/gio-qua-khai-truong-1-trieu</loc></url>
-  <url><loc>https://ely-fruit.vn/guide/cach-chon-gio-qua-tet-dep</loc></url>
   <url><loc>https://ely-fruit.vn/san-pham/ely-06</loc></url>
   <url><loc>https://ely-fruit.vn/san-pham/ely-07</loc></url>
   <url><loc>https://ely-fruit.vn/san-pham/ely-10</loc></url>
@@ -31,4 +27,53 @@
   <url><loc>https://ely-fruit.vn/san-pham/kh-07</loc></url>
   <url><loc>https://ely-fruit.vn/san-pham/kh-11</loc></url>
   <url><loc>https://ely-fruit.vn/san-pham/kh-13</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely-12</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh-16</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh-17</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely-13</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely-14</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely-15</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely-16</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely-18</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh-18</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely01</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely02</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely03</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely04</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely05</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely08</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/ely09</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/hq01</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/hq02</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/hq03</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/hq04</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/hq05</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/k01</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/k02</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh02</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh03</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh04</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh05</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh06</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh08</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh09</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh10</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh12</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh14</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh15</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kh53</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/kq02</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/q01</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/q02</loc></url>
+  <url><loc>https://ely-fruit.vn/san-pham/q03</loc></url>
+  <url><loc>https://ely-fruit.vn/guide/trai-cay-nhap-khau-tuoi-ngon-moi-ngay-thu-dau-mot</loc></url>
+  <url><loc>https://ely-fruit.vn/guide/mam-le-trap-cuoi-hoi-chuan-bi-chi-chu</loc></url>
+  <url><loc>https://ely-fruit.vn/guide/mot-chiec-noi-nho-gui-tron-loi-chuc-lon</loc></url>
+  <url><loc>https://ely-fruit.vn/guide/gio-dua-xinh-mon-qua-nho-tao-niem-vui-lon</loc></url>
+  <url><loc>https://ely-fruit.vn/guide/hom-nay-tang-gi-cho-that-dac-biet</loc></url>
+  <url><loc>https://ely-fruit.vn/guide/gio-trai-cay-bieu-tang-doi-tac</loc></url>
+  <url><loc>https://ely-fruit.vn/guide/gio-trai-cay-500k-nen-chon-gi</loc></url>
+  <url><loc>https://ely-fruit.vn/guide/qua-tham-benh-nen-chon-trai-cay-nao</loc></url>
+  <url><loc>https://ely-fruit.vn/guide/gio-qua-khai-truong-1-trieu</loc></url>
+  <url><loc>https://ely-fruit.vn/guide/cach-chon-gio-qua-tet-dep</loc></url>
 </urlset>

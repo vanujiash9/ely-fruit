@@ -1,0 +1,112 @@
+﻿DANH SÁCH THÀNH PHẦN TỪ TÊN FILE
+Chỉ đọc tên file, không OCR hoặc đọc nội dung ảnh.
+
+ELY01: Quýt úc, Táo Dazzle, Táo xanh, Táo Nam Phi và Hoa tươi.
+Nguồn: images/Ely01/699k Ely01_ Quýt úc, táo dazzel, táo xanh, táo nam phi, hoa tươi.jpg | images/Ely01/699k Ely01_ Quýt úc, táo dazzel, táo xanh, táo nam phi, hoa tươi_edited.png
+
+ELY02: Lê nâu, Cam Nam Phi, Táo dazzle, Quýt úc, Nho mẫu đơn, Táo Nam Phi và Hoa tươi.
+Nguồn: images/Ely02/699k Ely02_ lê nâu, cam nam phi, táo dazzle, quýt úc, nho mẫu đơn, táo nam phi, hoa tươi.jpg | images/Ely02/699k Ely02_ lê nâu, cam nam phi, táo dazzle, quýt úc, nho mẫu đơn, táo nam phi, hoa tươi_edited.png
+
+ELY03: Hoa tươi, Lê sữa, Kiwi vàng, Táo envy, Táo xanh và Quýt úc.
+Nguồn: images/Ely03/699k Ely03_ hoa tươi, lê sữa, kiwi vàng, táo envy, táo xanh, quýt úc.jpg | images/Ely03/699k Ely03_ hoa tươi, lê sữa, kiwi vàng, táo envy, táo xanh, quýt úc_edited.jpg
+
+ELY04: Hoa tươi, Quýt úc, Táo xanh và Táo Nam Phi.
+Nguồn: images/Ely04/699k Ely04_ Hoa tươi, quýt úc, táo xanh, táo nam phi.jpg | images/Ely04/699k Ely04_ Hoa tươi, quýt úc, táo xanh, táo nam phi_edited.png
+
+ELY05: Hoa tươi, Nho mẫu đơn, Táo xanh, Quýt úc và Táo Dazzle.
+Nguồn: images/Ely05/800k Ely05  Hoa tươi, nho mẫu đơn, táo xanh, quýt úc, táo dazzel.jpg | images/Ely05/800k Ely05  Hoa tươi, nho mẫu đơn, táo xanh, quýt úc, táo dazzel_edited.png
+
+ELY06: Hoa tươi, Cam Nam Phi, Lê nâu, Táo xanh, Táo Dazzle, Táo envy, Quýt úc và Táo Nam Phi.
+Nguồn: images/Ely06/800k Ely06(MS)_ Hoa tươi, cam nam phi, lê nâu, táo xanh, táo dazzel, táo envy, quýt úc, táo nam phi.jpg | images/Ely06/800k Ely06(MS)_ Hoa tươi, cam nam phi, lê nâu, táo xanh, táo dazzel, táo envy, quýt úc, táo nam phi_edited.png | images/Ely06/800k Ely06(MT)_ Hoa tươi, cam nam phi, lê nâu, táo xanh, táo dazzel, táo envy, quýt úc, táo nam phi.jpg | images/Ely06/800k Ely06(MT)_ Hoa tươi, cam nam phi, lê nâu, táo xanh, táo dazzel, táo envy, quýt úc, táo nam phi_edited.png
+
+ELY07: Hoa tươi, Cam Nam Phi, Lê nâu, Táo xanh, Táo Dazzle, Kiwi vàng, Quýt úc và Táo Nam Phi.
+Nguồn: images/Ely07/800k Ely07(MS)_ Hoa tươi, cam nam phi, lê nâu, táo xanh, táo dazzel, kiwi vàng, quýt úc, táo nam phi.jpg | images/Ely07/800k Ely07(MS)_ Hoa tươi, cam nam phi, lê nâu, táo xanh, táo dazzel, kiwi vàng, quýt úc, táo nam phi_edited.png | images/Ely07/800k Ely07(MT)_ Hoa tươi, cam nam phi, lê nâu, táo xanh, táo dazzel, kiwi vàng, quýt úc, táo nam phi.jpg | images/Ely07/800k Ely07(MT)_ Hoa tươi, cam nam phi, lê nâu, táo xanh, táo dazzel, kiwi vàng, quýt úc, táo nam phi_edited.png
+
+ELY08: Hoa tươi 2 bên, Nho mẫu đơn, Cam Nam Phi, Lê nâu, Táo Dazzle, Táo envy, Quýt úc và Táo Nam Phi.
+Nguồn: images/Ely08/1tr (trái cây 1 mặt) Ely08_ Hoa tươi 2 bên, nho mẫu đơn, cam nam phi, lê nâu, táo dazzel, táo envy, quýt úc, táo nam phi.jpg | images/Ely08/1tr (trái cây 1 mặt) Ely08_ Hoa tươi 2 bên, nho mẫu đơn, cam nam phi, lê nâu, táo dazzel, táo envy, quýt úc, táo nam phi_edited.png
+
+ELY09: Hoa tươi 2 bên, Cam Nam Phi, Quýt úc táo Dazzle, Quýt úc, Táo xanh, Lê nâu và Táo Nam Phi.
+Nguồn: images/Ely09/1tr (trái cây 1 mặt) Ely09_ hoa tươi 2 bên, cam nam phi, quýt úc táo dazzel, quýt úc, táo xanh, lê nâu, táo nam phi.jpg | images/Ely09/1tr (trái cây 1 mặt) Ely09_ hoa tươi 2 bên, cam nam phi, quýt úc táo dazzel, quýt úc, táo xanh, lê nâu, táo nam phi_edited.png
+
+ELY10: Hoa tươi 1 bên, Cam Nam Phi, Lê sữa, Táp xanh, Táo dazzle, Quýt úc, Kiwi vàng, Nho mẫu đơn, Lê đường hà giang và Táo Nam Phi.
+Nguồn: images/Ely10/1tr Ely10 (MS)_  Hoa tươi 1 bên, cam nam phi, lê sữa, táp xanh, táo dazzle, quýt úc, kiwi vàng, nho mẫu đơn, lê đường hà giang, táo nam phi,.jpg | images/Ely10/1tr Ely10 (MS)_  Hoa tươi 1 bên, cam nam phi, lê sữa, táp xanh, táo dazzle, quýt úc, kiwi vàng, nho mẫu đơn, lê đường hà giang, táo nam phi,_edited.png | images/Ely10/1tr Ely10 (MT)_  Hoa tươi 1 bên, cam nam phi, lê sữa, táp xanh, táo dazzle, quýt úc, kiwi vàng, nho mẫu đơn, lê đường hà giang, táo nam phi,.jpg | images/Ely10/1tr Ely10 (MT)_  Hoa tươi 1 bên, cam nam phi, lê sữa, táp xanh, táo dazzle, quýt úc, kiwi vàng, nho mẫu đơn, lê đường hà giang, táo nam phi,_edited.png
+
+ELY11: Hoa tươi 1 bên, Cam Nam Phi, Lê sữa, Táp xanh, Táo dazzle, Quýt úc, Kiwi vàng, Nho mẫu đơn, Lê đường hà giang và Táo Nam Phi.
+Nguồn: images/Ely11/1tr Ely11(MS)_  Hoa tươi 1 bên, cam nam phi, lê sữa, táp xanh, táo dazzle, quýt úc, kiwi vàng, nho mẫu đơn, lê đường hà giang, táo nam phi,.jpg | images/Ely11/1tr Ely11(MS)_  Hoa tươi 1 bên, cam nam phi, lê sữa, táp xanh, táo dazzle, quýt úc, kiwi vàng, nho mẫu đơn, lê đường hà giang, táo nam phi,_edited.png | images/Ely11/1tr Ely11(MT)_  Hoa tươi 1 bên, cam nam phi, lê sữa, táp xanh, táo dazzle, quýt úc, kiwi vàng, nho mẫu đơn, lê đường hà giang, táo nam phi,.jpg | images/Ely11/1tr Ely11(MT)_  Hoa tươi 1 bên, cam nam phi, lê sữa, táp xanh, táo dazzle, quýt úc, kiwi vàng, nho mẫu đơn, lê đường hà giang, táo nam phi,_edited.png
+
+HQ01: Táo Dazzle, Nho mẫu đơn và Nho đỏ.
+Nguồn: images/HQ01/399k HQ01_ Táo dazzel, nho mẫu đơn, nho đỏ_.jpg | images/HQ01/399k HQ01_ Táo dazzel, nho mẫu đơn, nho đỏ__edited.png
+
+HQ02: Nho mẫu đơn, Táo Dazzle, Táo envy, Lê nâu, Kiwi vàng, Quýt úc và Cam Nam Phi.
+Nguồn: images/HQ02/399k HQ02_ Nho mẫu đơn, táo dazzel, táo envy, lê nâu, kiwi vàng, quýt úc, Cam nam phi.jpg | images/HQ02/399k HQ02_ Nho mẫu đơn, táo dazzel, táo envy, lê nâu, kiwi vàng, quýt úc, Cam nam phi_edited.png
+
+HQ03: Táo Dazzle, Kiwi vàng, Nho mẫu đơn và Quýt úc.
+Nguồn: images/HQ03/399k HQ03_ Táo dazzel, kiwi vàng, nho mẫu đơn, quýt úc.jpg | images/HQ03/399k HQ03_ Táo dazzel, kiwi vàng, nho mẫu đơn, quýt úc_edited.png
+
+HQ04: Táo envy, Lê nâu, Kiwi vàng, Nho mẫu đơn, Cherry và Quýt úc.
+Nguồn: images/HQ04/399k HQ04_ Táo envy, lê nâu, kiwi vàng, nho mẫu đơn , cherry,quýt úc.jpg | images/HQ04/399k HQ04_ Táo envy, lê nâu, kiwi vàng, nho mẫu đơn , cherry,quýt úc_edited.png
+
+HQ05: Quýt úc, Nho mẫu đơn, Nho đỏ và Táo Dazzle.
+Nguồn: images/HQ05/399k HQ05 _ Quýt úc, nho mẫu đơn, nho đỏ, táo dazzel.jpg | images/HQ05/399k HQ05 _ Quýt úc, nho mẫu đơn, nho đỏ, táo dazzel_edited.png
+
+K01: Quýt úc, Kiwi vàng, Táo envy, Cam úc, Lê nâu, Táo Dazzle, Nho mẫu đơn và Táo Nam Phi.
+Nguồn: images/K01/499 K01_ Quýt úc , kiwi vàng, táo envy, cam úc, lê nâu, táo dazzel,nho mẫu đơn, táo nam phi.jpg | images/K01/499 K01_ Quýt úc , kiwi vàng, táo envy, cam úc, lê nâu, táo dazzel,nho mẫu đơn, táo nam phi_edited.png
+
+K02: Quýt úc, Kiwi vàng, Táo envy, Cam úc, Lê nâu, Táo Dazzle, Nho mẫu đơn và Táo Nam Phi.
+Nguồn: images/K02/499k K02_ Quýt úc , kiwi vàng, táo envy, cam úc, lê nâu, táo dazzel,nho mẫu đơn, táo nam phi.jpg | images/K02/499k K02_ Quýt úc , kiwi vàng, táo envy, cam úc, lê nâu, táo dazzel,nho mẫu đơn, táo nam phi_edited.png
+
+KH01: Cam Nam Phi, Lê nâu, Táo xanh, Táo Dazzle, Quýt úc, Kiwwi vàng và Táo Nam Phi.
+Nguồn: images/KH01/499k KH01 (MS)_ Cam nam phi, Lê nâu,Táo xanh,Táo dazzel,Quýt úc,Kiwwi vàng,Táo nam phi.jpg | images/KH01/499k KH01 (MS)_ Cam nam phi, Lê nâu,Táo xanh,Táo dazzel,Quýt úc,Kiwwi vàng,Táo nam phi_edited.png | images/KH01/499k KH01 (MT)_ Cam nam phi, Lê nâu,Táo xanh,Táo dazzel,Quýt úc,Kiwwi vàng,Táo nam phi.jpg | images/KH01/499k KH01 (MT)_ Cam nam phi, Lê nâu,Táo xanh,Táo dazzel,Quýt úc,Kiwwi vàng,Táo nam phi_edited.png
+
+KH02: Cam Nam Phi, Lê nâu, Táo xanh, Táo Dazzle, Quýt úc, Lê đường hà giang và Táo Nam Phi.
+Nguồn: images/KH02/499k KH02 (MT)_ Cam nam phi,Lê nâu,Táo xanh,Táo dazzel,Quýt úc,Lê đường hà giang,Táo nam phi.jpg | images/KH02/499k KH02 (MT)_ Cam nam phi,Lê nâu,Táo xanh,Táo dazzel,Quýt úc,Lê đường hà giang,Táo nam phi_edited.png
+
+KH04: Cam Nam Phi, Lê nâu, Táo Dazzle, Quýt úc, Lê đường hà giang và Táo Nam Phi.
+Nguồn: images/KH04/499k KH04 (MT)_ Cam nam phi,Lê nâu,Táo dazzel,Quýt úc,Lê đường hà giang,Táo nam phi.jpg | images/KH04/499k KH04 (MT)_ Cam nam phi,Lê nâu,Táo dazzel,Quýt úc,Lê đường hà giang,Táo nam phi_edited.png | images/KH04/499k KH04(MS)_ Cam nam phi,Lê nâu,Táo dazzel,Quýt úc,Lê đường hà giang,Táo nam phi.jpg | images/KH04/499k KH04(MS)_ Cam nam phi,Lê nâu,Táo dazzel,Quýt úc,Lê đường hà giang,Táo nam phi_edited.png
+
+KH07: Cam Nam Phi, Lê sữa, Táo Dazzle, Quýt úc, Táo Nam Phi và Táo xanh.
+Nguồn: images/KH07/599k KH07(MT)_ Cam nam phi,Lê sữa, Táo dazzel,Quýt úc,Táo nam phi, táo xanh.jpg | images/KH07/599k KH07(MT)_ Cam nam phi,Lê sữa, Táo dazzel,Quýt úc,Táo nam phi, táo xanh_edited.png | images/KH07/599k KH07(Ms)_ Cam nam phi,Lê sữa, Táo dazzel,Quýt úc,Táo nam phi, táo xanh.jpg | images/KH07/599k KH07(Ms)_ Cam nam phi,Lê sữa, Táo dazzel,Quýt úc,Táo nam phi, táo xanh_edited.png
+
+KH08: Cam Nam Phi, Lê nâu, Táo Dazzle, Quýt úc, Táo Nam Phi, Táo xanh, Lê Nam Phi và Nho mẫu đơn.
+Nguồn: images/KH08/599k KH08(MS)_ Cam nam phi,Lê nâu, Táo dazzel,Quýt úc,Táo nam phi, táo xanh, lê nam phi, nho mẫu đơn,.jpg | images/KH08/599k KH08(MS)_ Cam nam phi,Lê nâu, Táo dazzel,Quýt úc,Táo nam phi, táo xanh, lê nam phi, nho mẫu đơn,_edited.png | images/KH08/599k KH08(MT)_ Cam nam phi,Lê nâu, Táo dazzel,Quýt úc,Táo nam phi, táo xanh, lê nam phi, nho mẫu đơn,.jpg | images/KH08/599k KH08(MT)_ Cam nam phi,Lê nâu, Táo dazzel,Quýt úc,Táo nam phi, táo xanh, lê nam phi, nho mẫu đơn,_edited.png
+
+KH09: Lê sữa, Lê Nam Phi, Táo xanh, Quýt úc, Táo dazzle, Táo golden, Kiwi vàng và Táo Nam Phi.
+Nguồn: images/KH09/599k KH09(MS)_ lê sữa, lê nam phi, táo xanh, quýt úc, táo dazzle, táo golden, kiwi vàng, táo nam phi.jpg | images/KH09/599k KH09(MS)_ lê sữa, lê nam phi, táo xanh, quýt úc, táo dazzle, táo golden, kiwi vàng, táo nam phi_edited.png | images/KH09/599k KH09(MT)_ lê sữa, lê nam phi, táo xanh, quýt úc, táo dazzle, táo golden, kiwi vàng, táo nam phi.jpg | images/KH09/599k KH09(MT)_ lê sữa, lê nam phi, táo xanh, quýt úc, táo dazzle, táo golden, kiwi vàng, táo nam phi_edited.png
+
+KH10: Lê sữa, Cam Nam Phi, Táo dazzle, Táo Nam Phi, Quýt úc, Táo xanh và Nho đỏ.
+Nguồn: images/KH10/599k KH10(MS)_ lê sữa, cam nam phi, táo dazzle, táo nam phi, quýt úc, táo xanh, nho đỏ.jpg | images/KH10/599k KH10(MS)_ lê sữa, cam nam phi, táo dazzle, táo nam phi, quýt úc, táo xanh, nho đỏ_edited.png
+
+KH11: Nho đen, Lê sữa, Cam Nam Phi, Táo xanh, Táo dazzle, Quýt úc, Kiwi vàng và Táo Nam Phi.
+Nguồn: images/KH11/699k KH11(MS)_ Nho đen, lê sữa, cam nam phi, táo xanh, táo dazzle, quýt úc, kiwi vàng, táo nam phi.jpg | images/KH11/699k KH11(MS)_ Nho đen, lê sữa, cam nam phi, táo xanh, táo dazzle, quýt úc, kiwi vàng, táo nam phi_edited.png | images/KH11/699k KH11(MT)_ Nho đen, lê sữa, cam nam phi, táo xanh, táo dazzle, quýt úc, kiwi vàng, táo nam phi.jpg | images/KH11/699k KH11(MT)_ Nho đen, lê sữa, cam nam phi, táo xanh, táo dazzle, quýt úc, kiwi vàng, táo nam phi_edited.png
+
+KH12: Nho đỏ, Lê đường hà giang, Lê nâu, Cam Nam Phi, Táo xanh, Táo dazzle và Táo Nam Phi.
+Nguồn: images/KH12/699k KH12(MS)_ nho đỏ, lê đường hà giang, lê nâu, cam nam phi, táo xanh, táo dazzle, táo nam phi.jpg | images/KH12/699k KH12(MS)_ nho đỏ, lê đường hà giang, lê nâu, cam nam phi, táo xanh, táo dazzle, táo nam phi_edited.png | images/KH12/699k KH12(MT)_ nho đỏ, lê đường hà giang, lê nâu, cam nam phi, táo xanh, táo dazzle, táo nam phi.jpg | images/KH12/699k KH12(MT)_ nho đỏ, lê đường hà giang, lê nâu, cam nam phi, táo xanh, táo dazzle, táo nam phi_edited.png
+
+KH13: Dưa đài queen, Lê nâu, Cam Nam Phi, Táo dazzle, Quýt úc, Nho mẫu đơn và Táo Nam Phi.
+Nguồn: images/KH13/800k  KH13(MS)_ Dưa đài queen, lê nâu, cam nam phi, táo dazzle, quýt úc, nho mẫu đơn, táo nam phi.jpg | images/KH13/800k  KH13(MS)_ Dưa đài queen, lê nâu, cam nam phi, táo dazzle, quýt úc, nho mẫu đơn, táo nam phi_edited.png | images/KH13/800k  KH13(MT)_ Dưa đài queen, lê nâu, cam nam phi, táo dazzle, quýt úc, nho mẫu đơn, táo nam phi.jpg | images/KH13/800k  KH13(MT)_ Dưa đài queen, lê nâu, cam nam phi, táo dazzle, quýt úc, nho mẫu đơn, táo nam phi_edited.png
+
+KH14: Dưa đài queen, Cam úc, Lê nâu, Táo envy, Táo Dazzle, Quýt úc nho mẫu đơn và Táo Nam Phi.
+Nguồn: images/KH14/800k KH14(MS)_ dưa đài queen, cam úc, lê nâu, táo envy, táo dazzel, quýt úc nho mẫu đơn, táo nam phi.jpg | images/KH14/800k KH14(MS)_ dưa đài queen, cam úc, lê nâu, táo envy, táo dazzel, quýt úc nho mẫu đơn, táo nam phi_edited.png | images/KH14/800k KH14(MT)_ dưa đài queen, cam úc, lê nâu, táo envy, táo dazzel, quýt úc nho mẫu đơn, táo nam phi.jpg | images/KH14/800k KH14(MT)_ dưa đài queen, cam úc, lê nâu, táo envy, táo dazzel, quýt úc nho mẫu đơn, táo nam phi_edited.png
+
+KH15: (MT) dưa đài queen, Cherry, Lê nâu, Táo xanh, Táo Dazzle, Quýt úc nho mẫu đơn và Táo Nam Phi.
+Nguồn: images/KH15/800k KH15(MT) dưa đài queen, cherry, lê nâu, táo xanh, táo dazzel, quýt úc nho mẫu đơn, táo nam phi.jpg | images/KH15/800k KH15(MT) dưa đài queen, cherry, lê nâu, táo xanh, táo dazzel, quýt úc nho mẫu đơn, táo nam phi_edited.png
+
+KH16: Dưa đài queen, Nho mẫu đơn, Kiwi vàng, Táo Dazzle, Quýt úc, Táo envy và Táo Nam Phi.
+Nguồn: images/KH16/1tr KH16(MS)_ dưa đài queen, nho mẫu đơn, kiwi vàng, táo dazzel, quýt úc , táo envy, táo nam phi.jpg | images/KH16/1tr KH16(MS)_ dưa đài queen, nho mẫu đơn, kiwi vàng, táo dazzel, quýt úc , táo envy, táo nam phi_edited.png | images/KH16/1tr KH16(MT)_ dưa đài queen, nho mẫu đơn, kiwi vàng, táo dazzel, quýt úc , táo envy, táo nam phi.jpg | images/KH16/1tr KH16(MT)_ dưa đài queen, nho mẫu đơn, kiwi vàng, táo dazzel, quýt úc , táo envy, táo nam phi_edited.png
+
+KH53: Dưa lưới dài aladin, Lê nâu, Dưa lê hàn, Táo dazzle, Cam Nam Phi, Quýt úc, Kiwi vàng và Táo Nam Phi.
+Nguồn: images/KH53/699k KH53(MS)_ Dưa lưới dài aladin , lê nâu, dưa lê hàn, táo dazzle, cam nam phi, quýt úc, kiwi vàng, táo nam phi.jpg | images/KH53/699k KH53(MS)_ Dưa lưới dài aladin , lê nâu, dưa lê hàn, táo dazzle, cam nam phi, quýt úc, kiwi vàng, táo nam phi_edited.png | images/KH53/699k KH53(MT)_ Dưa lưới dài aladin , lê nâu, dưa lê hàn, táo dazzle, cam nam phi, quýt úc, kiwi vàng, táo nam phi.jpg | images/KH53/699k KH53(MT)_ Dưa lưới dài aladin , lê nâu, dưa lê hàn, táo dazzle, cam nam phi, quýt úc, kiwi vàng, táo nam phi_edited.png
+
+Q01: Táo envy, Táo Dazzle và Táo cherry.
+Nguồn: images/Q01/399k Q01_ Táo envy, táo dazzel, táo cherry.jpg | images/Q01/399k Q01_ Táo envy, táo dazzel, táo cherry_edited.png
+
+Q02: Táo xanh, Táo envy, Kiwwi vàng và Nho mẫu đơn.
+Nguồn: images/Q02/399k Q02_ Táo xanh, táo envy, kiwwi vàng, nho mẫu đơn.jpg | images/Q02/399k Q02_ Táo xanh, táo envy, kiwwi vàng, nho mẫu đơn_edited.png
+
+Q03: Kiwi vàng và Táo cherry.
+Nguồn: images/Q03/399k Q03_ Kiwi vàng, táo cherry.jpg | images/Q03/399k Q03_ Kiwi vàng, táo cherry_edited.png
+
+CẦN RÀ SOÁT
+
+Nhiều thành phần khác nhau cho KH10: images/KH10/599k KH10(MT)_ lê sữa, cam nam phi, táo dazzle, táo nam phi, táo dazzle, quýt úc, táo xanh, nho đỏ.jpg
+Nhiều thành phần khác nhau cho KH10: images/KH10/599k KH10(MT)_ lê sữa, cam nam phi, táo dazzle, táo nam phi, táo dazzle, quýt úc, táo xanh, nho đỏ_edited.png

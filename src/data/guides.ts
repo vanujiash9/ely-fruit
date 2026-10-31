@@ -21,12 +21,19 @@ export interface GuideImage {
   width: number
 }
 
+export interface GuideTable {
+  caption: string
+  columns: [string, string]
+  rows: Array<[string, string]>
+}
+
 export interface GuideSection {
   heading: string
   id: string
   paragraphs: string[]
   points?: string[]
   image?: GuideImage
+  table?: GuideTable
 }
 
 export interface GuideFaq {
@@ -92,8 +99,9 @@ export const guides: Guide[] = [
     updatedAt,
     heroImage: guideImage('trai-cay-nhap-khau-tuoi-ngon-moi-ngay', '01', 'Trái cây nhập khẩu được bày tại Ely Fruit ở Thủ Dầu Một', 'Những mẫu trái cây và giỏ quà được chuẩn bị tại Ely Fruit.'),
     sections: [
-      { id: 'chon-trai-cay', heading: 'Bắt đầu từ nhu cầu dùng hay dịp tặng', paragraphs: ['Nếu mua để dùng trong ngày, hãy chọn lượng vừa đủ và ưu tiên loại quả phù hợp khẩu vị gia đình. Khi chọn làm quà, hình thức tổng thể, sự hài hòa về màu sắc và thông tin thành phần lại quan trọng hơn.', 'Tại Thủ Dầu Một, bạn có thể ghé Ely Fruit để xem trực tiếp các mẫu trái cây nhập khẩu và trao đổi về kiểu quà phù hợp.'], image: guideImage('trai-cay-nhap-khau-tuoi-ngon-moi-ngay', '02', 'Giỏ trái cây với nhiều loại quả tươi tại Ely Fruit', 'Một giỏ quà có thể được cân chỉnh theo người nhận và ngân sách.') },
-      { id: 'luu-y-chon-mua', heading: 'Ba điểm nên hỏi trước khi chốt đơn', paragraphs: ['Một vài câu hỏi ngắn giúp việc chọn quà rõ ràng hơn và tránh những chi tiết không cần thiết.'], points: ['Người nhận dùng quà trong gia đình hay trong một dịp gặp gỡ?', 'Bạn cần một hộp quà gọn gàng hay một giỏ quà có điểm nhấn?', 'Thời gian nhận quà và lời nhắn trên thiệp đã được xác nhận chưa?'] },
+      { id: 'chon-trai-cay', heading: 'Bắt đầu từ nhu cầu dùng hay dịp tặng', paragraphs: ['Nếu mua để dùng trong ngày, hãy chọn lượng vừa đủ và ưu tiên loại quả phù hợp khẩu vị gia đình. Khi chọn làm quà, hình thức tổng thể, sự hài hòa về màu sắc và thông tin thành phần lại quan trọng hơn.', 'Bạn không cần thuộc tên từng loại trái cây để chọn tốt. Chỉ cần nói rõ món quà dùng cho ai, khi nào cần nhận và khoảng ngân sách dự kiến; các chi tiết còn lại sẽ dễ trao đổi hơn khi đã có một điểm bắt đầu rõ ràng.'], table: { caption: 'Một cách bắt đầu gọn gàng trước khi chọn trái cây hoặc giỏ quà.', columns: ['Nhu cầu', 'Nên ưu tiên trao đổi'], rows: [['Dùng trong ngày', 'Số lượng vừa đủ, khẩu vị gia đình và cách bảo quản phù hợp.'], ['Thăm hỏi, gặp gỡ', 'Loại quả dễ dùng, hình thức nhẹ nhàng và thời gian nhận quà.'], ['Biếu tặng', 'Người nhận, ngân sách, lời nhắn thiệp và tổng thể cách trình bày.']] }, image: guideImage('trai-cay-nhap-khau-tuoi-ngon-moi-ngay', '02', 'Giỏ trái cây với nhiều loại quả tươi tại Ely Fruit', 'Một giỏ quà có thể được cân chỉnh theo người nhận, thời gian giao và ngân sách.') },
+      { id: 'luu-y-chon-mua', heading: 'Quan sát độ tươi và thông tin trước khi chọn', paragraphs: ['Khi xem trái cây, hãy quan sát bề mặt, cuống và độ đồng đều của từng loại quả. Đây là các dấu hiệu trực quan giúp bạn trao đổi cụ thể hơn về mẫu đang có trong ngày, thay vì chỉ chọn theo ảnh.', 'Với quà tặng, nên xác nhận lại thành phần, khung giờ giao và nội dung thiệp trước khi hoàn thiện. Một bước nhỏ này giúp món quà đến đúng lúc và đúng tinh thần bạn muốn gửi trao.'], points: ['Hỏi mẫu thực tế hoặc thành phần dự kiến nếu cần làm giỏ quà.', 'Xác nhận người nhận, địa chỉ và khung giờ giao trước khi chốt.', 'Giữ lời nhắn trên thiệp ngắn gọn, đúng tên người nhận và người gửi.'] },
+      { id: 'xac-nhan-don', heading: 'Ba điểm nên hỏi trước khi chốt đơn', paragraphs: ['Một vài câu hỏi ngắn giúp việc chọn quà rõ ràng hơn và tránh những chi tiết không cần thiết.'], points: ['Người nhận dùng quà trong gia đình hay trong một dịp gặp gỡ?', 'Bạn cần một hộp quà gọn gàng hay một giỏ quà có điểm nhấn?', 'Thời gian nhận quà và lời nhắn trên thiệp đã được xác nhận chưa?'] },
     ],
     relatedLinks: [
       { label: 'Xem trái cây nhập khẩu', href: '/trai-cay-nhap-khau', description: 'Khám phá các nhóm trái cây và lựa chọn phù hợp nhu cầu.' },
@@ -106,7 +114,7 @@ export const guides: Guide[] = [
       { productSlug: 'ely-06', suitableFor: 'món quà cần hình thức nổi bật hơn' },
     ],
     faqs: [
-      { question: 'Có thể xem trái cây trực tiếp trước khi chọn không?', answer: 'Bạn có thể ghé Ely Fruit tại Phú Lợi, Thủ Dầu Một để trao đổi trực tiếp về nhu cầu và các mẫu đang có.' },
+      { question: 'Có thể xem trái cây trực tiếp trước khi chọn không?', answer: 'Bạn có thể ghé Ely Fruit tại 22 Đường 30/04, Thủ Dầu Một để trao đổi trực tiếp về nhu cầu và các mẫu đang có.' },
       { question: 'Có thể dùng trái cây nhập khẩu để làm giỏ quà không?', answer: 'Có. Hãy cho Ely Fruit biết người nhận, dịp tặng và ngân sách để được tư vấn cách phối phù hợp.' },
       { question: 'Nên chuẩn bị gì khi nhờ tư vấn?', answer: 'Một vài thông tin như thời gian nhận quà, lời nhắn trên thiệp và ngân sách sẽ giúp việc chọn mẫu nhanh hơn.' },
     ],
@@ -224,7 +232,7 @@ export const guides: Guide[] = [
     faqs: [
       { question: 'Không biết người nhận thích gì thì bắt đầu từ đâu?', answer: 'Hãy xác định dịp tặng và ngân sách trước, sau đó chọn một tổng thể cân đối, dễ chia sẻ và có lời nhắn riêng.' },
       { question: 'Quà cá nhân và quà doanh nghiệp khác nhau thế nào?', answer: 'Quà cá nhân thường ưu tiên cảm xúc và sở thích; quà doanh nghiệp cần thêm sự trang trọng, nhận diện hoặc thông điệp rõ ràng.' },
-      { question: 'Có thể nhận tư vấn trực tiếp tại cửa hàng không?', answer: 'Có. Bạn có thể ghé Ely Fruit tại Phú Lợi, Thủ Dầu Một để trao đổi về nhu cầu chọn quà.' },
+      { question: 'Có thể nhận tư vấn trực tiếp tại cửa hàng không?', answer: 'Có. Bạn có thể ghé Ely Fruit tại 22 Đường 30/04, Thủ Dầu Một để trao đổi về nhu cầu chọn quà.' },
     ],
   },
   {

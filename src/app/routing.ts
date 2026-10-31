@@ -13,6 +13,7 @@ export interface RouteDefinition {
 export const ROUTES: RouteDefinition[] = [
   { path: '/', title: 'Ely Fruit | Giỏ quà cao cấp tại Thủ Dầu Một', description: 'Ely Fruit cung cấp giỏ quà, giỏ trái cây nhập khẩu, mâm lễ và tráp cưới hỏi tại Thủ Dầu Một.' },
   { path: '/gio-trai-cay', title: 'Giỏ trái cây cao cấp Thủ Dầu Một | Ely Fruit', description: 'Danh mục giỏ trái cây Ely Fruit với giá, mã hàng và thành phần rõ ràng, có thể lọc theo ngân sách và dịp tặng.' },
+  { path: '/trai-cay', title: 'Trái cây nhập khẩu tươi mỗi ngày | Ely Fruit', description: 'Trái cây nhập khẩu tuyển chọn tại Ely Fruit, Thủ Dầu Một. Cập nhật theo mùa và tư vấn theo nhu cầu.' },
   { path: '/catalogue', title: 'Catalogue giỏ quà, mâm lễ | Ely Fruit', description: 'Catalogue giỏ quà, quà doanh nghiệp, mâm lễ, tráp cưới hỏi và trái cây nhập khẩu.' },
   { path: '/about', title: 'Về Ely Fruit | Trái cây và quà tặng Thủ Dầu Một', description: 'Tìm hiểu Ely Fruit, cửa hàng trái cây và quà tặng cao cấp tại Thủ Dầu Một.' },
   { path: '/contact', title: 'Liên hệ Ely Fruit | Địa chỉ, điện thoại, Google Maps', description: 'Ghé cửa hàng, gọi điện hoặc nhắn tin để được tư vấn giỏ quà phù hợp.' },
@@ -38,6 +39,7 @@ const CATEGORY_ROUTES: RouteDefinition[] = [
 
 export function getRoute(path: string): RouteDefinition | undefined {
   if (path === '/gifts') return ROUTES.find(route => route.path === '/gio-trai-cay')
+  if (path === '/trai-cay-nhap-khau') return ROUTES.find(route => route.path === '/trai-cay')
 
   const route = [...ROUTES, ...CATEGORY_ROUTES].find(route => route.path === path)
   if (route) return route
