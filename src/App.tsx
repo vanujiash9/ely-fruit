@@ -2,7 +2,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 're
 import { ProductCard } from './components/ProductCard'
 import { PageHero } from './components/PageHero'
 import { fruitProducts, products, sortProductsByPrice, type FruitProduct, type Product } from './data/catalog'
-import { ADDRESS, FACEBOOK_URL, MAP_URL, PHONE, PHONE_LINK, SITE_URL, TIKTOK_URL, TRUST_METRICS, ZALO_URL } from './data/site'
+import { ADDRESS, EMAIL, FACEBOOK_URL, MAP_URL, OPENING_HOURS, PHONE, PHONE_LINK, PRICE_RANGE, SITE_URL, SOCIAL_IMAGE_PATH, TIKTOK_URL, TRUST_METRICS, ZALO_URL } from './data/site'
 import { getPageTitle, getRoute } from './app/routing'
 import { guides, guideSources, type Guide, type GuideImage } from './data/guides'
 import {
@@ -767,13 +767,17 @@ export default function App({ initialPath }: AppProps) {
       document.head.appendChild(meta)
     }
     meta.content = route?.description ?? 'Trang bạn tìm không tồn tại tại Ely Fruit.'
-    const routeImage = route?.image ? new URL(route.image, SITE_URL).href : `${SITE_URL}/products/hero-fruit-basket.png`
+    const guide = path.startsWith('/guide/') ? guides.find(item => `/guide/${item.slug}` === path) : undefined
+    const routeImage = route?.image ? new URL(route.image, SITE_URL).href : `${SITE_URL}${SOCIAL_IMAGE_PATH}`
+    const routeImageAlt = route?.product?.name ?? guide?.heroImage?.alt ?? guide?.title ?? 'Hộp quà trái cây cao cấp Ely Fruit tại Thủ Dầu Một, Bình Dương'
     const metadata = [
       ['meta[property="og:title"]', 'property', 'og:title', route?.title ?? getPageTitle(path)],
       ['meta[property="og:description"]', 'property', 'og:description', meta.content],
       ['meta[property="og:type"]', 'property', 'og:type', route?.type === 'article' ? 'article' : 'website'],
       ['meta[property="og:image"]', 'property', 'og:image', routeImage],
+      ['meta[property="og:image:alt"]', 'property', 'og:image:alt', routeImageAlt],
       ['meta[name="twitter:image"]', 'name', 'twitter:image', routeImage],
+      ['meta[name="twitter:image:alt"]', 'name', 'twitter:image:alt', routeImageAlt],
     ] as const
     metadata.forEach(([selector, attribute, name, content]) => {
       let element = document.querySelector<HTMLMetaElement>(selector)
@@ -787,27 +791,28 @@ export default function App({ initialPath }: AppProps) {
     const schema = document.createElement('script')
     schema.type = 'application/ld+json'
     schema.id = 'ely-fruit-local-business'
-    const guide = path.startsWith('/guide/') ? guides.find(item => `/guide/${item.slug}` === path) : undefined
     const graph: Record<string, unknown>[] = [{
       '@type': 'LocalBusiness',
       '@id': `${SITE_URL}/#business`,
       name: 'Ely Fruit',
       url: SITE_URL,
       telephone: '+84981370970',
-      email: 'ctythucphamelyfruit@gmail.com',
-      image: `${SITE_URL}/products/hero-fruit-basket.png`,
+      email: EMAIL,
+      priceRange: PRICE_RANGE,
+      image: `${SITE_URL}${SOCIAL_IMAGE_PATH}`,
+      logo: `${SITE_URL}/ely-fruit-logo.png`,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Số 22 đường 30/4, Phú Lợi',
+        streetAddress: ADDRESS,
         addressLocality: 'Thủ Dầu Một',
-        addressRegion: 'Hồ Chí Minh',
+        addressRegion: 'Bình Dương',
         addressCountry: 'VN',
       },
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        opens: '07:30',
-        closes: '21:00',
+        opens: OPENING_HOURS.opens,
+        closes: OPENING_HOURS.closes,
       }],
       sameAs: [FACEBOOK_URL, TIKTOK_URL, MAP_URL],
     }, {
